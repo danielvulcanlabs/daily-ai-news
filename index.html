@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>AI Intelligence · Vulcan Labs Daily</title>
 <style>
 :root {
@@ -252,7 +253,12 @@ const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Satur
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 let issues = [];
+let flatIssues = []; // flat lookup array for onclick index
 let activeFile = null;
+
+function loadByIndex(i) {
+  loadIssue(flatIssues[i]);
+}
 
 async function init() {
   try {
@@ -283,18 +289,22 @@ function renderSidebar() {
     groups[key].items.push(issue);
   });
 
+  flatIssues = [];
+  const sortedKeys = Object.keys(groups).sort((a,b) => b.localeCompare(a));
   let html = '';
-  Object.keys(groups).sort((a,b) => b.localeCompare(a)).forEach(key => {
+  sortedKeys.forEach((key, keyIdx) => {
     const g = groups[key];
     html += `<div class="month-group">`;
     html += `<div class="month-label">${g.label}</div>`;
     g.items.forEach((issue, idx) => {
+      const flatIdx = flatIssues.length;
+      flatIssues.push(issue);
       const d = new Date(issue.date + 'T00:00:00');
       const dayName = DAYS[d.getDay()];
       const dateStr = String(d.getDate()).padStart(2,'0') + ' ' + MONTHS[d.getMonth()];
-      const isLatest = idx === 0 && key === Object.keys(groups).sort((a,b) => b.localeCompare(a))[0];
+      const isLatest = keyIdx === 0 && idx === 0;
       html += `
-        <div class="issue-row" id="row-${issue.file}" onclick="loadIssue(${JSON.stringify(issue)})">
+        <div class="issue-row" id="row-${issue.file}" onclick="loadByIndex(${flatIdx})">
           <div class="ir-left">
             <div class="ir-date">${dateStr}</div>
             <div class="ir-day">${dayName}</div>

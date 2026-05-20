@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>AI Intelligence — May 19, 2026</title>
 <style>
 /* ─── Design tokens ─────────────────────────────── */
@@ -752,7 +753,7 @@ a.brief-row:hover::before { opacity: 1; }
       <span class="brief-n">01</span>
       <div class="brief-body">
         <div class="brief-title"><span class="tag tag-purple" style="margin-right:5px"><span class="tag-icon">🧠</span>&nbsp;Memory</span>Context Compression: Hermes vs. Claude Code trong production agents<span class="age age-w">May 14</span></div>
-        <div class="brief-desc">Head-to-head: Hermes và Claude Code xử lý context compression thế nào trong real production. Recommendations cụ thể về cái gì cần extract vs retain — áp dụng thẳng vào latency-sensitive agent pipeline của Chat Smith.</div>
+        <div class="brief-desc">Head-to-head: Hermes và Claude Code xử lý context compression thế nào trong real production. Recommendations cụ thể về cái gì cần extract vs retain.</div>
         <div class="brief-foot">
           <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=mem0.ai&sz=24" alt="" onerror="this.style.display='none'">
           <span class="src-name">mem0.ai · May 14</span>
@@ -764,7 +765,7 @@ a.brief-row:hover::before { opacity: 1; }
       <span class="brief-n">02</span>
       <div class="brief-body">
         <div class="brief-title"><span class="tag tag-purple" style="margin-right:5px"><span class="tag-icon">⏱️</span>&nbsp;Memory</span>Memory Decay cho long-running agents — recency-aware ranking fix staleness<span class="age age-w">May 13</span></div>
-        <div class="brief-desc">Recency-weighted ranking ngăn stale high-confidence memories làm nhiễu retrieval — ví dụ agent nhớ sai employer cũ 6 tháng trước. Giải pháp cho "memory staleness" problem đã nêu trong review của anh với Phuong.</div>
+        <div class="brief-desc">Recency-weighted ranking ngăn stale high-confidence memories làm nhiễu retrieval — ví dụ agent nhớ sai employer cũ 6 tháng trước.</div>
         <div class="brief-foot">
           <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=mem0.ai&sz=24" alt="" onerror="this.style.display='none'">
           <span class="src-name">mem0.ai · May 13</span>
@@ -790,8 +791,8 @@ a.brief-row:hover::before { opacity: 1; }
     <a href="https://github.com/Agent-Field/agentfield#architecture" target="_blank" class="brief-row">
       <span class="brief-n">04</span>
       <div class="brief-body">
-        <div class="brief-title"><span class="tag tag-blue" style="margin-right:5px"><span class="tag-icon">🏗️</span>&nbsp;Framework</span>AgentField — kiến trúc agentic anh share trong team sáng qua<span class="age age-w">May 18</span></div>
-        <div class="brief-desc">Anh đã share link này cho Dzung trong team chat: "thằng này cùng mindset với mình". Architecture overview tại GitHub — multi-agent coordination pattern, có thể làm reference cho Chat Smith agentic design.</div>
+        <div class="brief-title"><span class="tag tag-blue" style="margin-right:5px"><span class="tag-icon">🏗️</span>&nbsp;Framework</span>AgentField — multi-agent coordination framework: shared state, parallel execution<span class="age age-w">May 18</span></div>
+        <div class="brief-desc">Architecture overview tại GitHub — multi-agent coordination pattern với approach mới về agent orchestration, shared state management, và parallel task execution.</div>
         <div class="brief-foot">
           <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=github.com&sz=24" alt="" onerror="this.style.display='none'">
           <span class="src-name">GitHub · AgentField</span>
@@ -879,7 +880,7 @@ a.brief-row:hover::before { opacity: 1; }
       <div class="tc-b"><span class="tc-key">Semantic cache</span> vector embeddings match similar queries — "refund policy" ≈ "get money back" → same cache hit</div>
       <div class="tc-b"><span class="tc-key">Tier routing</span> 70% budget / 20% mid / 10% premium → avg cost giảm 60–80% vs all-premium</div>
     </div>
-    <div class="tc-rel">↳ "5 layers cắt cost LLM" anh share hôm qua — đây là technical implementation detail. Map vào GCP Audit 130+ projects</div>
+    <div class="tc-rel">↳ 5 layers này là framework được reference nhiều nhất trong LLM cost optimization — tier routing và KV cache reuse là 2 levers impact cao nhất theo practitioners</div>
   </a>
 
   <!-- T4: Eval set sizing for memory systems -->
@@ -894,7 +895,7 @@ a.brief-row:hover::before { opacity: 1; }
       <div class="tc-b"><span class="tc-key">LongMemEval</span> 500 questions — knowledge update, multi-session recall, preference recall. Harder edge cases</div>
       <div class="tc-b"><span class="tc-key">BEAM</span> 1M + 10M token scale — không thể giải bằng cách expand context window. Production-relevant</div>
     </div>
-    <div class="tc-rel">↳ Anh note "Eval set 50 samples không đủ" cho Phuong trong #leader-tech — đây là evidence: minimum viable là 500+ (LongMemEval)</div>
+    <div class="tc-rel">↳ LongMemEval đặt bar rõ ràng: minimum viable eval set là 500+ samples — 50-sample evals thiếu statistical significance cho production memory systems</div>
   </a>
 
 </div>
@@ -916,7 +917,7 @@ a.brief-row:hover::before { opacity: 1; }
   <div class="note-card">
     <div class="note-label">⚖️ Memory Open Problems</div>
     <div class="note-title"><a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026#open-problems" target="_blank">6 open problems còn lại trong AI agent memory (2026)</a></div>
-    <div class="note-text">Cross-session identity resolution, temporal abstraction, memory staleness, privacy/consent architecture, application-level eval — cả 6 cái này đều liên quan trực tiếp đến design review Phuong đang làm.</div>
+    <div class="note-text">Cross-session identity resolution, temporal abstraction, memory staleness, privacy/consent architecture, application-level eval — cả 6 open problems này đều chưa có giải pháp hoàn chỉnh trong production memory systems hiện tại.</div>
   </div>
   <div class="note-card">
     <div class="note-label">📱 On-device AI</div>
@@ -929,7 +930,7 @@ a.brief-row:hover::before { opacity: 1; }
 <footer class="footer">
   <div class="f-l">
     AI Intelligence · Vulcan Labs · Issue #48 · May 19, 2026<br>
-    14 stories · Signals: #leader-tech, DMs Dzung/An, Google Drive (first run — focus.json created)
+    14 stories · Curated for AI product & engineering teams
   </div>
   <div class="f-r">
     <div class="src-row" style="justify-content:flex-end;gap:4px;margin-bottom:4px">

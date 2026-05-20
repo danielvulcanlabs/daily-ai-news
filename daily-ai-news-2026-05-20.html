@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>AI Intelligence — 20 May 2026</title>
 <style>
 /* ─── Design tokens ─────────────────────────────── */
@@ -746,7 +747,7 @@ a.brief-row:hover::before { opacity: 1; }
       <span class="brief-n">01</span>
       <div class="brief-body">
         <p class="brief-title">Gemini 3.5 Flash — 4× faster, built for agentic coding, available ngay hôm nay <span class="age age-w">Hôm nay</span></p>
-        <p class="brief-desc">Google ra mắt Gemini 3.5 Flash tại I/O 2026 — model mới nhất được build specifically cho agentic coding và long-horizon tasks. Available cho developers starting today. Relevant cho Chat Smith model selection và cost optimization.</p>
+        <p class="brief-desc">Google ra mắt Gemini 3.5 Flash tại I/O 2026 — model mới nhất được build specifically cho agentic coding và long-horizon tasks. Available cho developers starting today qua Gemini API và AI Studio.</p>
         <div class="brief-foot">
           <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=thetechportal.com&sz=32" alt="">
           <span class="src-name">The Tech Portal</span>
@@ -801,7 +802,7 @@ a.brief-row:hover::before { opacity: 1; }
       <span class="brief-n">05</span>
       <div class="brief-body">
         <p class="brief-title">Cách dùng Google AI agents mới: vượt qua standard search, practical guide <span class="age age-w">May 19</span></p>
-        <p class="brief-desc">TechCrunch guide về Google's new agent capabilities từ I/O 2026 — information agents, Universal Cart, Gmail agents. Practical overview cho việc understand user-facing agent UX patterns mà Chat Smith cần compete với.</p>
+        <p class="brief-desc">TechCrunch guide về Google's new agent capabilities từ I/O 2026 — information agents, Universal Cart, Gmail agents, và cách chúng hoạt động trong daily workflows. Practical overview cho developer và product teams muốn hiểu user-facing agent UX patterns đang emerge.</p>
         <div class="brief-foot">
           <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=techcrunch.com&sz=32" alt="">
           <span class="src-name">TechCrunch · May 19</span>
@@ -849,7 +850,7 @@ a.brief-row:hover::before { opacity: 1; }
       <p class="tc-b"><span class="tc-key">Omni Flash</span> First-gen model trong series — tối ưu cho real-time use cases, lower latency so với full Omni</p>
       <p class="tc-b"><span class="tc-key">video edit</span> User nói chuyện với Omni để edit video — first-class video understanding trong inference loop</p>
     </div>
-    <p class="tc-rel">↳ Relevant cho Chat Smith media handling: thay vì route từng media type qua separate models, Omni pattern cho phép single-model inference — simplifies architecture, có thể giảm latency và cost đáng kể</p>
+    <p class="tc-rel">↳ Any-to-any pattern loại bỏ routing overhead giữa specialist models — đặt ra câu hỏi mới về pricing, API design, và multi-modal application architecture trong năm tới</p>
   </a>
 
   <!-- TC2: Claude Dreaming Memory -->
@@ -864,7 +865,7 @@ a.brief-row:hover::before { opacity: 1; }
       <p class="tc-b"><span class="tc-key">Outcomes</span> Agents iterate cho đến khi meet defined criteria — built-in eval loop, không cần external orchestration để retry</p>
       <p class="tc-b"><span class="tc-key">sub-agents</span> Coordinator agent delegate sang specialist sub-agents với own model + prompts + tools, chạy parallel trên shared filesystem</p>
     </div>
-    <p class="tc-rel">↳ Dreaming = automated version của LTM consolidation mà team đang build cho Chat Smith. Outcomes = eval framework tương đương cái An đang design. Đây là production implementation reference</p>
+    <p class="tc-rel">↳ Dreaming là first production implementation của episodic-to-semantic memory consolidation ở agent layer — Outcomes loop eliminates external retry orchestration, built-in eval cycle thay thế human-in-the-loop cho nhiều use cases</p>
   </a>
 
   <!-- TC3: Kimi K2.6 MoE Architecture -->
@@ -879,7 +880,7 @@ a.brief-row:hover::before { opacity: 1; }
       <p class="tc-b"><span class="tc-key">256K context</span> Extended context window với native video understanding — single inference cho long documents hoặc video content</p>
       <p class="tc-b"><span class="tc-key">Agent Swarm</span> 300 domain-specialized sub-agents, up to 4,000 coordinated steps per autonomous run — production multi-agent orchestration</p>
     </div>
-    <p class="tc-rel">↳ K2.6 là open-source alternative đáng theo dõi cho Chat Smith model selection — MoE architecture với 32B activated params có thể cost-effective hơn dense models cùng quality tier. Deprecated deadline: May 25</p>
+    <p class="tc-rel">↳ K2.6 đặt ra benchmark mới cho open-source MoE — 32B activated params trên 1T total là bar mới cho cost-efficient inference ở frontier quality. Migration từ K2 → K2.6 deadline: May 25</p>
   </a>
 
   <!-- TC4: LLM Cost Optimization -->
@@ -894,7 +895,7 @@ a.brief-row:hover::before { opacity: 1; }
       <p class="tc-b"><span class="tc-key">Layer 3–4</span> <strong>Runtime optimization</strong> — continuous batching, KV cache reuse (prompt caching), speculative decoding</p>
       <p class="tc-b"><span class="tc-key">Layer 5</span> <strong>Infra shape matching</strong> — serverless inference cho bursty traffic, spot capacity cho batch jobs; Gartner dự báo 90% cost reduction by 2030</p>
     </div>
-    <p class="tc-rel">↳ Trực tiếp relevant cho OpenClaw ($1.3M/tháng, 100 agents) và GCP Audit. KV cache reuse + model right-sizing là 2 levers có ROI cao nhất cho Chat Smith inference budget</p>
+    <p class="tc-rel">↳ Gartner's 90% cost reduction projection by 2030 dựa trên 5 layers này — KV cache reuse và model right-sizing hiện là 2 levers có impact cao nhất theo practitioners đang chạy production LLM workloads</p>
   </a>
 
 </div><!-- /tech-grid -->
@@ -919,7 +920,7 @@ a.brief-row:hover::before { opacity: 1; }
   <div class="note-card">
     <p class="note-label">🔬 Production Memory Research</p>
     <p class="note-title"><a href="https://www.infoq.com/news/2026/04/linkedin-cognitive-memory-agent/" target="_blank">LinkedIn Cognitive Memory Agent — InfoQ deep-dive</a></p>
-    <p class="note-text">LinkedIn production implementation của memory agent: hierarchical memory với episodic, semantic, và procedural layers. Key finding: memory retrieval latency là bottleneck chính ở scale, không phải storage. Họ dùng separate indexing pipeline để pre-compute memory relevance scores. Highly relevant cho Chat Smith LTM architecture decisions.</p>
+    <p class="note-text">LinkedIn production implementation của memory agent: hierarchical memory với episodic, semantic, và procedural layers. Key finding: memory retrieval latency là bottleneck chính ở scale, không phải storage. Họ dùng separate indexing pipeline để pre-compute memory relevance scores — pattern đang được nhiều teams adopt trong Q1/Q2 2026.</p>
   </div>
 
   <div class="note-card">
@@ -938,7 +939,7 @@ a.brief-row:hover::before { opacity: 1; }
     <strong style="color:var(--t2)">AI Intelligence · Vulcan Labs Daily</strong><br>
     Issue #49 · Wednesday, May 20, 2026<br>
     Showing 14 stories from last 24–48h · 0 deduped against prior digests (first run)<br>
-    Signal sources: Jira (last 14d) · Slack messages · Google Drive recents · CLAUDE.md context
+    Curated for AI product &amp; engineering teams
   </div>
   <div class="f-r">
     Run: 2026-05-20 · auto-generated by daily-ai-news scheduled task<br>
