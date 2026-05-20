@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence · Vulcan Labs Daily</title>
+<style>
+:root {
+  --bg:     #07070a;
+  --s1:     #0f0f14;
+  --s2:     #16161d;
+  --s3:     #1d1d27;
+  --s4:     #30303e;
+  --rule:   rgba(255,255,255,0.07);
+  --rule2:  rgba(255,255,255,0.13);
+  --t1: #f0ece4; --t2: #9a958c; --t3: #6e6b67;
+  --gold: #c8a76a; --gold-a: rgba(200,167,106,0.10); --gold-b: rgba(200,167,106,0.20);
+  --blue: #5d8dee; --blue-a: rgba(93,141,238,0.08);
+  --sidebar-w: 268px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Top bar ── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  height: 48px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--rule2);
+  flex-shrink: 0;
+  z-index: 10;
+}
+.tb-brand { display: flex; align-items: center; gap: 9px; }
+.tb-icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: linear-gradient(135deg, #c8a76a, #9a7038);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 12px rgba(200,167,106,0.35);
+  flex-shrink: 0;
+}
+.tb-icon svg { width: 13px; height: 13px; fill: #fff; }
+.tb-name { font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.tb-sep  { width: 1px; height: 12px; background: var(--rule2); }
+.tb-sub  { font-size: 10px; color: var(--t3); }
+.tb-right { display: flex; align-items: center; gap: 12px; }
+.tb-count { font-size: 10px; color: var(--t3); }
+.tb-latest {
+  font-size: 10px; font-weight: 700; color: var(--gold);
+  background: var(--gold-a); border: 1px solid var(--gold-b);
+  padding: 3px 10px; border-radius: 100px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.tb-latest:hover { background: rgba(200,167,106,0.18); }
+
+/* ── Main layout ── */
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--s1);
+  border-right: 1px solid var(--rule2);
+  display: flex; flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.sidebar-head {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+.sidebar-label {
+  font-size: 8.5px; font-weight: 800; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--t3);
+}
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.sidebar-scroll::-webkit-scrollbar { width: 4px; }
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--s4); border-radius: 4px; }
+
+.month-group { margin-bottom: 4px; }
+.month-label {
+  font-size: 8px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--t3);
+  padding: 8px 16px 4px;
+}
+
+.issue-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 16px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background .12s, border-color .12s;
+  position: relative;
+}
+.issue-row:hover { background: var(--s2); }
+.issue-row.active {
+  background: var(--blue-a);
+  border-left-color: var(--blue);
+}
+.issue-row.active .ir-date { color: var(--blue); }
+.issue-row.active .ir-num  { color: var(--blue); }
+
+.ir-left { flex-shrink: 0; padding-top: 1px; }
+.ir-date {
+  font-size: 12px; font-weight: 700; color: var(--t2);
+  line-height: 1; margin-bottom: 2px;
+  letter-spacing: -.01em;
+}
+.ir-day { font-size: 9px; color: var(--t3); }
+.ir-right { flex: 1; min-width: 0; }
+.ir-num {
+  font-size: 8.5px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--t3);
+  margin-bottom: 3px;
+}
+.ir-headline {
+  font-size: 10.5px; color: var(--t2); line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.latest-badge {
+  font-size: 7.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gold); background: var(--gold-a); border: 1px solid var(--gold-b);
+  padding: 1px 5px; border-radius: 3px; margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* ── Content iframe area ── */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.content-frame {
+  width: 100%; height: 100%; border: none;
+  background: var(--bg);
+}
+
+/* Loading overlay */
+.loading {
+  position: absolute; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  z-index: 5;
+}
+.loading.visible { opacity: 1; pointer-events: all; }
+.spin {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--rule2);
+  border-top-color: var(--blue);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-size: 11px; color: var(--t3); }
+
+/* ── Empty state ── */
+.empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; gap: 12px; color: var(--t3);
+}
+.empty-icon { font-size: 32px; opacity: .4; }
+.empty-msg { font-size: 12px; }
+
+/* ── Responsive: collapse sidebar on narrow ── */
+@media (max-width: 700px) {
+  .sidebar { width: 200px; }
+  .ir-headline { display: none; }
+}
+@media (max-width: 480px) {
+  .sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="tb-brand">
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24"><path d="M13 2L4.5 14H11L9.5 22L19.5 10H13L13 2Z"/></svg>
+    </div>
+    <span class="tb-name">AI Intelligence</span>
+    <span class="tb-sep"></span>
+    <span class="tb-sub">Vulcan Labs Daily</span>
+  </div>
+  <div class="tb-right">
+    <span class="tb-count" id="tb-count"></span>
+    <span class="tb-latest" onclick="loadLatest()">⚡ Latest issue</span>
+  </div>
+</div>
+
+<!-- Layout -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-label">Archive</div>
+    </div>
+    <div class="sidebar-scroll" id="sidebar-list">
+      <div class="empty">
+        <div class="empty-icon">📋</div>
+        <div class="empty-msg">Loading...</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="loading visible" id="loading">
+      <div class="spin"></div>
+      <div class="loading-text">Loading digest...</div>
+    </div>
+    <iframe class="content-frame" id="frame" title="AI Intelligence Digest"></iframe>
+  </div>
+
+</div>
+
+<script>
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+let issues = [];
+let activeFile = null;
+
+async function init() {
+  try {
+    const resp = await fetch('manifest.json?t=' + Date.now());
+    const data = await resp.json();
+    issues = data.issues || [];
+    renderSidebar();
+    if (issues.length) loadIssue(issues[0]);
+  } catch(e) {
+    document.getElementById('sidebar-list').innerHTML =
+      '<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-msg">Could not load manifest.json</div></div>';
+    document.getElementById('loading').classList.remove('visible');
+  }
+}
+
+function renderSidebar() {
+  const list = document.getElementById('sidebar-list');
+  const count = document.getElementById('tb-count');
+  count.textContent = issues.length + ' issue' + (issues.length !== 1 ? 's' : '');
+
+  // Group by month
+  const groups = {};
+  issues.forEach(issue => {
+    const d = new Date(issue.date + 'T00:00:00');
+    const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+    const label = MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+    if (!groups[key]) groups[key] = { label, items: [] };
+    groups[key].items.push(issue);
+  });
+
+  let html = '';
+  Object.keys(groups).sort((a,b) => b.localeCompare(a)).forEach(key => {
+    const g = groups[key];
+    html += `<div class="month-group">`;
+    html += `<div class="month-label">${g.label}</div>`;
+    g.items.forEach((issue, idx) => {
+      const d = new Date(issue.date + 'T00:00:00');
+      const dayName = DAYS[d.getDay()];
+      const dateStr = String(d.getDate()).padStart(2,'0') + ' ' + MONTHS[d.getMonth()];
+      const isLatest = idx === 0 && key === Object.keys(groups).sort((a,b) => b.localeCompare(a))[0];
+      html += `
+        <div class="issue-row" id="row-${issue.file}" onclick="loadIssue(${JSON.stringify(issue)})">
+          <div class="ir-left">
+            <div class="ir-date">${dateStr}</div>
+            <div class="ir-day">${dayName}</div>
+          </div>
+          <div class="ir-right">
+            <div class="ir-num">#${issue.issue}${isLatest ? '<span class="latest-badge">Latest</span>' : ''}</div>
+            <div class="ir-headline">${issue.headline}</div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+  list.innerHTML = html;
+}
+
+function loadIssue(issue) {
+  if (activeFile === issue.file) return;
+  activeFile = issue.file;
+
+  // Update active state
+  document.querySelectorAll('.issue-row').forEach(r => r.classList.remove('active'));
+  const row = document.getElementById('row-' + issue.file);
+  if (row) {
+    row.classList.add('active');
+    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // Show loading, load iframe
+  const loading = document.getElementById('loading');
+  const frame = document.getElementById('frame');
+  loading.classList.add('visible');
+
+  frame.onload = () => loading.classList.remove('visible');
+  frame.src = issue.file;
+
+  document.title = 'AI Intelligence #' + issue.issue + ' · ' + issue.date;
+}
+
+function loadLatest() {
+  if (issues.length) loadIssue(issues[0]);
+}
+
+init();
+</script>
+</body>
+</html>

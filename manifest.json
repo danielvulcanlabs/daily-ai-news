@@ -1,0 +1,9 @@
+{
+  "issues": [
+    { "date": "2026-05-20", "file": "daily-ai-news-2026-05-20.html", "issue": 49, "headline": "Google I/O 2026: Gemini Omni any-to-any · Antigravity 2.0 · Kimi K2 deprecated May 25" },
+    { "date": "2026-05-19", "file": "daily-ai-news-2026-05-19.html", "issue": 48, "headline": "Dust $40M Series B · Google I/O keynote preview · Claude for Small Business" },
+    { "date": "2026-05-18", "file": "daily-ai-news-2026-05-18.html", "issue": 47, "headline": "Trio model deployment · Chat Smith Agent Platform · Mem0 memory benchmarks" },
+    { "date": "2026-05-15", "file": "daily-ai-news-2026-05-15.html", "issue": 46, "headline": "GPT-5.5 Instant default · OpenAI personal finance · Cursor 3.0 Agents Window" },
+    { "date": "2026-05-13", "file": "daily-ai-news-2026-05-13.html", "issue": 45, "headline": "Claude for Small Business launch · Chat Smith redesign Phase 1 · Agent survey" }
+  ]
+}

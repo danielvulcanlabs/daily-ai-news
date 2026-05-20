@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News Digest — May 15, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f5f5f4;
+    color: #1c1917;
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: #1c1917;
+    color: #fafaf9;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 6px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #fafaf9;
+  }
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    background: #292524;
+    color: #d6d3d1;
+    border: 1px solid #44403c;
+    border-radius: 99px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Section headers */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #78716c;
+    margin: 28px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e7e5e4;
+  }
+
+  /* Top read cards */
+  .card {
+    background: #fff;
+    border: 1px solid #e7e5e4;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .card-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .card h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .card h2 a {
+    color: #1c1917;
+    text-decoration: none;
+  }
+  .card h2 a:hover { color: #d97706; }
+  .card-meta {
+    font-size: 12px;
+    color: #78716c;
+    margin-bottom: 10px;
+  }
+  .card-meta .source { font-weight: 600; color: #57534e; }
+  .card-summary { font-size: 14px; color: #44403c; margin-bottom: 12px; }
+  .card-relevance {
+    background: #f0fdf4;
+    border-left: 3px solid #22c55e;
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #15803d;
+  }
+  .card-relevance strong { font-weight: 600; }
+
+  /* Other stories */
+  .stories-group { margin-bottom: 20px; }
+  .stories-group-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #a8a29e;
+    margin-bottom: 10px;
+  }
+  .story-item {
+    background: #fff;
+    border: 1px solid #e7e5e4;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .story-item a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1917;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2px;
+    line-height: 1.35;
+  }
+  .story-item a:hover { color: #d97706; }
+  .story-item .story-meta { font-size: 11px; color: #a8a29e; margin-bottom: 4px; }
+  .story-item .story-summary { font-size: 13px; color: #57534e; }
+  .story-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d6d3d1;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px;
+    padding: 16px 20px;
+    background: #fafaf9;
+    border: 1px solid #e7e5e4;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #a8a29e;
+    line-height: 1.7;
+  }
+  .footer strong { color: #78716c; }
+
+  /* Note */
+  .inference-note {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #92400e;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Daily AI Digest for Daniel</div>
+    <h1>AI News — May 15, 2026</h1>
+    <div class="topics">
+      <span class="chip">AI agent platforms</span>
+      <span class="chip">Frontier LLM releases</span>
+      <span class="chip">AI in mobile apps</span>
+      <span class="chip">Claude &amp; Anthropic</span>
+      <span class="chip">OpenAI updates</span>
+      <span class="chip">Apple iOS AI integration</span>
+    </div>
+  </div>
+
+  <!-- FIRST RUN NOTE -->
+  <div class="inference-note">
+    ⚡ <strong>First run — focus inferred automatically.</strong> Topics derived from: Slack link to AI Agent Conference (May 14), Vulcan Labs' AI app portfolio (Chat Smith, AI Study, Grammar, Book Summary using OpenAI/Claude APIs), and Databuckets data platform work. No prior digest to dedup against.
+  </div>
+
+  <!-- TOP READS -->
+  <div class="section-title">⭐ Top Reads</div>
+
+  <!-- Card 1 -->
+  <div class="card">
+    <div class="card-badge">Top Read</div>
+    <h2><a href="https://9to5mac.com/2026/05/13/apple-is-working-to-incorporate-ai-agents-on-the-app-store-per-report/" target="_blank">Apple Prepares App Store for Autonomous AI Agents</a></h2>
+    <div class="card-meta"><span class="source">9to5Mac / MacRumors</span> &nbsp;·&nbsp; May 13, 2026</div>
+    <p class="card-summary">Apple is designing a new system to allow AI agents into the App Store while maintaining its privacy and security standards. Tim Cook signaled urgency at the last earnings call, and an announcement could come at WWDC 2026 in June. The challenge: agents take complex autonomous actions that break Apple's current sandbox rules, so Apple is reportedly loosening those restrictions for verified agent apps.</p>
+    <div class="card-relevance"><strong>Why it matters for you:</strong> Vulcan Labs ships AI-powered iOS apps (Chat Smith, AI Study). If Apple creates an "agent tier" in the App Store, it directly reshapes the distribution and capability surface for your products — early positioning here could be a competitive moat.</div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card">
+    <div class="card-badge">Top Read</div>
+    <h2><a href="https://www.notion.com/releases/2026-05-13" target="_blank">Notion Launches Developer Platform 3.5 — Workers, External Agents API &amp; Database Sync</a></h2>
+    <div class="card-meta"><span class="source">Notion / TechCrunch</span> &nbsp;·&nbsp; May 13, 2026</div>
+    <p class="card-summary">Notion's Developer Platform 3.5 ships Notion Workers (hosted serverless runtime for custom code), an External Agents API (bring your own agents — Claude Code, Cursor, Codex, Decagon work out of the box), and Database Sync to pull any external data into Notion. Over 1 million custom agents have been built since February. Workers run in a sandboxed environment and bill on Notion credits from August 2026.</p>
+    <div class="card-relevance"><strong>Why it matters for you:</strong> Directly relevant to AI agent frameworks — this is the signal from Databuckets and agent tooling work. The External Agents API pattern (MCP-style agent routing into a workspace) is the same architecture underlying Cowork-style tools your team evaluates.</div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card">
+    <div class="card-badge">Top Read</div>
+    <h2><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic Releases Claude Opus 4.7 — 13% Coding Lift, Better Vision</a></h2>
+    <div class="card-meta"><span class="source">Anthropic</span> &nbsp;·&nbsp; April 16, 2026 (GA / widely covered this week)</div>
+    <p class="card-summary">Claude Opus 4.7 lifts coding benchmark resolution by 13% over Opus 4.6 on a 93-task suite, including 4 tasks neither 4.6 nor Sonnet 4.6 could solve. Substantially improved vision (higher resolution image understanding). Pricing unchanged at $5/M input, $25/M output tokens. New Cyber Verification Program for security professionals. Available across Claude apps, API, Bedrock, Vertex AI, and Microsoft Foundry.</p>
+    <div class="card-relevance"><strong>Why it matters for you:</strong> Vulcan Labs uses Claude API across products. The coding improvement and vision upgrade could meaningfully affect your AI app features, especially for Chat Smith's assistant capabilities and any image-aware features in your portfolio.</div>
+  </div>
+
+  <!-- OTHER STORIES -->
+  <div class="section-title">Other Stories</div>
+
+  <!-- Group: Frontier LLM Releases -->
+  <div class="stories-group">
+    <div class="stories-group-label">Frontier LLM Releases</div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">OpenAI · May 5, 2026</div>
+        <a href="https://openai.com/index/gpt-5-5-instant/" target="_blank">GPT-5.5 Instant Is Now the Default ChatGPT Model</a>
+        <div class="story-summary">OpenAI made GPT-5.5 Instant the new ChatGPT default, producing 52.5% fewer hallucinated claims vs GPT-5.3 Instant, 30% shorter responses, and enhanced personalization from past chats and Gmail. Available in the API as <code>chat-latest</code>.</div>
+      </div>
+    </div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">Google · Upcoming at I/O (May 19–20, 2026)</div>
+        <a href="https://www.abhs.in/blog/google-io-2026-may-19-20-gemini-android-17-developer-preview" target="_blank">Google I/O 2026 Preview: Gemini 3.1 Ultra, Android 17, 2M Token Context Expected</a>
+        <div class="story-summary">Google I/O is May 19–20. Gemini 3.1 Ultra is the headline model expected — 2M token context window, native multimodal (text/image/audio/video), sandboxed code execution. Gemini 3.1 Flash-Lite already shipped May 8 as a lightweight GA model.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group: OpenAI Updates -->
+  <div class="stories-group">
+    <div class="stories-group-label">OpenAI Product Updates</div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">OpenAI · May 7, 2026</div>
+        <a href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/" target="_blank">OpenAI Launches 3 New Voice Models: GPT-Realtime-2, Translate, and Whisper Streaming</a>
+        <div class="story-summary">GPT-Realtime-2 brings GPT-5-class reasoning to real-time voice. GPT-Realtime-Translate handles live speech-to-speech translation from 70+ languages into 13 output languages. GPT-Realtime-Whisper streams live transcription. Pricing from $0.017/min. Directly relevant for voice-powered mobile AI apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group: AI Agent Frameworks -->
+  <div class="stories-group">
+    <div class="stories-group-label">AI Agent Platforms &amp; Frameworks</div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">NVIDIA / Nous Research · May 2026</div>
+        <a href="https://blogs.nvidia.com/blog/rtx-ai-garage-hermes-agent-dgx-spark/" target="_blank">Hermes Agent Crosses 140K GitHub Stars — Self-Improving AI Agents on Local Hardware</a>
+        <div class="story-summary">Nous Research's Hermes agent, powered by NVIDIA RTX PCs and DGX Spark, reached 140,000 GitHub stars in under 3 months. Designed for reliability and self-improvement — the agent reviews its prior behavior between sessions to improve future performance (Anthropic calls a similar technique "dreaming").</div>
+      </div>
+    </div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">Microsoft · April 3, 2026 (coverage ongoing)</div>
+        <a href="https://techcommunity.microsoft.com/blog/azuredevcommunityblog/the-future-of-agentic-ai-inside-microsoft-agent-framework-1-0/4510698" target="_blank">Microsoft Agent Framework 1.0 — Open-Source Multi-Agent Runtime for .NET and Python</a>
+        <div class="story-summary">Microsoft's production-ready open-source framework for building agents and multi-agent workflows ships in .NET and Python. Released April 3, but developer community coverage continues. Key pattern: tool-calling + orchestration across agents with shared memory.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group: AI in Mobile Apps -->
+  <div class="stories-group">
+    <div class="stories-group-label">AI in Mobile Apps</div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">9to5Mac / Digital Trends · May 13, 2026</div>
+        <a href="https://www.digitaltrends.com/computing/after-flubbing-with-siri-apple-plans-to-host-ai-agents-on-the-app-store/" target="_blank">After Siri's Struggles, Apple Plans an "Agent Store" Tier — New Rules for Autonomous Apps</a>
+        <div class="story-summary">Separate coverage from the top read: Apple staffers are designing privacy-compliant agent sandboxing. TechRadar calls it a potential "Agent Store." The new system would let iOS users install agents that can take autonomous multi-step actions — a fundamental shift in what an iOS app can do.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group: Anthropic & Claude -->
+  <div class="stories-group">
+    <div class="stories-group-label">Anthropic &amp; Claude</div>
+
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div>
+        <div class="story-meta">9to5Mac · May 13, 2026</div>
+        <a href="https://9to5mac.com/2026/05/13/anthropics-latest-claude-release-turns-your-mac-into-a-small-business-powerhouse/" target="_blank">Claude for Small Business — Integrated into QuickBooks, HubSpot, Canva, Microsoft 365 &amp; More</a>
+        <div class="story-summary">Anthropic launched Claude for Small Business, bringing ready-to-run AI workflows into QuickBooks, PayPal, HubSpot, Canva, DocuSign, Google Workspace, and Microsoft 365. Targets payroll, invoicing, sales, and marketing automation — a direct push into the SMB vertical.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No fresh news note -->
+  <div style="background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:12px 16px; margin-bottom:8px; font-size:13px; color:#78716c;">
+    <strong>No fresh news on:</strong> RAG / vector search (last 48h window too quiet); on-device LLM mobile deployment (trend coverage only, no hard releases today).
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>Run timestamp:</strong> 2026-05-15 · <strong>Stories shown:</strong> 10 from last 48h · <strong>Deduped against prior digests:</strong> 0 (first run) · <strong>Focus inference:</strong> Automatic — Slack signals + Drive docs + Vulcan Labs product context · <strong>Next run:</strong> Tomorrow at this time.
+  </div>
+
+</div>
+</body>
+</html>
