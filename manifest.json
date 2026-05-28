@@ -1,5 +1,11 @@
 {
   "issues": [
+    { "date": "2026-05-28", "file": "daily-ai-news-2026-05-28.html", "issue": 55, "headline": "Glasswing update: Mythos 10K+ CVEs confirmed · Grok Build public beta · Claude Sonnet 4.8 leak" },
+    { "date": "2026-05-27", "file": "daily-ai-news-2026-05-27.html", "issue": 54, "headline": "Glasswing: Mythos Preview tìm 10K+ CVEs · RecursiveMAS -75% token · Mem0 benchmark 2026" },
+    { "date": "2026-05-26", "file": "daily-ai-news-2026-05-26.html", "issue": 53, "headline": "Anthropic vượt OpenAI business customers · $900B valuation · Claude Managed Agents sandbox" },
+    { "date": "2026-05-25", "file": "daily-ai-news-2026-05-25.html", "issue": 52, "headline": "Mythos 10K zero-days · Anthropic $900B round · Trump kills AI EO · GitHub TeamPCP supply chain hack" },
+    { "date": "2026-05-22", "file": "daily-ai-news-2026-05-22.html", "issue": 51, "headline": "Gemini 3.5 Flash GA · Anthropic acquires Stainless · Trump AI EO postponed" },
+    { "date": "2026-05-21", "file": "daily-ai-news-2026-05-21.html", "issue": 50, "headline": "Gemini 3.5 Flash GA · Anthropic first profit Q2 · xAI Grok Build coding agent" },
     { "date": "2026-05-20", "file": "daily-ai-news-2026-05-20.html", "issue": 49, "headline": "Google I/O 2026: Gemini Omni any-to-any · Antigravity 2.0 · Kimi K2 deprecated May 25" },
     { "date": "2026-05-19", "file": "daily-ai-news-2026-05-19.html", "issue": 48, "headline": "Dust $40M Series B · Google I/O keynote preview · Claude for Small Business" },
     { "date": "2026-05-18", "file": "daily-ai-news-2026-05-18.html", "issue": 47, "headline": "Trio model deployment · Chat Smith Agent Platform · Mem0 memory benchmarks" },

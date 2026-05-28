@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — 28 May 2026</title>
+<style>
+:root {
+  --bg: #07070a; --s1: #0f0f14; --s2: #16161d; --s3: #1d1d27; --s4: #30303e;
+  --t1: #f0ece4; --t2: #9a958c; --t3: #6e6b67;
+  --gold: #c8a76a; --blue: #5d8dee; --teal: #3ecf8e;
+  --red: #e55252; --purple: #9d78f0;
+  --r: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(93,141,238,0.12) 0%, transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: auto, 28px 28px;
+  color: var(--t1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 60px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+@keyframes borderShift {
+  0%,100% { border-color: var(--gold); box-shadow: 0 0 24px rgba(200,167,106,0.25); }
+  50% { border-color: #e8c78a; box-shadow: 0 0 40px rgba(200,167,106,0.45); }
+}
+@keyframes countGlow { 0%,100% { text-shadow: 0 0 8px rgba(200,167,106,0.4); } 50% { text-shadow: 0 0 20px rgba(200,167,106,0.8); } }
+@keyframes ripple { 0% { box-shadow: 0 0 0 0 rgba(229,82,82,0.5); } 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@keyframes tickerGlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.section { animation: fadeUp 0.5s ease both; }
+.section:nth-child(2) { animation-delay:.05s; }
+.section:nth-child(3) { animation-delay:.10s; }
+.section:nth-child(4) { animation-delay:.15s; }
+.section:nth-child(5) { animation-delay:.20s; }
+.section:nth-child(6) { animation-delay:.25s; }
+.section:nth-child(7) { animation-delay:.30s; }
+.section:nth-child(8) { animation-delay:.35s; }
+
+/* ── MASTHEAD ── */
+.masthead { display: flex; align-items: center; justify-content: space-between; padding: 32px 0 28px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 24px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, #d4a843, #8b6914); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.brand-icon svg { width: 22px; height: 22px; }
+.brand-name { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--t1); }
+.brand-sub { font-size: 11px; color: var(--t3); font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 2px; }
+.masthead-right { text-align: right; }
+.issue-badge { display: inline-block; background: var(--s2); border: 1px solid var(--s4); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
+.date-text { font-size: 12px; color: var(--t3); }
+
+/* ── FOCUS CHIPS ── */
+.focus-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; margin-bottom: 8px; }
+.focus-chip { background: var(--s2); border: 1px solid var(--s4); border-radius: 20px; padding: 5px 13px; font-size: 11px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; cursor: default; }
+.fc-1 { color: var(--gold); border-color: rgba(200,167,106,0.3); }
+.fc-2 { color: var(--teal); border-color: rgba(62,207,142,0.25); }
+.fc-3 { color: var(--blue); border-color: rgba(93,141,238,0.25); }
+.fc-4 { color: var(--purple); border-color: rgba(157,120,240,0.25); }
+.fc-5 { color: var(--red); border-color: rgba(229,82,82,0.25); }
+.fc-6 { color: var(--t2); border-color: var(--s4); }
+
+/* ── TICKER ── */
+.ticker { background: linear-gradient(90deg, #3a0a0a, #5c1111, #3a0a0a); background-size: 200% 100%; animation: tickerGlow 4s ease infinite; border-radius: var(--r); padding: 10px 18px; display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.ticker-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; animation: ripple 1.5s ease infinite; flex-shrink: 0; }
+.ticker-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--red); text-transform: uppercase; flex-shrink: 0; }
+.ticker-text { font-size: 13px; color: var(--t1); font-weight: 500; }
+
+/* ── SECTION LABEL ── */
+.sec-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--t3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+/* ── HERO GRID ── */
+.hero-grid { display: grid; grid-template-columns: 1fr 314px; gap: 16px; margin-bottom: 32px; }
+.hero-card {
+  background: var(--s1);
+  border: 1.5px solid var(--gold);
+  border-radius: var(--r);
+  padding: 28px;
+  animation: borderShift 3s ease infinite;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.hero-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background: linear-gradient(90deg,transparent,rgba(200,167,106,0.6),transparent); }
+.hero-glow { position:absolute; top:-40px; right:-40px; width:180px; height:180px; background:radial-gradient(circle, rgba(200,167,106,0.1) 0%, transparent 70%); pointer-events:none; }
+.tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.tag { font-size:10px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
+.tag-gold { background:rgba(200,167,106,0.15); color:var(--gold); }
+.tag-blue { background:rgba(93,141,238,0.15); color:var(--blue); }
+.tag-teal { background:rgba(62,207,142,0.15); color:var(--teal); }
+.tag-red { background:rgba(229,82,82,0.15); color:var(--red); }
+.tag-purple { background:rgba(157,120,240,0.15); color:var(--purple); }
+.hero-title { font-size:22px; font-weight:700; line-height:1.3; letter-spacing:-0.3px; margin-bottom:12px; color:var(--t1); }
+.hero-desc { font-size:13px; color:var(--t2); line-height:1.65; margin-bottom:16px; }
+.hero-bullets { list-style:none; margin-bottom:20px; flex:1; }
+.hero-bullets li { font-size:13px; color:var(--teal); padding:4px 0; display:flex; gap:8px; }
+.hero-bullets li::before { content:"→"; color:var(--gold); flex-shrink:0; }
+.hero-footer { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); }
+.src-name { font-size:11px; color:var(--t3); font-weight:600; letter-spacing:0.4px; }
+.cta { font-size:12px; font-weight:700; color:var(--gold); text-decoration:none; letter-spacing:0.3px; }
+.cta:hover { color:#e8c78a; }
+.hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+.stat-box { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:10px 14px; }
+.stat-val { font-size:18px; font-weight:700; color:var(--gold); animation:countGlow 3s ease infinite; }
+.stat-lbl { font-size:10px; color:var(--t3); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+
+/* ── SIDEBAR ── */
+.sidebar { display:flex; flex-direction:column; gap:14px; }
+.watch-card { background:var(--s1); border:1.5px solid var(--red); border-radius:var(--r); padding:20px; flex:1; }
+.watch-card .card-head { font-size:10px; font-weight:700; letter-spacing:1px; color:var(--red); text-transform:uppercase; margin-bottom:10px; }
+.watch-card .card-title { font-size:15px; font-weight:700; line-height:1.35; color:var(--t1); margin-bottom:8px; }
+.watch-card .card-desc { font-size:12px; color:var(--t2); line-height:1.5; margin-bottom:14px; }
+.mini-card { background:var(--s1); border:1px solid var(--s3); border-radius:var(--r); padding:16px; }
+.mini-card .card-title { font-size:13px; font-weight:600; color:var(--t1); line-height:1.3; margin-bottom:6px; }
+.mini-card .card-desc { font-size:11px; color:var(--t2); }
+.card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05); }
+
+/* ── 3-COL CARDS ── */
+.card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
+.card { background:var(--s1); border-radius:var(--r); border:1px solid var(--s3); overflow:hidden; display:flex; flex-direction:column; }
+.card-accent { height:3px; }
+.card-blue .card-accent { background:linear-gradient(90deg,var(--blue),#3a6bcc); }
+.card-purple .card-accent { background:linear-gradient(90deg,var(--purple),#7a5bc4); }
+.card-teal .card-accent { background:linear-gradient(90deg,var(--teal),#2aad78); }
+.card-body { padding:18px; flex:1; display:flex; flex-direction:column; }
+.co-mark { width:28px; height:28px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; margin-bottom:10px; letter-spacing:0.5px; }
+.co-anthropic { background:linear-gradient(135deg,#8b4513,#c67c3c); color:#fff; }
+.co-google { background:#fff; color:#4285F4; font-size:9px; }
+.co-fujitsu { background:linear-gradient(135deg,#c0392b,#e74c3c); color:#fff; }
+.co-kore { background:linear-gradient(135deg,#1a4db3,#3a6bcc); color:#fff; }
+.co-xai { background:linear-gradient(135deg,#111,#333); color:#fff; }
+.co-mem0 { background:linear-gradient(135deg,#1a6ccc,#3a8eee); color:#fff; }
+.co-arxiv { background:linear-gradient(135deg,#b31b1b,#d32f2f); color:#fff; }
+.co-openai { background:linear-gradient(135deg,#10a37f,#068a6a); color:#fff; }
+.co-grab { background:linear-gradient(135deg,#00b14f,#00891f); color:#fff; }
+.co-cf { background:linear-gradient(135deg,#f38020,#e06010); color:#fff; }
+.card-date { font-size:10px; color:var(--t3); margin-bottom:8px; }
+.card-title { font-size:14px; font-weight:700; line-height:1.35; color:var(--t1); margin-bottom:8px; }
+.card-text { font-size:12px; color:var(--t2); line-height:1.55; flex:1; }
+
+/* ── BRIEFING ── */
+.brief-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:32px; border:1px solid var(--s3); border-radius:var(--r); overflow:hidden; }
+.brief-item { padding:16px 20px; border-bottom:1px solid var(--s3); display:flex; gap:14px; cursor:default; transition:transform .15s, background .15s; position:relative; }
+.brief-item:last-child, .brief-item:nth-last-child(2):nth-child(odd) { border-bottom:none; }
+.brief-item:hover { background:rgba(255,255,255,0.02); transform:translateX(3px); }
+.brief-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; opacity:0; transition:opacity .15s; }
+.brief-item:hover::before { opacity:1; }
+.brief-item:nth-child(1)::before,.brief-item:nth-child(2)::before { background:var(--gold); }
+.brief-item:nth-child(3)::before,.brief-item:nth-child(4)::before { background:var(--teal); }
+.brief-item:nth-child(5)::before,.brief-item:nth-child(6)::before { background:var(--blue); }
+.brief-num { font-size:11px; font-weight:700; color:var(--t3); min-width:22px; }
+.brief-content { flex:1; }
+.brief-tag { display:inline-block; font-size:9px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:2px 6px; border-radius:3px; background:rgba(255,255,255,0.06); color:var(--t3); margin-bottom:5px; }
+.brief-title { font-size:13px; font-weight:600; color:var(--t1); line-height:1.35; margin-bottom:4px; }
+.brief-footer { display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
+.brief-src { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--t3); }
+.brief-src-dot { width:14px; height:14px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:800; color:#fff; flex-shrink:0; }
+.src-openai { background:linear-gradient(135deg,#10a37f,#068a6a); }
+.src-grab { background:linear-gradient(135deg,#00b14f,#00891f); }
+.src-cf { background:linear-gradient(135deg,#f38020,#e06010); }
+.src-infoq { background:linear-gradient(135deg,#314cc6,#1a30a0); }
+.src-gartner { background:linear-gradient(135deg,#005f9e,#004070); }
+.src-sf { background:linear-gradient(135deg,#009edb,#0070ae); }
+.src-anthropic { background:linear-gradient(135deg,#8b4513,#c67c3c); }
+.src-tech { background:#2d3748; }
+
+/* ── TECH DEEP DIVE ── */
+.tc-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:32px; }
+.tc-card { background:var(--s1); border-radius:var(--r); border:1px solid var(--s3); border-left:3px solid; padding:20px; display:flex; flex-direction:column; }
+.tc-card-1 { border-left-color:var(--gold); }
+.tc-card-2 { border-left-color:var(--teal); }
+.tc-card-3 { border-left-color:var(--purple); }
+.tc-card-4 { border-left-color:var(--blue); }
+.tc-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.tc-head { font-size:15px; font-weight:700; line-height:1.3; color:var(--t1); margin-bottom:12px; }
+.tc-bullets { list-style:none; flex:1; }
+.tc-bullets li { font-size:12px; color:var(--t2); padding:4px 0; padding-left:16px; position:relative; line-height:1.5; }
+.tc-bullets li::before { content:"·"; position:absolute; left:0; color:var(--teal); font-weight:700; font-size:16px; line-height:1.2; }
+.tc-key { background:rgba(255,255,255,0.07); padding:1px 5px; border-radius:3px; font-family:monospace; font-size:11px; color:var(--t1); }
+.tc-footer { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; }
+
+/* ── GITHUB / OPEN SOURCE ── */
+.repo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:32px; }
+.repo-card { background:var(--s1); border:1px solid var(--s3); border-radius:var(--r); padding:16px; display:flex; flex-direction:column; gap:8px; }
+.repo-name { font-family:monospace; font-size:13px; font-weight:700; color:var(--blue); }
+.repo-desc { font-size:11px; color:var(--t2); line-height:1.5; flex:1; }
+.repo-meta { display:flex; gap:6px; flex-wrap:wrap; }
+.repo-stars { font-size:11px; font-weight:700; color:var(--gold); }
+.repo-lang { font-size:10px; padding:2px 6px; background:rgba(255,255,255,0.05); border-radius:4px; color:var(--t3); }
+.repo-spike { font-size:10px; font-weight:700; color:var(--teal); background:rgba(62,207,142,0.1); padding:2px 6px; border-radius:4px; }
+.repo-rel { font-size:10px; font-weight:700; color:var(--teal); margin-top:2px; }
+.repo-footer { display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+
+/* ── NOTES ── */
+.notes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
+.note { background:var(--s1); border:1px solid var(--s3); border-radius:var(--r); padding:18px; display:flex; flex-direction:column; }
+.note-label { font-size:11px; color:var(--t3); margin-bottom:8px; }
+.note-title { font-size:13px; font-weight:700; color:var(--t1); line-height:1.35; margin-bottom:8px; }
+.note-text { font-size:12px; color:var(--t2); line-height:1.55; flex:1; }
+.note-cta { font-size:11px; font-weight:700; color:var(--gold); text-align:right; display:block; margin-top:12px; text-decoration:none; }
+
+/* ── FOOTER ── */
+.footer { border-top:1px solid rgba(255,255,255,0.06); padding-top:24px; display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.footer-left { font-size:11px; color:var(--t3); line-height:1.8; }
+.footer-brand { font-weight:700; color:var(--gold); font-size:13px; margin-bottom:4px; }
+.footer-right { font-size:11px; color:var(--t3); text-align:right; }
+.signal-label { font-size:9px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--t3); margin-bottom:6px; }
+.signal-chips { display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+.signal-chip { background:var(--s2); border:1px solid var(--s4); border-radius:20px; padding:3px 9px; font-size:10px; color:var(--t2); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:940px) {
+  .hero-grid { grid-template-columns:1fr; }
+  .card-grid { grid-template-columns:1fr 1fr; }
+  .tc-grid { grid-template-columns:1fr; }
+  .brief-grid { grid-template-columns:1fr; }
+  .repo-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px) {
+  .card-grid { grid-template-columns:1fr; }
+  .notes-grid { grid-template-columns:1fr; }
+  .repo-grid { grid-template-columns:1fr; }
+  .footer { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<div class="masthead section">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f0ece4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <div>
+      <div class="brand-name">AI Intelligence</div>
+      <div class="brand-sub">Vulcan Labs Daily</div>
+    </div>
+  </div>
+  <div class="masthead-right">
+    <div class="issue-badge">#55</div>
+    <div class="date-text">Thursday, 28 May 2026</div>
+  </div>
+</div>
+
+<!-- FOCUS CHIPS -->
+<div class="focus-row section">
+  <span class="focus-chip fc-1">🧠 Agentic Memory</span>
+  <span class="focus-chip fc-2">🤖 Anthropic · Claude</span>
+  <span class="focus-chip fc-3">💰 LLM Cost Optimization</span>
+  <span class="focus-chip fc-4">🚀 Frontier Models &amp; Leaks</span>
+  <span class="focus-chip fc-5">⚡ AI Coding Agents</span>
+  <span class="focus-chip fc-6">🕸️ Multi-Agent Frameworks</span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker section">
+  <div class="ticker-dot"></div>
+  <span class="ticker-label">Breaking</span>
+  <span class="ticker-text">Anthropic Project Glasswing update: Claude Mythos Preview xác nhận 10,000+ software vulnerabilities — 90.6% true positives; Grok Build ra public beta với multi-agent orchestrator; Claude Sonnet 4.8 bị leak qua 512K-line npm source map</span>
+</div>
+
+<!-- BREAKING THIS WEEK -->
+<div class="section">
+<div class="sec-label">Breaking This Week</div>
+<div class="hero-grid">
+
+  <!-- HERO CARD -->
+  <div class="hero-card">
+    <div class="hero-glow"></div>
+    <div class="tags">
+      <span class="tag tag-gold">TOP READ ★</span>
+      <span class="tag tag-blue">Anthropic</span>
+      <span class="tag tag-red">Security AI</span>
+    </div>
+    <div class="hero-title">Project Glasswing Update: Claude Mythos đã tìm 10,000+ lỗ hổng critical — security AI benchmark mới</div>
+    <div class="hero-desc">Anthropic công bố bản cập nhật Project Glasswing — sáng kiến bảo mật phần mềm mã nguồn mở. Claude Mythos Preview đã scan 1,000+ open-source projects trong 1 tháng, phát hiện 6,202 lỗ hổng high/critical-severity với 90.6% confirmed true positives. Mozilla Firefox 150 patched 271 CVEs được tìm bởi Mythos — gấp 10× so với Firefox 148 dùng Claude Opus 4.6.</div>
+    <ul class="hero-bullets">
+      <li>Cloudflare phát hiện 2,000 bugs (400 high/critical) với false positive rate thấp hơn human testers — bottleneck hiện tại là patch velocity, không phải bug discovery</li>
+      <li>Claude Security public beta mở cho Enterprise: đã patch 2,100+ vulnerabilities trong 3 tuần đầu; Cyber Verification Program mở cho security professionals</li>
+      <li>Mythos vượt trội toàn bộ pipeline security truyền thống về throughput và accuracy — khả năng scan full codebase thay vì sampling trở thành tiêu chuẩn mới</li>
+    </ul>
+    <div class="hero-footer">
+      <span class="src-name">helpnetsecurity.com</span>
+      <a class="cta" href="https://www.helpnetsecurity.com/2026/05/26/anthropic-project-glasswing-update/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="stat-val">10K+</div><div class="stat-lbl">Vulnerabilities found</div></div>
+      <div class="stat-box"><div class="stat-val">90.6%</div><div class="stat-lbl">True positive rate</div></div>
+      <div class="stat-box"><div class="stat-val">1,000+</div><div class="stat-lbl">OSS projects scanned</div></div>
+      <div class="stat-box"><div class="stat-val">10×</div><div class="stat-lbl">Speed vs Opus 4.6</div></div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- WATCH CARD -->
+    <div class="watch-card">
+      <div class="card-head">⚠ Watch</div>
+      <div class="card-title">Grok Build ra public beta: multi-agent orchestrator, Plan Mode, Imagine CLI</div>
+      <div class="card-desc">xAI mở Grok Build cho SuperGrok ($30/tháng) và X Premium+ ($40/tháng). Platform bao gồm Plan Mode cho agent task planning, multi-agent orchestrator cho parallel workloads, và Imagine CLI cho visual generation từ terminal.</div>
+      <div class="card-footer">
+        <span class="src-name">pasqualepillitteri.it</span>
+        <a class="cta" href="https://pasqualepillitteri.it/en/news/3442/grok-build-public-beta-imagine-orchestrator-26-may-2026" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- MINI CARDS -->
+    <div class="mini-card">
+      <div class="card-title">Anthropic mở văn phòng Seoul — KiYoung Choi làm Representative Director Korea</div>
+      <div class="card-desc">Claude usage tại Hàn Quốc cao 3.5× so với tỷ lệ dân số. Anthropic Korea tập trung vào enterprise &amp; government partnerships.</div>
+      <div class="card-footer">
+        <span class="src-name">anthropic.com</span>
+        <a class="cta" href="https://www.anthropic.com/news/kiyoung-choi-representative-director-anthropic-korea" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="mini-card">
+      <div class="card-title">Claude Sonnet 4.8 bị leak qua npm source map 512,000 dòng</div>
+      <div class="card-desc">Reverse engineers phân tích source map từ Claude.ai bundle: tokenizer tăng +30%, visual accuracy 98%, tier mới "xhigh" cho agentic tasks.</div>
+      <div class="card-footer">
+        <span class="src-name">pasqualepillitteri.it</span>
+        <a class="cta" href="https://pasqualepillitteri.it/en/news/3286/claude-sonnet-4-8-leak-anthropic-512000-lines" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- TIN TUẦN NÀY — 3-COL CARDS -->
+<div class="section">
+<div class="sec-label">Tin tuần này</div>
+<div class="card-grid">
+
+  <!-- CARD 1 -->
+  <div class="card card-blue">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="co-mark co-fujitsu">FJ</div>
+      <div class="tags"><span class="tag tag-blue">Multi-Agent</span><span class="tag tag-teal">Self-Evolving</span></div>
+      <div class="card-date">25 May 2026</div>
+      <div class="card-title">Fujitsu EVE-Agent: AI agent tự tiến hóa, tăng 28 điểm accuracy trong production benchmarks</div>
+      <div class="card-text">Fujitsu ra mắt EVE-Agent (Evolving AI Agent) — hệ thống multi-agent có khả năng tự cải thiện kỹ năng dựa trên feedback loops. Benchmark nội bộ cho thấy +28 điểm accuracy so với static agent baseline, không cần retraining.</div>
+      <div class="card-footer">
+        <span class="src-name">global.fujitsu.com</span>
+        <a class="cta" href="https://global.fujitsu/en-global/pr/news/2026/05/25-01" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card card-purple">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="co-mark co-kore">KA</div>
+      <div class="tags"><span class="tag tag-purple">Enterprise AI</span><span class="tag tag-blue">Azure</span></div>
+      <div class="card-date">21 May 2026</div>
+      <div class="card-title">Kore.ai Artemis Agent Platform ra mắt trên Azure — governance &amp; optimization built-in</div>
+      <div class="card-text">Kore.ai launch Artemis thế hệ mới trên Azure Marketplace: nền tảng xây dựng, quản lý và tối ưu enterprise AI agents với Agent Governance Layer và real-time cost optimization dashboard.</div>
+      <div class="card-footer">
+        <span class="src-name">businesswire.com</span>
+        <a class="cta" href="https://www.businesswire.com/news/home/20260521284219/en/Kore.ai-Launches-Artemis-the-New-Generation-of-the-Kore.ai-Agent-Platform-for-Building-Governing-and-Optimizing-Enterprise-AI" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card card-teal">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="co-mark co-xai">xAI</div>
+      <div class="tags"><span class="tag tag-teal">API</span><span class="tag tag-gold">Grok 4.3</span></div>
+      <div class="card-date">22 May 2026</div>
+      <div class="card-title">xAI ra Grok Skills + Responses API cho Grok 4.3 — tool calling &amp; stateful sessions</div>
+      <div class="card-text">xAI mở Responses API cho Grok 4.3 với Grok Skills — bộ built-in tools (web search, code execution, data analysis). Stateful multi-turn sessions giúp developer xây agent workflows không cần manage conversation state thủ công.</div>
+      <div class="card-footer">
+        <span class="src-name">infoq.com</span>
+        <a class="cta" href="https://www.infoq.com/news/2026/05/xai-grok-skills/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ĐÁNG ĐỌC — 2-COL BRIEFING -->
+<div class="section">
+<div class="sec-label">Đáng đọc — relevance cao</div>
+<div class="brief-grid">
+
+  <div class="brief-item">
+    <div class="brief-num">01</div>
+    <div class="brief-content">
+      <span class="brief-tag">Agent Orchestration</span>
+      <div class="brief-title">OpenAI Symphony: SPEC.md open-source cho coding agent orchestration thúc đẩy +500% PR contributions</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-openai">OAI</div> infoq.com</div>
+        <a class="cta" href="https://www.infoq.com/news/2026/05/openai-symphony-agents/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-num">02</div>
+    <div class="brief-content">
+      <span class="brief-tag">Multi-Agent Production</span>
+      <div class="brief-title">Grab dùng LangGraph multi-agent system cho data warehouse support — tiết kiệm hàng trăm engineering hours/tháng</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-grab">GR</div> infoq.com</div>
+        <a class="cta" href="https://www.infoq.com/news/2026/05/grab-multi-agent-support-system/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-num">03</div>
+    <div class="brief-content">
+      <span class="brief-tag">Agentic Commerce</span>
+      <div class="brief-title">Cloudflare + Stripe: AI agents có thể tự tạo account, mua domain, deploy lên production — không cần human approval</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-cf">CF</div> infoq.com</div>
+        <a class="cta" href="https://www.infoq.com/news/2026/05/cloudflare-stripe-agent-commerce/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-num">04</div>
+    <div class="brief-content">
+      <span class="brief-tag">GitHub Trending</span>
+      <div class="brief-title">GitHub Trending tuần 21/5: agent memory, on-device AI, và code knowledge graph chiếm top 10 — agentic infra đang là focus chính của OSS community</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-tech">PP</div> pasqualepillitteri.it</div>
+        <a class="cta" href="https://pasqualepillitteri.it/en/news/3327/github-trending-top-10-may-2026" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-num">05</div>
+    <div class="brief-content">
+      <span class="brief-tag">Enterprise Platform</span>
+      <div class="brief-title">Salesforce Summer '26: Multi-Agent Orchestration là headline feature của Agentforce — GA ngày 15 tháng 6</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-sf">SF</div> salesforce.com</div>
+        <a class="cta" href="https://www.salesforce.com/news/press-releases/2026/05/salesforce-summer-26-release/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-num">06</div>
+    <div class="brief-content">
+      <span class="brief-tag">Inference Economics</span>
+      <div class="brief-title">Gartner: Chi phí LLM inference sẽ giảm 90%+ vào năm 2030 — hardware efficiency và model compression là 2 driver chính</div>
+      <div class="brief-footer">
+        <div class="brief-src"><div class="brief-src-dot src-gartner">GT</div> gartner.com</div>
+        <a class="cta" href="https://www.gartner.com/en/newsroom/press-releases/2026-05-llm-inference-cost-forecast" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- TECHNICAL DEEP-DIVE -->
+<div class="section">
+<div class="sec-label">Technical Deep-dive</div>
+<div class="tc-grid">
+
+  <div class="tc-card tc-card-1">
+    <div class="tc-top">
+      <span class="tag tag-gold">OpenAI Symphony</span>
+      <span class="src-name">infoq.com</span>
+    </div>
+    <div class="tc-head">SPEC.md Pattern: Declarative agent orchestration contracts thay thế imperative wiring</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">SPEC.md</span> là contract file định nghĩa agent capabilities, input/output schemas, và handoff protocols — tương tự OpenAPI nhưng cho agents</li>
+      <li>Elixir-based orchestration layer xử lý <span class="tc-key">parallel agent dispatch</span> và <span class="tc-key">failure recovery</span> mà không cần developer viết retry logic thủ công</li>
+      <li>Open-source release kéo theo +500% PR contributions từ cộng đồng trong 2 tuần đầu — pattern đang trở thành de facto standard cho multi-agent coding workflows</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="src-name">May 17, 2026</span>
+      <a class="cta" href="https://www.infoq.com/news/2026/05/openai-symphony-agents/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <div class="tc-card tc-card-2">
+    <div class="tc-top">
+      <span class="tag tag-teal">Grab Engineering</span>
+      <span class="src-name">infoq.com</span>
+    </div>
+    <div class="tc-head">LangGraph multi-agent architecture cho data warehouse support tại scale production</div>
+    <ul class="tc-bullets">
+      <li>Kiến trúc <span class="tc-key">supervisor agent</span> routing requests đến specialized sub-agents (SQL generation, schema lookup, query optimization) — mỗi agent có memory riêng</li>
+      <li><span class="tc-key">Checkpointing state</span> qua LangGraph cho phép long-running queries không bị timeout, resume từ điểm cuối nếu agent bị interrupt</li>
+      <li>Production metrics: reclaim 100s engineering hours/tháng, mean time to answer giảm từ 4 giờ xuống 8 phút cho data warehouse queries</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="src-name">May 20, 2026</span>
+      <a class="cta" href="https://www.infoq.com/news/2026/05/grab-multi-agent-support-system/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <div class="tc-card tc-card-3">
+    <div class="tc-top">
+      <span class="tag tag-purple">Cloudflare + Stripe</span>
+      <span class="src-name">infoq.com</span>
+    </div>
+    <div class="tc-head">Agentic commerce layer: AI agents tự thực hiện financial transactions trong production pipelines</div>
+    <ul class="tc-bullets">
+      <li>Tích hợp <span class="tc-key">Stripe Payment Intents API</span> vào Cloudflare Workers AI — agent có thể tạo payment, mua domain, provisioning resources trong cùng một workflow</li>
+      <li><span class="tc-key">Spending limits &amp; approval gates</span> được config ở Cloudflare layer — agent chỉ thực hiện transaction nếu nằm trong policy đã set trước</li>
+      <li>Pattern mở ra khả năng fully autonomous DevOps agents — từ spin up infra đến thanh toán cloud bill mà không cần human-in-the-loop</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="src-name">May 18, 2026</span>
+      <a class="cta" href="https://www.infoq.com/news/2026/05/cloudflare-stripe-agent-commerce/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <div class="tc-card tc-card-4">
+    <div class="tc-top">
+      <span class="tag tag-blue">Fujitsu EVE-Agent</span>
+      <span class="src-name">global.fujitsu.com</span>
+    </div>
+    <div class="tc-head">Self-evolving agent architecture: skill acquisition qua reinforcement feedback — không cần retraining</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">Skill graph</span> là central data structure — mỗi task execution tạo ra node mới, EVE-Agent tự kết nối skills và optimize execution paths qua time</li>
+      <li><span class="tc-key">Failure-driven evolution</span>: agent tự phân tích lý do task fail, propose skill modifications, và A/B test changes trước khi commit vào skill graph</li>
+      <li>+28 điểm accuracy trong benchmark thực tế trên enterprise IT operation tasks — không cần fine-tuning hay human labeling trong quá trình evolution</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="src-name">May 25, 2026</span>
+      <a class="cta" href="https://global.fujitsu/en-global/pr/news/2026/05/25-01" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- OPEN SOURCE & TOOLS -->
+<div class="section">
+<div class="sec-label">Open Source &amp; Tools — GitHub Trending</div>
+<div class="repo-grid">
+
+  <div class="repo-card">
+    <div class="repo-name">rohitg00/agentmemory</div>
+    <div class="repo-desc">Persistent memory layer cho AI coding agents — multi-tier storage (working, episodic, semantic), context compression, cross-session recall.</div>
+    <div class="repo-meta">
+      <span class="repo-stars">★ 17.1K</span>
+      <span class="repo-spike">+6.9K this week</span>
+      <span class="repo-lang">Python</span>
+    </div>
+    <div class="repo-rel">🧠 Agentic Memory Infrastructure</div>
+    <div class="repo-footer">
+      <span></span>
+      <a class="cta" href="https://github.com/rohitg00/agentmemory" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">colbymchenry/codegraph</div>
+    <div class="repo-desc">Code knowledge graph cho AI coding agents — map toàn bộ codebase thành graph, giúp agent navigate và reduce token usage tới 60%.</div>
+    <div class="repo-meta">
+      <span class="repo-stars">★ 21K</span>
+      <span class="repo-spike">+14.1K this week</span>
+      <span class="repo-lang">TypeScript</span>
+    </div>
+    <div class="repo-rel">⚡ AI Coding Agents Dev Tools</div>
+    <div class="repo-footer">
+      <span></span>
+      <a class="cta" href="https://github.com/colbymchenry/codegraph" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">humanlayer/12-factor-agents</div>
+    <div class="repo-desc">12 nguyên tắc thiết kế LLM agents cho production — tương tự 12-Factor App nhưng cho agentic systems: idempotency, observability, human-in-the-loop.</div>
+    <div class="repo-meta">
+      <span class="repo-stars">★ 22K</span>
+      <span class="repo-spike">+1.9K this week</span>
+      <span class="repo-lang">Markdown</span>
+    </div>
+    <div class="repo-rel">🕸️ Multi-Agent Frameworks</div>
+    <div class="repo-footer">
+      <span></span>
+      <a class="cta" href="https://github.com/humanlayer/12-factor-agents" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">tinyhumansai/openhuman</div>
+    <div class="repo-desc">Private on-device AI assistant chạy hoàn toàn local — zero cloud dependency, hỗ trợ long-term memory và multi-modal input mà không cần gửi data ra ngoài.</div>
+    <div class="repo-meta">
+      <span class="repo-stars">★ 26.8K</span>
+      <span class="repo-spike">+17.1K this week</span>
+      <span class="repo-lang">Rust</span>
+    </div>
+    <div class="repo-rel">🧠 On-device Agentic Memory</div>
+    <div class="repo-footer">
+      <span></span>
+      <a class="cta" href="https://github.com/tinyhumansai/openhuman" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ĐỌC THÊM — 3-COL NOTES -->
+<div class="section">
+<div class="sec-label">Đọc thêm</div>
+<div class="notes-grid">
+
+  <div class="note">
+    <div class="note-label">🏢 Enterprise Platform</div>
+    <div class="note-title">Salesforce Summer '26: Multi-Agent Orchestration là headline Agentforce feature — GA ngày 15 tháng 6</div>
+    <div class="note-text">Agentforce 3.0 cho phép nhiều AI agents phối hợp xử lý complex workflows trong Salesforce CRM — routing, escalation, và task handoff được tự động hóa hoàn toàn. GA June 15 cho tất cả Enterprise tier.</div>
+    <a class="note-cta" href="https://www.salesforce.com/news/press-releases/2026/05/salesforce-summer-26-release/" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+
+  <div class="note">
+    <div class="note-label">💰 Inference Economics</div>
+    <div class="note-title">Gartner: LLM inference cost giảm 90%+ vào 2030 — hardware efficiency và quantization là 2 driver chính</div>
+    <div class="note-text">Báo cáo Gartner dự báo cost-per-token sẽ tiếp tục giảm mạnh — xu hướng đang tăng tốc nhờ speculative decoding, mixed-precision quantization, và custom silicon. Các dự án LLM cost optimization sẽ có ROI ngắn hạn hơn dự kiến.</div>
+    <a class="note-cta" href="https://www.gartner.com/en/newsroom/press-releases/2026-05-llm-inference-cost-forecast" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+
+  <div class="note">
+    <div class="note-label">🌏 Anthropic Korea</div>
+    <div class="note-title">Anthropic Korea expansion: Claude usage 3.5× cao hơn tỷ lệ dân số — Seoul office chính thức mở</div>
+    <div class="note-text">Anthropic xác nhận Hàn Quốc là một trong các thị trường tăng trưởng nhanh nhất toàn cầu. KiYoung Choi (ex-Samsung, ex-Google Korea) sẽ dẫn dắt chiến lược enterprise và government partnerships tại khu vực.</div>
+    <a class="note-cta" href="https://www.anthropic.com/news/kiyoung-choi-representative-director-anthropic-korea" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer section">
+  <div class="footer-left">
+    <div class="footer-brand">AI Intelligence · Vulcan Labs Daily</div>
+    <div>Issue #55 · Thursday, 28 May 2026</div>
+    <div>15 stories · 4 GitHub repos · Curated for AI product &amp; engineering teams</div>
+  </div>
+  <div class="footer-right">
+    <div class="signal-label">Signal Sources</div>
+    <div class="signal-chips">
+      <span class="signal-chip">🧠 Claude Memory</span>
+      <span class="signal-chip">💬 Slack</span>
+      <span class="signal-chip">📁 Drive</span>
+      <span class="signal-chip">✉️ Gmail</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+</body>
+</html>
