@@ -1,5 +1,6 @@
 {
   "issues": [
+    { "date": "2026-05-29", "file": "daily-ai-news-2026-05-29.html", "issue": 56, "headline": "Anthropic $65B Series H $965B · Claude Opus 4.8 Dynamic Workflows · Tencent memory open-source" },
     { "date": "2026-05-28", "file": "daily-ai-news-2026-05-28.html", "issue": 55, "headline": "Glasswing update: Mythos 10K+ CVEs confirmed · Grok Build public beta · Claude Sonnet 4.8 leak" },
     { "date": "2026-05-27", "file": "daily-ai-news-2026-05-27.html", "issue": 54, "headline": "Glasswing: Mythos Preview tìm 10K+ CVEs · RecursiveMAS -75% token · Mem0 benchmark 2026" },
     { "date": "2026-05-26", "file": "daily-ai-news-2026-05-26.html", "issue": 53, "headline": "Anthropic vượt OpenAI business customers · $900B valuation · Claude Managed Agents sandbox" },
