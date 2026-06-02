@@ -304,7 +304,7 @@ function renderSidebar() {
       const dateStr = String(d.getDate()).padStart(2,'0') + ' ' + MONTHS[d.getMonth()];
       const isLatest = keyIdx === 0 && idx === 0;
       html += `
-        <div class="issue-row" id="row-${issue.file}" onclick="loadByIndex(${flatIdx})">
+        <div class="issue-row" id="row-${issue.file.replace(/\//g, '__')}" onclick="loadByIndex(${flatIdx})">
           <div class="ir-left">
             <div class="ir-date">${dateStr}</div>
             <div class="ir-day">${dayName}</div>
@@ -326,7 +326,7 @@ function loadIssue(issue) {
 
   // Update active state
   document.querySelectorAll('.issue-row').forEach(r => r.classList.remove('active'));
-  const row = document.getElementById('row-' + issue.file);
+  const row = document.getElementById('row-' + issue.file.replace(/\//g, '__'));
   if (row) {
     row.classList.add('active');
     row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });

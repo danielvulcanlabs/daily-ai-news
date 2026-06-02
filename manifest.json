@@ -2,85 +2,85 @@
   "issues": [
     {
       "date": "2026-06-02",
-      "file": "daily-ai-news-2026-06-02.html",
+      "file": "news/daily-ai-news-2026-06-02.html",
       "issue": 58,
       "headline": "Anthropic IPO S-1 filed \u00b7 Opus 4.8 Dynamic Workflows \u00b7 Copilot token billing live"
     },
     {
       "date": "2026-06-01",
-      "file": "daily-ai-news-2026-06-01.html",
+      "file": "news/daily-ai-news-2026-06-01.html",
       "issue": 57,
       "headline": "GitHub Copilot AI Credits live \u00b7 Anthropic Agent SDK billing 15/6 \u00b7 Gemini 3.5 Pro incoming"
     },
     {
       "date": "2026-05-29",
-      "file": "daily-ai-news-2026-05-29.html",
+      "file": "news/daily-ai-news-2026-05-29.html",
       "issue": 56,
       "headline": "Anthropic $65B Series H $965B \u00b7 Claude Opus 4.8 Dynamic Workflows \u00b7 Tencent memory open-source"
     },
     {
       "date": "2026-05-28",
-      "file": "daily-ai-news-2026-05-28.html",
+      "file": "news/daily-ai-news-2026-05-28.html",
       "issue": 55,
       "headline": "Glasswing update: Mythos 10K+ CVEs confirmed \u00b7 Grok Build public beta \u00b7 Claude Sonnet 4.8 leak"
     },
     {
       "date": "2026-05-27",
-      "file": "daily-ai-news-2026-05-27.html",
+      "file": "news/daily-ai-news-2026-05-27.html",
       "issue": 54,
       "headline": "Glasswing: Mythos Preview t\u00ecm 10K+ CVEs \u00b7 RecursiveMAS -75% token \u00b7 Mem0 benchmark 2026"
     },
     {
       "date": "2026-05-26",
-      "file": "daily-ai-news-2026-05-26.html",
+      "file": "news/daily-ai-news-2026-05-26.html",
       "issue": 53,
       "headline": "Anthropic v\u01b0\u1ee3t OpenAI business customers \u00b7 $900B valuation \u00b7 Claude Managed Agents sandbox"
     },
     {
       "date": "2026-05-25",
-      "file": "daily-ai-news-2026-05-25.html",
+      "file": "news/daily-ai-news-2026-05-25.html",
       "issue": 52,
       "headline": "Mythos 10K zero-days \u00b7 Anthropic $900B round \u00b7 Trump kills AI EO \u00b7 GitHub TeamPCP supply chain hack"
     },
     {
       "date": "2026-05-22",
-      "file": "daily-ai-news-2026-05-22.html",
+      "file": "news/daily-ai-news-2026-05-22.html",
       "issue": 51,
       "headline": "Gemini 3.5 Flash GA \u00b7 Anthropic acquires Stainless \u00b7 Trump AI EO postponed"
     },
     {
       "date": "2026-05-21",
-      "file": "daily-ai-news-2026-05-21.html",
+      "file": "news/daily-ai-news-2026-05-21.html",
       "issue": 50,
       "headline": "Gemini 3.5 Flash GA \u00b7 Anthropic first profit Q2 \u00b7 xAI Grok Build coding agent"
     },
     {
       "date": "2026-05-20",
-      "file": "daily-ai-news-2026-05-20.html",
+      "file": "news/daily-ai-news-2026-05-20.html",
       "issue": 49,
       "headline": "Google I/O 2026: Gemini Omni any-to-any \u00b7 Antigravity 2.0 \u00b7 Kimi K2 deprecated May 25"
     },
     {
       "date": "2026-05-19",
-      "file": "daily-ai-news-2026-05-19.html",
+      "file": "news/daily-ai-news-2026-05-19.html",
       "issue": 48,
       "headline": "Dust $40M Series B \u00b7 Google I/O keynote preview \u00b7 Claude for Small Business"
     },
     {
       "date": "2026-05-18",
-      "file": "daily-ai-news-2026-05-18.html",
+      "file": "news/daily-ai-news-2026-05-18.html",
       "issue": 47,
       "headline": "Trio model deployment \u00b7 Chat Smith Agent Platform \u00b7 Mem0 memory benchmarks"
     },
     {
       "date": "2026-05-15",
-      "file": "daily-ai-news-2026-05-15.html",
+      "file": "news/daily-ai-news-2026-05-15.html",
       "issue": 46,
       "headline": "GPT-5.5 Instant default \u00b7 OpenAI personal finance \u00b7 Cursor 3.0 Agents Window"
     },
     {
       "date": "2026-05-13",
-      "file": "daily-ai-news-2026-05-13.html",
+      "file": "news/daily-ai-news-2026-05-13.html",
       "issue": 45,
       "headline": "Claude for Small Business launch \u00b7 Chat Smith redesign Phase 1 \u00b7 Agent survey"
     }

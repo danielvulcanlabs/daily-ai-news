@@ -96,7 +96,7 @@ Indexes:
 File `.env.local` đã có sẵn config đúng. Verify lại:
 
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyDMDjphxGV7ZYpjZx9x_rRlPKv7y9-Ph1Y
+NEXT_PUBLIC_FIREBASE_API_KEY=YOUR_FIREBASE_API_KEY
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=daily-ai-news-c6c23.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=daily-ai-news-c6c23
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=daily-ai-news-c6c23.firebasestorage.app
