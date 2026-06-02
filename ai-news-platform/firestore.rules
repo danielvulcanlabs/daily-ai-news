@@ -1,0 +1,60 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ──
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // ── Users ──
+    // users/{uid} — user profile document
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid);
+      allow update: if isOwner(uid);
+      // delete not allowed from client — admin only
+
+      // ── Connectors ──
+      // users/{uid}/connectors/{provider}
+      match /connectors/{provider} {
+        allow read: if isOwner(uid);
+        allow write: if isOwner(uid);
+      }
+
+      // ── Topics ──
+      // users/{uid}/topics/{topicId}
+      match /topics/{topicId} {
+        allow read: if isOwner(uid);
+        allow write: if isOwner(uid);
+
+        // ── Topic Updates ──
+        // users/{uid}/topics/{topicId}/updates/{updateId}
+        match /updates/{updateId} {
+          allow read: if isOwner(uid);
+          // write only from server (cron worker)
+          allow write: if false;
+        }
+      }
+
+      // ── Digests ──
+      // users/{uid}/digests/{date}
+      match /digests/{date} {
+        allow read: if isOwner(uid);
+        // write only from server (cron worker)
+        allow write: if false;
+      }
+    }
+
+    // ── Deny everything else ──
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
