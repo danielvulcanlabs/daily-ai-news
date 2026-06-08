@@ -2,6 +2,3 @@ CLAUDE.md
 memory/
 outputs/
 .DS_Store
-
-# Local Netlify folder
-.netlify

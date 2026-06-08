@@ -101,20 +101,22 @@ Update `/Users/macbook/Working/Vulcan Labs/AI News/manifest.json` — prepend to
 ```
 Keep all existing entries. Cap array at 90 entries. Save.
 
-## Step 7: Deploy to Netlify
+## Step 7: Push to GitHub
+
+Commit today's digest and push — GitHub Pages serves the static site automatically.
 
 ```bash
 cd "/Users/macbook/Working/Vulcan Labs/AI News"
-netlify deploy --dir . --prod 2>&1
+git add news/daily-ai-news-<YYYY-MM-DD>.html manifest.json index.html
+git commit -m "Add daily AI digest <YYYY-MM-DD>"
+git push origin main
 ```
 
-If `netlify` is not installed or not authenticated, skip silently and note: "Netlify not configured — run `npm i -g netlify-cli && netlify login && netlify init` once to enable auto-deploy."
-
-If deploy succeeds, include the Netlify URL in the chat summary.
+If push fails (auth, dirty tree, etc.), note the error in the chat summary. Do not force-push.
 
 ## Step 8: Deliver
 
-Present the HTML file with a `computer://` link and a 2-sentence chat summary highlighting the single most relevant story. Include the Netlify URL if deploy succeeded.
+Present the HTML file with a `computer://` link and a 2-sentence chat summary highlighting the single most relevant story. Include the GitHub repo URL if push succeeded.
 
 Do not paste the digest body into chat.
 
