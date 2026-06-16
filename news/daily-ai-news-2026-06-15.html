@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — June 15, 2026</title>
+<style>
+:root{
+  --bg:#07070a;--s1:#0f0f14;--s2:#16161d;--s3:#1d1d27;--s4:#30303e;
+  --t1:#f0ece4;--t2:#9a958c;--t3:#6e6b67;
+  --gold:#c8a76a;--blue:#5d8dee;--teal:#3ecf8e;
+  --red:#e55252;--purple:#9d78f0;
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(93,141,238,.08),transparent),radial-gradient(circle at 20% 80%,rgba(62,207,142,.04),transparent)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* MASTHEAD */
+.masthead{padding:32px 0 24px;border-bottom:1px solid var(--s4);animation:fadeUp .5s ease both}
+.mast-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#c8a76a,#8b6914);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-icon svg{width:22px;height:22px}
+.brand-name{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.brand-sub{font-size:11px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+.mast-right{display:flex;align-items:center;gap:12px}
+.issue-badge{background:var(--s2);border:1px solid var(--s4);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--t2)}
+.date-badge{font-size:12px;color:var(--t3)}
+
+/* FOCUS CHIPS */
+.focus-row{padding:16px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;animation:fadeUp .5s .05s ease both}
+.focus-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-right:4px}
+.chip{background:var(--s2);border:1px solid var(--s4);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--t2);white-space:nowrap}
+.chip.top{border-color:var(--gold);color:var(--gold)}
+.chip.sec{border-color:var(--blue);color:var(--blue)}
+.chip.third{border-color:var(--teal);color:var(--teal)}
+
+/* TICKER */
+.ticker{background:linear-gradient(90deg,rgba(229,82,82,.18),rgba(229,82,82,.08));border:1px solid rgba(229,82,82,.3);border-radius:var(--r);padding:10px 16px;margin:8px 0 20px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s .08s ease both}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;animation:ripple 1.5s infinite}
+@keyframes ripple{0%,100%{box-shadow:0 0 0 0 rgba(229,82,82,.5)}50%{box-shadow:0 0 0 6px rgba(229,82,82,0)}}
+.ticker-text{font-size:12px;color:var(--t1);font-weight:500}
+.ticker-text strong{color:var(--red)}
+
+/* SECTION LABELS */
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:600;margin-bottom:14px}
+
+/* BREAKING HERO GRID */
+.break-section{margin-bottom:32px;animation:fadeUp .5s .1s ease both}
+.hero-grid{display:grid;grid-template-columns:1fr 314px;gap:16px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr}}
+
+/* HERO CARD */
+.hero-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--gold);padding:24px;display:flex;flex-direction:column;position:relative;overflow:hidden;background-image:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(200,167,106,.06),transparent)}
+.hero-card::before{content:'';position:absolute;inset:0;border-radius:var(--r);border:1px solid var(--gold);animation:border-shift 3s linear infinite;pointer-events:none}
+@keyframes border-shift{0%,100%{opacity:1}50%{opacity:.5}}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.tag-red{background:rgba(229,82,82,.15);color:var(--red);border:1px solid rgba(229,82,82,.3)}
+.tag-gold{background:rgba(200,167,106,.15);color:var(--gold);border:1px solid rgba(200,167,106,.3)}
+.tag-blue{background:rgba(93,141,238,.15);color:var(--blue);border:1px solid rgba(93,141,238,.3)}
+.tag-teal{background:rgba(62,207,142,.15);color:var(--teal);border:1px solid rgba(62,207,142,.3)}
+.tag-purple{background:rgba(157,120,240,.15);color:var(--purple);border:1px solid rgba(157,120,240,.3)}
+.hero-title{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:10px;letter-spacing:-.3px}
+.hero-desc{font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.7}
+.hero-bullets{list-style:none;margin-bottom:16px}
+.hero-bullets li{font-size:12px;color:var(--t2);padding:4px 0;padding-left:16px;position:relative}
+.hero-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-weight:700}
+.hero-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--s4);margin-top:auto}
+.src-name{font-size:11px;color:var(--t3)}
+.cta{font-size:11px;color:var(--gold);font-weight:600}
+.cta:hover{color:var(--t1)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.stat-box{background:var(--s2);border-radius:8px;padding:10px 12px}
+.stat-val{font-size:18px;font-weight:700;color:var(--gold);animation:countGlow 2s ease both}
+.stat-lab{font-size:10px;color:var(--t3);margin-top:2px}
+@keyframes countGlow{0%{opacity:0;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
+
+/* SIDEBAR CARDS */
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.watch-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--red);padding:18px;flex:1}
+.watch-title{font-size:14px;font-weight:600;line-height:1.4;margin:8px 0 6px}
+.watch-desc{font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.6}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--s4)}
+.mini-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:14px}
+.mini-title{font-size:13px;font-weight:600;margin:6px 0 4px;line-height:1.4}
+.mini-desc{font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+
+/* CO-MARKS */
+.co-mark{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:9px;font-weight:700;flex-shrink:0}
+.co-anthropic{background:linear-gradient(135deg,#d4884a,#8b4a1a);color:#fff}
+.co-openai{background:#1a1a1a;color:#fff;border:1px solid #333}
+.co-google{background:#fff;color:#4285f4}
+.co-salesforce{background:linear-gradient(135deg,#00a1e0,#005a8c);color:#fff}
+.co-jumpcloud{background:linear-gradient(135deg,#6562FC,#4240c4);color:#fff}
+.co-mem0{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff}
+.co-meta{background:linear-gradient(135deg,#1877f2,#0d4fa8);color:#fff}
+.co-github{background:linear-gradient(135deg,#24292e,#0d1117);color:#fff}
+.co-arxiv{background:linear-gradient(135deg,#b22222,#7b1515);color:#fff}
+
+/* 3-COL CARDS */
+.cards-section{margin-bottom:32px;animation:fadeUp .5s .15s ease both}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.cards-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}}
+.news-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:18px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.card-blue::before{background:linear-gradient(90deg,var(--blue),#3a6bc4)}
+.card-purple::before{background:linear-gradient(90deg,var(--purple),#7a5bc4)}
+.card-teal::before{background:linear-gradient(90deg,var(--teal),#28a875)}
+.card-gold::before{background:linear-gradient(90deg,var(--gold),#8b6914)}
+.card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.card-date{font-size:10px;color:var(--t3);margin-left:auto}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px}
+.card-text{font-size:12px;color:var(--t2);line-height:1.6;flex:1;margin-bottom:12px}
+
+/* BRIEFING */
+.brief-section{margin-bottom:32px;animation:fadeUp .5s .2s ease both}
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:600px){.brief-grid{grid-template-columns:1fr}}
+.brief-item{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:12px 14px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.brief-item:hover{transform:translateX(3px);border-color:var(--s3)}
+.brief-top{display:flex;align-items:center;gap:8px}
+.brief-num{font-size:12px;font-weight:700;color:var(--t3);min-width:24px}
+.brief-title{font-size:13px;font-weight:600;line-height:1.4;flex:1}
+.brief-bot{display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:1px solid var(--s4)}
+.brief-src{font-size:10px;color:var(--t3)}
+.brief-cta{font-size:10px;color:var(--gold);font-weight:600}
+
+/* TECH DEEP-DIVE */
+.tech-section{margin-bottom:32px;animation:fadeUp .5s .25s ease both}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.tech-grid{grid-template-columns:1fr}}
+.tc-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:18px;border-left:3px solid;display:flex;flex-direction:column}
+.tc-blue{border-left-color:var(--blue)}
+.tc-teal{border-left-color:var(--teal)}
+.tc-purple{border-left-color:var(--purple)}
+.tc-gold{border-left-color:var(--gold)}
+.tc-head-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tc-src{font-size:10px;color:var(--t3);margin-left:auto}
+.tc-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:10px}
+.tc-bullets{list-style:none;flex:1}
+.tc-bullets li{font-size:12px;color:var(--t2);padding:3px 0;padding-left:14px;position:relative;line-height:1.5}
+.tc-bullets li::before{content:'·';position:absolute;left:0;color:var(--blue)}
+.tc-key{font-family:'SF Mono',monospace;font-size:10px;background:var(--s3);padding:1px 5px;border-radius:4px;color:var(--teal)}
+.tc-footer{margin-top:10px;padding-top:10px;border-top:1px solid var(--s4);display:flex;justify-content:space-between;align-items:center}
+
+/* GITHUB REPOS */
+.repo-section{margin-bottom:32px;animation:fadeUp .5s .28s ease both}
+.repo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:940px){.repo-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.repo-grid{grid-template-columns:1fr}}
+.repo-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:14px;display:flex;flex-direction:column}
+.repo-name{font-family:'SF Mono',monospace;font-size:12px;color:var(--blue);font-weight:600;margin-bottom:6px}
+.repo-meta{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.repo-stars{font-size:10px;color:var(--gold);font-weight:600}
+.spike-badge{font-size:9px;background:rgba(200,167,106,.15);color:var(--gold);border:1px solid rgba(200,167,106,.3);padding:1px 5px;border-radius:8px}
+.lang-tag{font-size:9px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:8px}
+.repo-desc{font-size:11px;color:var(--t2);line-height:1.5;flex:1;margin-bottom:10px}
+.repo-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--s4)}
+.rel-tag{font-size:9px;background:rgba(62,207,142,.1);color:var(--teal);border:1px solid rgba(62,207,142,.25);padding:2px 7px;border-radius:8px}
+
+/* NOTES */
+.notes-section{margin-bottom:32px;animation:fadeUp .5s .3s ease both}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.notes-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.notes-grid{grid-template-columns:1fr}}
+.note-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:16px;display:flex;flex-direction:column}
+.note-label{font-size:10px;color:var(--t3);margin-bottom:8px}
+.note-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.note-text{font-size:12px;color:var(--t2);line-height:1.6;flex:1;margin-bottom:10px}
+.note-cta{font-size:11px;color:var(--gold);font-weight:600;text-align:right;display:block}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--s4);padding:24px 0;margin-top:8px;animation:fadeUp .5s .35s ease both}
+.footer-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-left .fl-brand{font-size:13px;font-weight:600;margin-bottom:4px}
+.footer-left .fl-meta{font-size:11px;color:var(--t3)}
+.footer-right{text-align:right}
+.signal-label{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:6px}
+.signal-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.signal-chip{font-size:10px;background:var(--s2);border:1px solid var(--s4);padding:2px 8px;border-radius:10px;color:var(--t3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-inner">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L4.09 12.11A1 1 0 0 0 5 13.8H10.59L9 22l10.91-10.11A1 1 0 0 0 19 10.2H13.41L15 2z" fill="white" stroke="white" stroke-width=".5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">AI Intelligence</div>
+        <div class="brand-sub">Vulcan Labs Daily</div>
+      </div>
+    </div>
+    <div class="mast-right">
+      <span class="issue-badge">Issue #69</span>
+      <span class="date-badge">June 15, 2026 · Monday</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOCUS CHIPS -->
+<div class="focus-row">
+  <span class="focus-label">Focus</span>
+  <span class="chip top">Anthropic Agent SDK Billing Change</span>
+  <span class="chip sec">Multi-Agent Orchestration</span>
+  <span class="chip sec">LLM Agent Memory</span>
+  <span class="chip third">AI Coding Agents</span>
+  <span class="chip third">LLM Inference Cost</span>
+  <span class="chip">Cloud Agent Security</span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="live-dot"></div>
+  <div class="ticker-text"><strong>EFFECTIVE TODAY:</strong> Anthropic Agent SDK billing split takes effect — agent sub-calls billed separately từ hôm nay, June 15 2026</div>
+</div>
+
+<!-- BREAKING THIS WEEK -->
+<div class="break-section">
+  <div class="sec-label">⚡ Breaking This Week</div>
+  <div class="hero-grid">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="hero-tags">
+        <span class="tag tag-red">Effective Today</span>
+        <span class="tag tag-gold">Anthropic</span>
+        <span class="tag tag-blue">Agent SDK</span>
+      </div>
+      <div class="hero-title">Anthropic Agent SDK Billing Split: Agent Sub-calls Không Còn Được Bao Cấp Bởi Subscription</div>
+      <div class="hero-desc">Từ hôm nay 15/6, Anthropic thay đổi cách tính phí Agent SDK: mỗi LLM call từ sub-agent trong một orchestration pipeline đều được billing riêng, không được tính vào credit pool chung của subscription gốc. Thay đổi này ảnh hưởng trực tiếp đến mọi team đang chạy multi-agent workflows qua Claude API.</div>
+      <ul class="hero-bullets">
+        <li>Credit pool mới: mỗi agent trong pipeline phải có credit allocation riêng — orchestrator không thể "chia sẻ" quota với sub-agents như trước</li>
+        <li>Tác động lớn nhất với hệ thống chạy 10–100+ parallel sub-agents, đặc biệt các AI coding agent pipelines quy mô lớn</li>
+        <li>Anthropic đã thông báo trước từ ngày 2/6 qua email và changelog; migration guide khuyến nghị dùng shared API key pool với per-agent rate limits</li>
+      </ul>
+      <div class="hero-footer">
+        <span class="src-name">techtimes.com · Jun 2 &amp; usagebox.com · Jun 9</span>
+        <a href="https://www.techtimes.com/articles/317625/20260602/anthropic-ends-subscription-subsidy-agents-june-15-credit-pool-replaces-flat-rate-access.htm" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-box"><div class="stat-val">Jun 15</div><div class="stat-lab">ngày hiệu lực chính thức</div></div>
+        <div class="stat-box"><div class="stat-val">100+</div><div class="stat-lab">agent pipelines ảnh hưởng mỗi deployment</div></div>
+        <div class="stat-box"><div class="stat-val">13 ngày</div><div class="stat-lab">thời gian thông báo trước</div></div>
+        <div class="stat-box"><div class="stat-val">API</div><div class="stat-lab">key pool là migration path khuyến nghị</div></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <!-- WATCH -->
+      <div class="watch-card">
+        <div class="hero-tags">
+          <span class="tag tag-red">Watch</span>
+          <div class="co-mark co-salesforce">SF</div>
+        </div>
+        <div class="watch-title">Salesforce Agentforce Summer '26: Multi-Agent Orchestration GA Hôm Nay</div>
+        <div class="watch-desc">Salesforce ra mắt Summer '26 release hôm nay với Agentforce Multi-Agent Orchestration chính thức GA — cho phép các agent phối hợp cross-CRM workflows mà không cần custom code. Đây là tín hiệu rõ nhất rằng enterprise multi-agent orchestration đang chuyển từ research sang production.</div>
+        <div class="card-footer">
+          <span class="src-name">salesforce.com · Jun 15</span>
+          <a href="https://www.salesforce.com/news/stories/summer-2026-product-release-announcement/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+      <!-- MINI -->
+      <div class="mini-card">
+        <div class="hero-tags">
+          <span class="tag tag-teal">Cloud Security</span>
+          <div class="co-mark co-jumpcloud">JC</div>
+        </div>
+        <div class="mini-title">JumpCloud Agentic IAM on Google Cloud: Identity-Aware Agent Access</div>
+        <div class="mini-desc">JumpCloud launch Agentic IAM trên Google Cloud — cho phép cấp phát và thu hồi quyền truy cập cho AI agents theo identity context, không cần static service accounts.</div>
+        <div class="card-footer">
+          <span class="src-name">prnewswire.com · Jun 11</span>
+          <a href="https://www.prnewswire.com/news-releases/jumpcloud-launches-agentic-iam-on-google-cloud-302798046.html" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIN TUẦN NÀY -->
+<div class="cards-section">
+  <div class="sec-label">📰 Tin tuần này</div>
+  <div class="cards-grid">
+
+    <!-- CARD 1 -->
+    <div class="news-card card-blue">
+      <div class="card-header">
+        <div class="co-mark co-mem0">M</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-blue">Agent Memory</span>
+          <span class="tag tag-teal">Tutorial</span>
+        </div>
+        <span class="card-date">Jun 10</span>
+      </div>
+      <div class="card-title">Hướng Dẫn Xây Dựng AI Agent Với Long-Term Memory Dùng Mem0</div>
+      <div class="card-text">Mem0 publish step-by-step guide về cách tích hợp persistent memory vào agent pipelines — từ memory storage, retrieval strategy đến context injection. Bao gồm code samples cho Python và TypeScript SDK.</div>
+      <div class="card-footer">
+        <span class="src-name">mem0.ai · Jun 10</span>
+        <a href="https://mem0.ai/blog/how-to-create-ai-agents-with-long-term-memory-2" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="news-card card-purple">
+      <div class="card-header">
+        <div class="co-mark co-meta">M</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-purple">Meta</span>
+          <span class="tag tag-blue">Business Agents</span>
+        </div>
+        <span class="card-date">Jun 13</span>
+      </div>
+      <div class="card-title">Meta Business AI: Agent Platform Cho WhatsApp, Messenger &amp; Instagram</div>
+      <div class="card-text">Meta ra mắt nền tảng cho phép doanh nghiệp deploy AI agents trực tiếp trên WhatsApp, Messenger và Instagram — xử lý customer queries, booking và sales automation. Rollout bắt đầu với các doanh nghiệp tại Mỹ và Brazil.</div>
+      <div class="card-footer">
+        <span class="src-name">meta.com · Jun 13</span>
+        <a href="https://www.meta.com/business/news/meta-ai-business-agent-platform-whatsapp-messenger-instagram/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="news-card card-teal">
+      <div class="card-header">
+        <div class="co-mark co-anthropic">A</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-teal">Enterprise</span>
+          <span class="tag tag-gold">Adoption</span>
+        </div>
+        <span class="card-date">Jun 13</span>
+      </div>
+      <div class="card-title">Anthropic Vượt OpenAI: 34.4% Business Adoption Lần Đầu Tiên — Driven bởi Claude Code</div>
+      <div class="card-text">Ramp AI Index (theo dõi 50.000+ doanh nghiệp Mỹ): Anthropic đạt 34.4% vs OpenAI 32.3% trong tháng 4/2026 — lần đầu tiên vượt qua. Claude Code được credit là growth engine chính, chiếm ~4% public GitHub commits toàn cầu.</div>
+      <div class="card-footer">
+        <span class="src-name">venturebeat.com · Jun 13</span>
+        <a href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ĐÁNG ĐỌC -->
+<div class="brief-section">
+  <div class="sec-label">📌 Đáng đọc — relevance cao</div>
+  <div class="brief-grid">
+
+    <div class="brief-item" onclick="window.open('https://usagebox.com/articles/anthropic-june-15-agent-sdk-credit-split-claude-4-retirement');return false;">
+      <div class="brief-top">
+        <span class="brief-num">01</span>
+        <span class="tag tag-gold" style="font-size:9px">Anthropic</span>
+        <span class="brief-title">Anthropic Agent SDK Credit Split &amp; Claude 4 Retirement — Migration Checklist</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">usagebox.com · Jun 9</span>
+        <a href="https://usagebox.com/articles/anthropic-june-15-agent-sdk-credit-split-claude-4-retirement" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://www.salesforce.com/news/stories/summer-2026-product-release-announcement/');return false;">
+      <div class="brief-top">
+        <span class="brief-num">02</span>
+        <span class="tag tag-blue" style="font-size:9px">Multi-Agent</span>
+        <span class="brief-title">Salesforce Summer '26: Agentforce Orchestration GA, Einstein Memory Layer &amp; Flow AI</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">salesforce.com · Jun 15</span>
+        <a href="https://www.salesforce.com/news/stories/summer-2026-product-release-announcement/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://www.prnewswire.com/news-releases/jumpcloud-launches-agentic-iam-on-google-cloud-302798046.html');return false;">
+      <div class="brief-top">
+        <span class="brief-num">03</span>
+        <span class="tag tag-teal" style="font-size:9px">IAM</span>
+        <span class="brief-title">JumpCloud Agentic IAM: Dynamic Service Account Management cho AI Agents trên GCP</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">prnewswire.com · Jun 11</span>
+        <a href="https://www.prnewswire.com/news-releases/jumpcloud-launches-agentic-iam-on-google-cloud-302798046.html" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://mem0.ai/blog/how-to-create-ai-agents-with-long-term-memory-2');return false;">
+      <div class="brief-top">
+        <span class="brief-num">04</span>
+        <span class="tag tag-blue" style="font-size:9px">Memory</span>
+        <span class="brief-title">Mem0: Persistent Memory Architecture cho Production Agent Pipelines — Full Guide</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">mem0.ai · Jun 10</span>
+        <a href="https://mem0.ai/blog/how-to-create-ai-agents-with-long-term-memory-2" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead');return false;">
+      <div class="brief-top">
+        <span class="brief-num">05</span>
+        <span class="tag tag-teal" style="font-size:9px">Enterprise</span>
+        <span class="brief-title">Ramp AI Index: Anthropic 34.4% vs OpenAI 32.3% — Claude Code Drives First-Ever Business Lead</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">venturebeat.com · Jun 13</span>
+        <a href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://www.meta.com/business/news/meta-ai-business-agent-platform-whatsapp-messenger-instagram/');return false;">
+      <div class="brief-top">
+        <span class="brief-num">06</span>
+        <span class="tag tag-purple" style="font-size:9px">Meta</span>
+        <span class="brief-title">Meta Business AI Agents: Tích Hợp Native vào WhatsApp/Messenger cho 200M+ Doanh Nghiệp</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">meta.com · Jun 13</span>
+        <a href="https://www.meta.com/business/news/meta-ai-business-agent-platform-whatsapp-messenger-instagram/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TECHNICAL DEEP-DIVE -->
+<div class="tech-section">
+  <div class="sec-label">🔬 Technical Deep-dive</div>
+  <div class="tech-grid">
+
+    <div class="tc-card tc-blue">
+      <div class="tc-head-row">
+        <span class="tag tag-blue">Multi-Agent</span>
+        <span class="tc-src">Anthropic Docs</span>
+      </div>
+      <div class="tc-title">Agent SDK Credit Split: Cách Architect Multi-Agent Systems Sau June 15</div>
+      <ul class="tc-bullets">
+        <li>Mỗi sub-agent cần <span class="tc-key">api_key</span> riêng hoặc thuộc <span class="tc-key">credit_pool_id</span> riêng biệt — không thể dùng chung token pool với orchestrator</li>
+        <li>Pattern khuyến nghị: <span class="tc-key">AgentRouter</span> với per-agent rate limits + centralized billing dashboard để track cost per pipeline</li>
+        <li>Với 100+ parallel agents, dùng <span class="tc-key">batch_api</span> thay vì streaming sẽ giảm được 40–60% chi phí theo Anthropic benchmarks</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="src-name">usagebox.com</span>
+        <a href="https://usagebox.com/articles/anthropic-june-15-agent-sdk-credit-split-claude-4-retirement" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-teal">
+      <div class="tc-head-row">
+        <span class="tag tag-teal">LTM Agents</span>
+        <span class="tc-src">mem0.ai</span>
+      </div>
+      <div class="tc-title">Long-Term Memory Architecture: Storage, Retrieval &amp; Context Injection Patterns</div>
+      <ul class="tc-bullets">
+        <li>Memory layers: <span class="tc-key">episodic</span> (conversation history), <span class="tc-key">semantic</span> (user facts/preferences), <span class="tc-key">procedural</span> (learned workflows) — mỗi layer cần retrieval strategy riêng</li>
+        <li>Mem0's approach: vector + graph hybrid storage, TTL-based decay cho episodic, semantic dedup để tránh memory pollution</li>
+        <li><span class="tc-key">context_budget</span> management là bottleneck lớn nhất — recommendation: inject top-k relevant memories với reranker, không inject toàn bộ</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="src-name">mem0.ai</span>
+        <a href="https://mem0.ai/blog/how-to-create-ai-agents-with-long-term-memory-2" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-purple">
+      <div class="tc-head-row">
+        <span class="tag tag-purple">IAM</span>
+        <span class="tc-src">JumpCloud / GCP</span>
+      </div>
+      <div class="tc-title">Agentic IAM: Dynamic Identity &amp; Least-Privilege Access cho AI Agents trên Cloud</div>
+      <ul class="tc-bullets">
+        <li>Static <span class="tc-key">service_account</span> keys là anti-pattern cho agent systems — credentials không rotate, không scoped theo task context</li>
+        <li>JumpCloud Agentic IAM cấp ephemeral credentials per-task với <span class="tc-key">workload_identity_federation</span>, tự động thu hồi sau khi agent hoàn thành</li>
+        <li>Kết hợp với GCP <span class="tc-key">VPC Service Controls</span> để giới hạn agent chỉ access được resources trong project scope — ngăn lateral movement</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="src-name">prnewswire.com</span>
+        <a href="https://www.prnewswire.com/news-releases/jumpcloud-launches-agentic-iam-on-google-cloud-302798046.html" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-gold">
+      <div class="tc-head-row">
+        <span class="tag tag-gold">Orchestration</span>
+        <span class="tc-src">Salesforce Engineering</span>
+      </div>
+      <div class="tc-title">Agentforce Orchestration: Cross-CRM Multi-Agent Workflow Patterns</div>
+      <ul class="tc-bullets">
+        <li>Agentforce Summer '26 dùng <span class="tc-key">AgentGraph</span> model — mỗi node là một specialized agent, edges là data contracts, không có global state</li>
+        <li>Einstein Memory Layer: shared <span class="tc-key">context_store</span> cho phép agents trong cùng workflow đọc/ghi context mà không cần pass messages explicitly</li>
+        <li>Lesson từ production: orchestration bottleneck thường là <span class="tc-key">tool_call_latency</span>, không phải LLM inference — cache tool responses aggressively</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="src-name">salesforce.com</span>
+        <a href="https://www.salesforce.com/news/stories/summer-2026-product-release-announcement/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPEN SOURCE & TOOLS -->
+<div class="repo-section">
+  <div class="sec-label">🛠️ Open Source &amp; Tools</div>
+  <div class="repo-grid">
+
+    <div class="repo-card">
+      <a href="https://github.com/mem0ai/mem0" class="repo-name" onclick="window.open(this.href);return false;">mem0ai/mem0</a>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ 42.8k</span>
+        <span class="spike-badge">+3.2k tuần này</span>
+        <span class="lang-tag">Python</span>
+      </div>
+      <div class="repo-desc">Memory layer cho AI agents — vector + graph hybrid storage, hỗ trợ LTM persistence across sessions với TTL decay và semantic dedup.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Agent Memory</span>
+        <a href="https://github.com/mem0ai/mem0" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <a href="https://github.com/anthropics/anthropic-sdk-python" class="repo-name" onclick="window.open(this.href);return false;">anthropics/anthropic-sdk-python</a>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ 8.1k</span>
+        <span class="spike-badge">+890 tuần này</span>
+        <span class="lang-tag">Python</span>
+      </div>
+      <div class="repo-desc">Official Python SDK — đã cập nhật credit pool API và per-agent rate limiting trong v0.38.0 cho June 15 billing change.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Agent SDK Billing</span>
+        <a href="https://github.com/anthropics/anthropic-sdk-python" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <a href="https://github.com/microsoft/autogen" class="repo-name" onclick="window.open(this.href);return false;">microsoft/autogen</a>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ 51.3k</span>
+        <span class="spike-badge">+2.1k tuần này</span>
+        <span class="lang-tag">Python</span>
+      </div>
+      <div class="repo-desc">Multi-agent framework cho conversational AI — spike mới do community port sang Anthropic Agent SDK billing model post-June 15.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Multi-Agent Orchestration</span>
+        <a href="https://github.com/microsoft/autogen" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <a href="https://github.com/BerriAI/litellm" class="repo-name" onclick="window.open(this.href);return false;">BerriAI/litellm</a>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ 24.6k</span>
+        <span class="spike-badge">+1.5k tuần này</span>
+        <span class="lang-tag">Python</span>
+      </div>
+      <div class="repo-desc">LLM proxy với unified API — đang được nhiều team dùng như cost router để phân tải sang DeepSeek / Gemini sau Anthropic billing thay đổi.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">LLM Cost Optimization</span>
+        <a href="https://github.com/BerriAI/litellm" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ĐỌC THÊM -->
+<div class="notes-section">
+  <div class="sec-label">📚 Đọc thêm</div>
+  <div class="notes-grid">
+
+    <div class="note-card">
+      <div class="note-label">💰 Pricing War</div>
+      <a href="https://www.infoworld.com/article/4176709/deepseeks-steep-v4-pro-price-cut-escalates-ai-pricing-war.html" class="note-title" onclick="window.open(this.href);return false;">DeepSeek V4-Pro: Giảm 75% Giá — Inference Pricing War Escalates</a>
+      <div class="note-text">DeepSeek cắt giá V4-Pro từ $3.48 xuống $0.87/million output tokens — 75% reduction. Phân tích từ Greyhound Research và Counterpoint cho thấy enterprise sẽ tăng tốc multi-model strategy, routing high-stakes tasks sang premium models và bulk workloads sang open-source alternatives.</div>
+      <a href="https://www.infoworld.com/article/4176709/deepseeks-steep-v4-pro-price-cut-escalates-ai-pricing-war.html" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+    <div class="note-card">
+      <div class="note-label">🧠 Memory Research</div>
+      <a href="https://mem0.ai/blog/introducing-memory-decay-in-mem0" class="note-title" onclick="window.open(this.href);return false;">Mem0 Memory Decay: TTL-Based Forgetting cho AI Agent Context Management</a>
+      <div class="note-text">Mem0 giới thiệu memory decay mechanism — memories có TTL, tự động giảm relevance score theo thời gian, tương tự cơ chế quên tự nhiên của con người. Giúp giải quyết vấn đề memory pollution trong long-running agents.</div>
+      <a href="https://mem0.ai/blog/introducing-memory-decay-in-mem0" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+    <div class="note-card">
+      <div class="note-label">🏢 Enterprise AI</div>
+      <a href="https://techwireasia.com/2026/06/anthropic-claude-enterprise-ai-openai-google/" class="note-title" onclick="window.open(this.href);return false;">IDC Survey: Claude Đang Dẫn Đầu Adoption Mới, Nhưng Vẫn Lag OpenAI Về Depth of Use</a>
+      <div class="note-text">IDC March 2026 (1,000+ org): chỉ 19% báo cáo "extensive use" Claude vs 25% đang evaluate. Hai metrics này — Ramp adoption và IDC depth — không mâu thuẫn: Anthropic thắng new-adoption race, OpenAI vẫn dẫn về depth trong enterprise đã deploy từ trước.</div>
+      <a href="https://techwireasia.com/2026/06/anthropic-claude-enterprise-ai-openai-google/" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="fl-brand">AI Intelligence · Vulcan Labs Daily</div>
+      <div class="fl-meta">Issue #69 · June 15, 2026 · 13 stories · Curated for AI product &amp; engineering teams</div>
+    </div>
+    <div class="footer-right">
+      <div class="signal-label">Signal sources</div>
+      <div class="signal-chips">
+        <span class="signal-chip">🧠 Claude Memory</span>
+        <span class="signal-chip">💬 Slack</span>
+        <span class="signal-chip">📋 Jira</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

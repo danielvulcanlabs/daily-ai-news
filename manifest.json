@@ -1,5 +1,29 @@
 [
   {
+    "date": "2026-06-16",
+    "file": "news/daily-ai-news-2026-06-16.html",
+    "issue": 70,
+    "headline": "Claude Fable 5 suspended by US export control \u2014 Agent SDK billing split takes effect"
+  },
+  {
+    "date": "2026-06-15",
+    "file": "news/daily-ai-news-2026-06-15.html",
+    "issue": 69,
+    "headline": "Anthropic Agent SDK Billing Split Effective Today - Multi-Agent Cost Restructuring"
+  },
+  {
+    "date": "2026-06-13",
+    "file": "news/daily-ai-news-2026-06-13.html",
+    "issue": 68,
+    "headline": "US export control suspends Fable 5 & Mythos 5 globally"
+  },
+  {
+    "date": "2026-06-12",
+    "file": "news/daily-ai-news-2026-06-12.html",
+    "issue": 67,
+    "headline": "Anthropic Agent SDK billing splits June 15"
+  },
+  {
     "date": "2026-06-11",
     "file": "news/daily-ai-news-2026-06-11.html",
     "issue": 66,
