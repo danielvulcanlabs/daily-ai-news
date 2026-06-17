@@ -36,17 +36,24 @@ Fallback if all connectors return no data: use `["frontier LLM releases", "AI co
 
 ## Step 2: Search news
 
-For each focus topic (in ranked order), use `WebSearch` to surface stories from the **last 48 hours**. Append "news", "announcement", or "released" + current date to queries. Aim for 2–4 results per topic, max 20 candidates total.
+**Editorial stance: technical-first, ~80/20 technical-to-press.** This digest is for an engineering audience. Strongly prioritize stories with technical substance — model/framework releases, research papers, benchmarks, architecture, APIs, eng deep-dives, open-source — over business/PR coverage. Roughly 80% of included stories should be technical; reserve the remaining ~20% for genuinely significant business/launch news that carries real engineering implications (e.g. a major model launch, a pricing change that affects cost optimization). Aggressively drop pure-press items (funding rounds, exec hires, partnerships, market-share punditry, opinion/hot-takes) unless they have a concrete technical angle.
+
+For each focus topic (in ranked order), use `WebSearch` to surface stories from the **last 48 hours**. Bias queries toward technical depth: append terms like "release", "paper", "arXiv", "benchmark", "open source", "technical report", "model card", "API", "changelog" alongside the topic + current date. Aim for 3–5 results per topic, max 24 candidates total — prefer over-collecting technical candidates so the press filter still leaves enough material.
+
+### Technical-substance test (apply to every candidate)
+
+Before keeping a candidate, ask: *does this story teach an engineer something concrete?* Keep it if it covers at least one of: a model/framework/tool release or version bump, a research paper or technical report, benchmark/eval results, architecture or system design, code/API/SDK changes, performance or cost numbers, or a reproducible method. If the story is primarily about money, people, deals, or market narrative with no technical detail → drop it (or, if it's a top-tier event, demote it to a one-line note in "Đọc thêm").
 
 ### Trusted source tiers (strict — do not deviate)
 
-**Tier 1 — Primary sources (always prefer)**
-- Official company blogs: anthropic.com/news, openai.com/blog, blog.google, mistral.ai/news, huggingface.co/blog, meta.ai/blog, deepmind.google/discover/blog
-- arXiv.org (preprints — always accessible, no paywall)
-- GitHub.com (model/framework releases, changelogs)
+**Tier 1 — Primary & technical sources (always prefer — these should dominate the digest)**
+- arXiv.org (preprints — always accessible, no paywall) — **top priority for technical depth**
+- GitHub.com (model/framework releases, changelogs, RFCs) — **top priority**
+- Official company blogs / research & engineering blogs: anthropic.com/news + research, openai.com/blog + research, blog.google + research.google, mistral.ai/news, huggingface.co/blog + papers, meta.ai/blog + ai.meta.com/research, deepmind.google/discover/blog
+- Engineering blogs: model cards, technical reports, framework docs/release notes (LangChain, LlamaIndex, vLLM, etc.)
 
-**Tier 2 — Reputable tech publications (Vietnam-accessible)**
-- techcrunch.com, venturebeat.com, the-decoder.com, arstechnica.com
+**Tier 2 — Reputable tech publications (Vietnam-accessible — prefer ones with technical reporting)**
+- the-decoder.com, arstechnica.com (lean technical), venturebeat.com (AI/infra coverage), techcrunch.com
 - 9to5google.com, 9to5mac.com, androidcentral.com, techtimes.com, letsdatascience.com
 
 **Tier 3 — Use only if Tier 1 & 2 have no coverage**
@@ -69,14 +76,19 @@ Stories failing any check are dropped entirely. Only include URLs that load real
 
 Main stories: prefer ≤48h. "Recent context" boxes (visually distinct, max 2): ≤14 days.
 
-## Step 4: Dedup and rank
+## Step 4: Dedup, filter press, and rank
 
-- Dedup by URL hash against `seen`. Skip already-seen stories.
-- Same-event dedup: if multiple sources cover the same announcement, keep primary source only.
-- **Rank by topic priority:** stories matching the #1 ranked focus topic get highest placement. Work down the ranked list.
-- Secondary ranking within topic: Concrete release/launch/paper > opinion > roundup.
+**4a. Dedup by URL** — hash against `seen`. Skip already-seen stories.
+
+**4b. Event-level dedup (strict — dedup by topic/event, not by URL).** Group all candidates by the underlying event, not by source or wording. Two stories are the *same event* if they describe the same model release, paper, version bump, feature, or announcement — even if from different sources, different outlets, or worded differently. For each event group, keep exactly **one** representative: prefer the primary/technical source (arXiv or GitHub or official blog > Tier 2 > Tier 3); within the same tier, prefer the one with the most technical detail. **Each distinct event appears at most once across the entire digest** — no event may repeat between sections (e.g. it cannot be both a Hero card and a "Tin tuần này" card). Before finalizing, scan the full selected set and confirm every story is a genuinely distinct event; if two cards are about the same thing, merge them.
+
+**4c. Press filter (enforce the ~80/20 technical stance).** Apply the technical-substance test from Step 2 to the deduped set. Drop pure-press items. Count technical vs press in the final selection — if press exceeds ~20% of stories, drop the weakest press items until technical is the clear majority. Surviving press items must have a concrete technical angle; otherwise demote to a single line under "Đọc thêm."
+
+**4d. Rank.**
+- **By topic priority:** stories matching the #1 ranked focus topic get highest placement. Work down the ranked list.
+- Secondary ranking within topic: Concrete release/paper/benchmark > technical analysis > launch > opinion > roundup.
 - Tertiary: Source tier (Tier 1 > Tier 2 > Tier 3).
-- Cap final report at top 10–15 stories. Mark up to 3 as "Top reads."
+- Cap final report at top 10–15 stories. Mark up to 3 as "Top reads" — prefer technical items for these.
 
 ## Step 5: Produce the HTML report
 
@@ -89,7 +101,7 @@ Main stories: prefer ≤48h. "Recent context" boxes (visually distinct, max 2): 
 - Sections: Masthead → Focus chips (ranked order, top topic = leftmost) → Ticker (breaking) → "Breaking This Week" hero grid → "Tin tuần này" 3-col cards → "Đáng đọc" 2-col briefing → "Technical Deep-dive" 2-col tech cards → "Đọc thêm" 3-col notes → Footer
 - Section labels Vietnamese; story titles/descriptions mix Vietnamese + English technical terms
 - Reference yesterday's `news/daily-ai-news-<prev-date>.html` for issue number (increment by 1)
-- Story count target: 10–15 total (Hero 1 + Watch 1 + Mini 1–2 + Cards 3 + Briefing 6 + Deep-dive 4 + Notes 3)
+- Story count target: 10–15 total, **technical-weighted**: Hero 1 (technical if possible) + Watch 1 + Mini 1–2 + Cards 3 + Briefing 4–5 (technical-leaning) + **Technical Deep-dive 5–6 (expanded — this is the centerpiece)** + Notes 3. Across the whole digest, ~80% of stories should pass the technical-substance test.
 
 After writing the HTML, append new story URLs to `focus.json`'s `seen` array, prune entries >14 days old, and save.
 
@@ -121,6 +133,8 @@ Present the HTML file with a `computer://` link and a 2-sentence chat summary hi
 Do not paste the digest body into chat.
 
 ## Guardrails
+- **Technical-first:** ~80% of included stories must pass the technical-substance test (Step 2). Aggressively drop pure-press items (funding, hires, partnerships, market punditry, opinion) unless they carry a concrete technical angle.
+- **No duplicate events:** each distinct event/model/paper/announcement appears at most once across the entire digest. Never let the same story show up in two sections. When in doubt, merge.
 - Never fabricate news. If a topic has no fresh results, write "No fresh news on <topic>" under that section.
 - If `WebSearch` is rate-limited or unavailable, write a stub report explaining this and stop.
 - **Hard rule: no story older than 14 days.** Main stories prefer ≤48h.
