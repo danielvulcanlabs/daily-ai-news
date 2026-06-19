@@ -1,0 +1,46 @@
+{
+  "name": "ai-intelligence-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Smith Daily News — Multi-user platform for personalized AI news digests with connected tool integrations",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "cron": "tsx cron/worker.ts",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
+  "dependencies": {
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "firebase": "^12.13.0",
+    "firebase-admin": "^13.10.0",
+    "bullmq": "^5.8.0",
+    "ioredis": "^5.4.0",
+    "node-cron": "^3.0.3",
+    "jose": "^6.0.0",
+    "lucide-react": "^0.510.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "zod": "^3.25.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/node-cron": "^3.0.11",
+    "typescript": "^5.8.0",
+    "tailwindcss": "^4.3.0",
+    "@tailwindcss/postcss": "^4.3.0",
+    "tsx": "^4.19.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.3.0",
+    "@eslint/eslintrc": "^3.0.0"
+  }
+}

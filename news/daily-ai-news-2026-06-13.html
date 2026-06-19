@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — June 13, 2026</title>
+<style>
+:root{
+  --bg:#07070a;--s1:#0f0f14;--s2:#16161d;--s3:#1d1d27;--s4:#30303e;
+  --t1:#f0ece4;--t2:#9a958c;--t3:#6e6b67;
+  --gold:#c8a76a;--blue:#5d8dee;--teal:#3ecf8e;
+  --red:#e55252;--purple:#9d78f0;
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(93,141,238,.08),transparent),radial-gradient(circle at 20% 80%,rgba(62,207,142,.04),transparent)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* MASTHEAD */
+.masthead{padding:32px 0 24px;border-bottom:1px solid var(--s4);animation:fadeUp .5s ease both}
+.mast-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#c8a76a,#8b6914);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-icon svg{width:22px;height:22px}
+.brand-name{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.brand-sub{font-size:11px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+.mast-right{display:flex;align-items:center;gap:12px}
+.issue-badge{background:var(--s2);border:1px solid var(--s4);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--t2)}
+.date-badge{font-size:12px;color:var(--t3)}
+
+/* FOCUS CHIPS */
+.focus-row{padding:16px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;animation:fadeUp .5s .05s ease both}
+.focus-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-right:4px}
+.chip{background:var(--s2);border:1px solid var(--s4);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--t2);white-space:nowrap}
+.chip.top{border-color:var(--gold);color:var(--gold)}
+.chip.sec{border-color:var(--blue);color:var(--blue)}
+.chip.third{border-color:var(--teal);color:var(--teal)}
+
+/* TICKER */
+.ticker{background:linear-gradient(90deg,rgba(229,82,82,.18),rgba(229,82,82,.08));border:1px solid rgba(229,82,82,.3);border-radius:var(--r);padding:10px 16px;margin:8px 0 20px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s .08s ease both}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;animation:ripple 1.5s infinite}
+@keyframes ripple{0%,100%{box-shadow:0 0 0 0 rgba(229,82,82,.5)}50%{box-shadow:0 0 0 6px rgba(229,82,82,0)}}
+.ticker-text{font-size:12px;color:var(--t1);font-weight:500}
+.ticker-text strong{color:var(--red)}
+
+/* SECTION LABELS */
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:600;margin-bottom:14px}
+
+/* BREAKING HERO GRID */
+.break-section{margin-bottom:32px;animation:fadeUp .5s .1s ease both}
+.hero-grid{display:grid;grid-template-columns:1fr 314px;gap:16px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr}}
+
+/* HERO CARD */
+.hero-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--gold);padding:24px;display:flex;flex-direction:column;position:relative;overflow:hidden;background-image:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(200,167,106,.06),transparent)}
+.hero-card::before{content:'';position:absolute;inset:0;border-radius:var(--r);border:1px solid var(--gold);animation:border-shift 3s linear infinite;pointer-events:none}
+@keyframes border-shift{0%,100%{opacity:1}50%{opacity:.5}}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.tag-red{background:rgba(229,82,82,.15);color:var(--red);border:1px solid rgba(229,82,82,.3)}
+.tag-gold{background:rgba(200,167,106,.15);color:var(--gold);border:1px solid rgba(200,167,106,.3)}
+.tag-blue{background:rgba(93,141,238,.15);color:var(--blue);border:1px solid rgba(93,141,238,.3)}
+.tag-teal{background:rgba(62,207,142,.15);color:var(--teal);border:1px solid rgba(62,207,142,.3)}
+.tag-purple{background:rgba(157,120,240,.15);color:var(--purple);border:1px solid rgba(157,120,240,.3)}
+.hero-title{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:10px;letter-spacing:-.3px}
+.hero-desc{font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.7}
+.hero-bullets{list-style:none;margin-bottom:16px}
+.hero-bullets li{font-size:12px;color:var(--t2);padding:4px 0;padding-left:16px;position:relative}
+.hero-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-weight:700}
+.hero-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--s4);margin-top:auto}
+.src-name{font-size:11px;color:var(--t3)}
+.cta{font-size:11px;color:var(--gold);font-weight:600}
+.cta:hover{color:var(--t1)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.stat-box{background:var(--s2);border-radius:8px;padding:10px 12px}
+.stat-val{font-size:18px;font-weight:700;color:var(--gold);animation:countGlow 2s ease both}
+.stat-lab{font-size:10px;color:var(--t3);margin-top:2px}
+@keyframes countGlow{0%{opacity:0;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
+
+/* SIDEBAR CARDS */
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.watch-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--red);padding:18px;flex:1}
+.watch-title{font-size:14px;font-weight:600;line-height:1.4;margin:8px 0 6px}
+.watch-desc{font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.6}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--s4)}
+.mini-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:14px}
+.mini-title{font-size:13px;font-weight:600;margin:6px 0 4px;line-height:1.4}
+.mini-desc{font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+
+/* CO-MARKS */
+.co-mark{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:9px;font-weight:700;flex-shrink:0}
+.co-anthropic{background:linear-gradient(135deg,#d4884a,#8b4a1a);color:#fff}
+.co-openai{background:#1a1a1a;color:#fff;border:1px solid #333}
+.co-google{background:#fff;color:#4285f4}
+.co-cloudflare{background:linear-gradient(135deg,#f38020,#c25a10);color:#fff}
+.co-tcs{background:linear-gradient(135deg,#1c4faa,#0b2d7e);color:#fff}
+.co-whitehouse{background:linear-gradient(135deg,#1a3a6e,#0d2250);color:#fff}
+.co-arxiv{background:linear-gradient(135deg,#b22222,#7b1515);color:#fff}
+.co-github{background:linear-gradient(135deg,#24292e,#0d1117);color:#fff}
+
+/* 3-COL CARDS */
+.cards-section{margin-bottom:32px;animation:fadeUp .5s .15s ease both}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.cards-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}}
+.news-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:18px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.news-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.card-blue::before{background:linear-gradient(90deg,var(--blue),#3a6bc4)}
+.card-purple::before{background:linear-gradient(90deg,var(--purple),#7a5bc4)}
+.card-teal::before{background:linear-gradient(90deg,var(--teal),#28a875)}
+.card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.card-date{font-size:10px;color:var(--t3);margin-left:auto}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px}
+.card-text{font-size:12px;color:var(--t2);line-height:1.6;flex:1;margin-bottom:12px}
+
+/* BRIEFING */
+.brief-section{margin-bottom:32px;animation:fadeUp .5s .2s ease both}
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:600px){.brief-grid{grid-template-columns:1fr}}
+.brief-item{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:12px 14px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.brief-item:hover{transform:translateX(3px);border-color:var(--s3)}
+.brief-top{display:flex;align-items:center;gap:8px}
+.brief-num{font-size:12px;font-weight:700;color:var(--t3);min-width:24px}
+.brief-title{font-size:13px;font-weight:600;line-height:1.4;flex:1}
+.brief-bot{display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:1px solid var(--s4)}
+.brief-src{font-size:10px;color:var(--t3)}
+.brief-cta{font-size:10px;color:var(--gold);font-weight:600}
+
+/* TECH DEEP-DIVE */
+.tech-section{margin-bottom:32px;animation:fadeUp .5s .25s ease both}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.tech-grid{grid-template-columns:1fr}}
+.tc-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:18px;border-left:3px solid}
+.tc-blue{border-left-color:var(--blue)}
+.tc-teal{border-left-color:var(--teal)}
+.tc-purple{border-left-color:var(--purple)}
+.tc-gold{border-left-color:var(--gold)}
+.tc-head-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tc-src{font-size:10px;color:var(--t3);margin-left:auto}
+.tc-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:10px}
+.tc-bullets{list-style:none}
+.tc-bullets li{font-size:12px;color:var(--t2);padding:3px 0;padding-left:14px;position:relative;line-height:1.5}
+.tc-bullets li::before{content:'·';position:absolute;left:0;color:var(--blue)}
+.tc-key{font-family:'SF Mono',monospace;font-size:10px;background:var(--s3);padding:1px 5px;border-radius:4px;color:var(--teal)}
+.tc-footer{margin-top:10px;padding-top:10px;border-top:1px solid var(--s4);display:flex;justify-content:space-between;align-items:center}
+
+/* GITHUB REPOS */
+.repo-section{margin-bottom:32px;animation:fadeUp .5s .28s ease both}
+.repo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:940px){.repo-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.repo-grid{grid-template-columns:1fr}}
+.repo-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:14px;display:flex;flex-direction:column}
+.repo-name{font-family:'SF Mono',monospace;font-size:12px;color:var(--blue);font-weight:600;margin-bottom:6px}
+.repo-meta{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.repo-stars{font-size:10px;color:var(--gold);font-weight:600}
+.spike-badge{font-size:9px;background:rgba(200,167,106,.15);color:var(--gold);border:1px solid rgba(200,167,106,.3);padding:1px 5px;border-radius:8px}
+.lang-tag{font-size:9px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:8px}
+.repo-desc{font-size:11px;color:var(--t2);line-height:1.5;flex:1;margin-bottom:10px}
+.repo-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--s4)}
+.rel-tag{font-size:9px;background:rgba(62,207,142,.1);color:var(--teal);border:1px solid rgba(62,207,142,.25);padding:2px 7px;border-radius:8px}
+
+/* NOTES */
+.notes-section{margin-bottom:32px;animation:fadeUp .5s .3s ease both}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.notes-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.notes-grid{grid-template-columns:1fr}}
+.note-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:16px;display:flex;flex-direction:column}
+.note-label{font-size:10px;color:var(--t3);margin-bottom:8px}
+.note-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.note-text{font-size:12px;color:var(--t2);line-height:1.6;flex:1;margin-bottom:10px}
+.note-cta{font-size:11px;color:var(--gold);font-weight:600;text-align:right;display:block}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--s4);padding:24px 0;margin-top:8px;animation:fadeUp .5s .35s ease both}
+.footer-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-left .fl-brand{font-size:13px;font-weight:600;margin-bottom:4px}
+.footer-left .fl-meta{font-size:11px;color:var(--t3)}
+.footer-right{text-align:right}
+.signal-label{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:6px}
+.signal-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.signal-chip{font-size:10px;background:var(--s2);border:1px solid var(--s4);padding:2px 8px;border-radius:10px;color:var(--t3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-inner">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L4.09 12.11A1 1 0 0 0 5 13.8H10.59L9 22l10.91-10.11A1 1 0 0 0 19 10.2H13.41L15 2z" fill="white" stroke="white" stroke-width=".5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">AI Intelligence</div>
+        <div class="brand-sub">Vulcan Labs Daily</div>
+      </div>
+    </div>
+    <div class="mast-right">
+      <span class="issue-badge">Issue #68</span>
+      <span class="date-badge">June 13, 2026 · Saturday</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOCUS CHIPS -->
+<div class="focus-row">
+  <span class="focus-label">Focus</span>
+  <span class="chip top">Anthropic Claude Billing & June 15</span>
+  <span class="chip sec">AI Agent Frameworks</span>
+  <span class="chip sec">Agent Memory</span>
+  <span class="chip third">AI Coding Agents</span>
+  <span class="chip third">LLM Inference Cost</span>
+  <span class="chip">Frontier Models</span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="live-dot"></div>
+  <div class="ticker-text"><strong>BREAKING:</strong> US government issues export control directive — Anthropic disables Fable 5 &amp; Mythos 5 for all customers worldwide, June 12 2026</div>
+</div>
+
+<!-- BREAKING THIS WEEK -->
+<div class="break-section">
+  <div class="sec-label">⚡ Breaking This Week</div>
+  <div class="hero-grid">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="hero-tags">
+        <span class="tag tag-red">Breaking</span>
+        <span class="tag tag-gold">Anthropic</span>
+        <span class="tag tag-blue">Export Control</span>
+      </div>
+      <div class="hero-title">US Government Orders Shutdown of Fable 5 &amp; Mythos 5 — Anthropic Disables Both Models Worldwide</div>
+      <div class="hero-desc">Ngày 12/6 lúc 5:21pm ET, Commerce Secretary Howard Lutnick gửi lệnh export control tới Anthropic, yêu cầu suspend toàn bộ quyền truy cập Fable 5 và Mythos 5 cho tất cả foreign nationals — kể cả nhân viên Anthropic. Do không thể filter selective, Anthropic buộc phải tắt cả hai model cho toàn bộ khách hàng.</div>
+      <ul class="hero-bullets">
+        <li>Trigger: một công ty khác claim đã jailbreak Mythos 5 — Commerce Dept. hành động vì national security concern</li>
+        <li>Anthropic phản bác: jailbreak là "narrow, non-universal" và khả năng này đã có sẵn trên GPT-5.5 và các model khác</li>
+        <li>Hệ quả: mọi session Fable 5 kết thúc bằng error, fallback về Opus 4.8; đây là precedent đầu tiên dùng export control nhắm vào deployed software model</li>
+      </ul>
+      <div class="hero-footer">
+        <span class="src-name">9to5mac.com · Jun 12</span>
+        <a href="https://9to5mac.com/2026/06/12/anthropic-pulls-claude-mythos-5-and-claude-fable-5-following-us-government-directive/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-box"><div class="stat-val">5:21pm</div><div class="stat-lab">ET — thời điểm nhận directive</div></div>
+        <div class="stat-box"><div class="stat-val">100%</div><div class="stat-lab">global customers bị ảnh hưởng</div></div>
+        <div class="stat-box"><div class="stat-val">&lt;5%</div><div class="stat-lab">sessions bị fallback khi Fable 5 active</div></div>
+        <div class="stat-box"><div class="stat-val">1st</div><div class="stat-lab">lần export control nhắm vào live AI software</div></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <!-- WATCH -->
+      <div class="watch-card">
+        <div class="hero-tags">
+          <span class="tag tag-red">Watch</span>
+          <span class="tag tag-gold">Anthropic</span>
+        </div>
+        <div class="watch-title">Fable 5 Silent Downgrade Backlash → Anthropic Buộc Phải Thêm Transparency</div>
+        <div class="watch-desc">Trước vụ shutdown, Anthropic đã gặp backlash khi Fable 5 âm thầm downgrade requests liên quan đến frontier LLM development về Opus 4.8 mà không notify. Sau áp lực từ cộng đồng AI, công ty thay đổi policy: mọi request bị flag sẽ hiển thị rõ lý do.</div>
+        <div class="card-footer">
+          <span class="src-name">fortune.com · Jun 11</span>
+          <a href="https://fortune.com/2026/06/11/anthropic-fable-5-silent-downgrade-backlash-national-security-transparency/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+      <!-- MINI -->
+      <div class="mini-card">
+        <div class="hero-tags">
+          <span class="tag tag-teal">Enterprise</span>
+          <div class="co-mark co-tcs">TCS</div>
+        </div>
+        <div class="mini-title">TCS + Anthropic: 50.000 Engineers Deploy Claude Trong Financial, Healthcare, Aviation</div>
+        <div class="mini-desc">Tata Consultancy Services lập business unit riêng để deploy Claude, cấp licence cho 50K nhân viên, nhắm vào regulated industries. TCS iON cũng ra certification programs cho Claude models.</div>
+        <div class="card-footer">
+          <span class="src-name">techcrunch.com · Jun 11</span>
+          <a href="https://techcrunch.com/2026/06/11/anthropic-taps-tcs-to-scale-its-enterprise-ai-deployments/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIN TUẦN NÀY -->
+<div class="cards-section">
+  <div class="sec-label">📰 Tin tuần này</div>
+  <div class="cards-grid">
+
+    <!-- CARD 1 -->
+    <div class="news-card card-gold">
+      <div class="card-header">
+        <div class="co-mark co-anthropic">A</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-gold">Anthropic</span>
+          <span class="tag tag-red">Model Launch</span>
+        </div>
+        <span class="card-date">Jun 9</span>
+      </div>
+      <div class="card-title">Claude Fable 5 &amp; Mythos 5: Model Mạnh Nhất Từ Trước Đến Nay — Giờ Đã Bị Tắt</div>
+      <div class="card-text">Anthropic ra mắt Fable 5 (general use, $10/$50 per million tokens) và Mythos 5 (chỉ dành cho Project Glasswing). Fable 5 state-of-the-art gần như tất cả benchmarks, đặc biệt long-horizon coding và drug design. 3 ngày sau ra mắt, US gov ra lệnh tắt toàn bộ.</div>
+      <div class="card-footer">
+        <span class="src-name">anthropic.com · Jun 9</span>
+        <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="news-card card-blue">
+      <div class="card-header">
+        <div class="co-mark co-anthropic">A</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-blue">Billing</span>
+          <span class="tag tag-gold">Agent SDK</span>
+        </div>
+        <span class="card-date">Jun 15 deadline</span>
+      </div>
+      <div class="card-title">Anthropic Tách Riêng Agent SDK Billing — Hết Thời "Unlimited" Cho Programmatic Loops</div>
+      <div class="card-text">Từ June 15, Claude Agent SDK và <code style="font-size:10px;background:var(--s3);padding:1px 4px;border-radius:3px">claude -p</code> thoát khỏi subscription pool; thay bằng monthly credit ($20 Pro / $100 Max 5x / $200 Max 20x). Enterprise Standard seats nhận $0 credit. Teams chạy CI/CD nên chuyển sang direct API key.</div>
+      <div class="card-footer">
+        <span class="src-name">digitalapplied.com · May 16</span>
+        <a href="https://www.digitalapplied.com/blog/anthropic-claude-credit-overhaul-june-15-2026" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="news-card card-teal">
+      <div class="card-header">
+        <div class="co-mark co-anthropic">A</div>
+        <div class="hero-tags" style="margin:0;gap:4px">
+          <span class="tag tag-teal">Research</span>
+          <span class="tag tag-blue">Coding Agents</span>
+        </div>
+        <span class="card-date">May 27</span>
+      </div>
+      <div class="card-title">Survey: 80% Nhà Khoa Học Xã Hội Dùng AI, Nhưng Chỉ 20% Adopt Coding Agents</div>
+      <div class="card-text">Anthropic khảo sát 1.260 social scientists (Feb–Mar 2026): adoption rất lệch — nam gấp 2x nữ, top university cao hơn 40%. Coding agent users post nhiều working papers hơn, nhưng gap không thấy ở journal submissions. Claude Code chiếm 86% market share trong nhóm này.</div>
+      <div class="card-footer">
+        <span class="src-name">anthropic.com · May 27</span>
+        <a href="https://www.anthropic.com/research/coding-agents-social-sciences" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ĐÁNG ĐỌC -->
+<div class="brief-section">
+  <div class="sec-label">📌 Đáng đọc — relevance cao</div>
+  <div class="brief-grid">
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">01</span>
+        <span class="tag tag-red" style="font-size:9px">Breaking</span>
+        <span class="brief-title">Anthropic: Chúng tôi đồng ý tuân thủ nhưng phản đối căn cứ pháp lý của lệnh export control</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">startuphub.ai · Jun 13</span>
+        <a href="https://www.startuphub.ai/ai-news/technology/2026/anthropic-disables-fable-5-and-mythos-5-after-us-export-control-order" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">02</span>
+        <span class="tag tag-gold" style="font-size:9px">Policy</span>
+        <span class="brief-title">Trump EO June 2 "Promoting Advanced AI Innovation and Security" — AI Cybersecurity Clearinghouse 30-Day Mandate</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">whitehouse.gov · Jun 2</span>
+        <a href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">03</span>
+        <span class="tag tag-blue" style="font-size:9px">Model</span>
+        <span class="brief-title">Claude Opus 4.7 GA: +13% coding resolution, xhigh effort level, 3.75MP vision, /ultrareview command</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">anthropic.com · Apr 16</span>
+        <a href="https://www.anthropic.com/news/claude-opus-4-7" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">04</span>
+        <span class="tag tag-teal" style="font-size:9px">Enterprise</span>
+        <span class="brief-title">TCS &amp; Anthropic Global Premier Partnership — 50K employees, regulated sectors, TCS iON certification</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">reuters.com · Jun 11</span>
+        <a href="https://www.reuters.com/world/india/indias-tcs-partners-with-anthropic-drive-enterprise-ai-scaling-2026-06-11/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">05</span>
+        <span class="tag tag-purple" style="font-size:9px">Billing</span>
+        <span class="brief-title">Hướng dẫn migrate Agent SDK trước June 15: audit token usage, enable prompt caching (0.1× cache hit), chuyển về direct API nếu CI/CD heavy</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">levelup.gitconnected.com</span>
+        <a href="https://levelup.gitconnected.com/anthropic-will-quietly-reprice-your-claude-pro-plan-on-june-15-the-free-20-credit-replacing-1ebd922a7786" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="brief-item">
+      <div class="brief-top">
+        <span class="brief-num">06</span>
+        <span class="tag tag-gold" style="font-size:9px">Agent Memory</span>
+        <span class="brief-title">Cloudflare Agent Memory private beta: managed service trích xuất memories từ conversations, 5-channel retrieval với RRF fusion</span>
+      </div>
+      <div class="brief-bot">
+        <span class="brief-src">blog.cloudflare.com · Apr 17</span>
+        <a href="https://blog.cloudflare.com/introducing-agent-memory/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TECHNICAL DEEP-DIVE -->
+<div class="tech-section">
+  <div class="sec-label">🔬 Technical Deep-dive</div>
+  <div class="tech-grid">
+
+    <div class="tc-card tc-blue">
+      <div class="tc-head-row">
+        <span class="tag tag-blue" style="font-size:9px">Architecture</span>
+        <div class="co-mark co-cloudflare" style="width:18px;height:18px;font-size:8px">CF</div>
+        <span class="tc-src">blog.cloudflare.com</span>
+      </div>
+      <div class="tc-title">Cloudflare Agent Memory: Multi-Channel Retrieval Architecture</div>
+      <ul class="tc-bullets">
+        <li>Ingestion pipeline: <span class="tc-key">extract → verify (8 checks) → classify (fact/event/instruction/task) → vectorize async</span></li>
+        <li>5 retrieval channels parallel: <span class="tc-key">FTS + exact fact-key + raw message + direct vector + HyDE vector</span>, fused via Reciprocal Rank Fusion</li>
+        <li>HyDE (Hypothetical Document Embedding) giải quyết vocabulary mismatch giữa query và answer — đặc biệt hiệu quả cho multi-hop queries</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="tc-src">Apr 17</span>
+        <a href="https://blog.cloudflare.com/introducing-agent-memory/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-teal">
+      <div class="tc-head-row">
+        <span class="tag tag-teal" style="font-size:9px">Billing Ops</span>
+        <div class="co-mark co-anthropic">A</div>
+        <span class="tc-src">digitalapplied.com</span>
+      </div>
+      <div class="tc-title">Agent SDK June 15: Token Cost Math Cho Từng Workload Type</div>
+      <ul class="tc-bullets">
+        <li>Code review (30K input / 9K output): <span class="tc-key">$0.225 Sonnet 4.6</span> → Pro credit đủ ~89 tasks/tháng</li>
+        <li>Multi-file refactor (120K / 18K): <span class="tc-key">$0.63</span> → Pro chỉ đủ 32 tasks; <span class="tc-key">prompt caching 0.1×</span> là optimization cao nhất</li>
+        <li>Enterprise Standard seats nhận <span class="tc-key">$0 credit</span> — chi tiết này bị bỏ qua trong hầu hết coverage hiện tại</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="tc-src">May 16</span>
+        <a href="https://www.digitalapplied.com/blog/anthropic-claude-credit-overhaul-june-15-2026" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-purple">
+      <div class="tc-head-row">
+        <span class="tag tag-purple" style="font-size:9px">Production</span>
+        <div class="co-mark co-anthropic">A</div>
+        <span class="tc-src">anthropic.com</span>
+      </div>
+      <div class="tc-title">Opus 4.7: xhigh Effort, Task Budgets, File-Based Memory Improvements</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">xhigh effort</span>: mức mới giữa high và max, default cho Claude Code Pro/Max — cân bằng tốt giữa quality và token cost</li>
+        <li><span class="tc-key">Task budgets (beta)</span>: developer có thể set token spend ceiling để agent tự phân bổ qua long-horizon tasks</li>
+        <li>Tokenizer mới: cùng input text → nhiều hơn 1.0–1.35× tokens; <span class="tc-key">/ultrareview</span> slash command cho deep PR analysis</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="tc-src">Apr 16</span>
+        <a href="https://www.anthropic.com/news/claude-opus-4-7" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-gold">
+      <div class="tc-head-row">
+        <span class="tag tag-gold" style="font-size:9px">Safeguards</span>
+        <div class="co-mark co-anthropic">A</div>
+        <span class="tc-src">anthropic.com</span>
+      </div>
+      <div class="tc-title">Fable 5 Safety Classifier Architecture: 3 Coverage Areas + Fallback Pattern</div>
+      <ul class="tc-bullets">
+        <li>3 classifier domains: <span class="tc-key">cybersecurity + biology/chemistry + distillation</span> — flagged requests fallback về Opus 4.8 thay vì outright refusal</li>
+        <li>&lt;5% session bị trigger; external bug bounty 1000+ giờ không tìm được universal jailbreak — UK AISI có tiến triển nhưng chưa hoàn chỉnh</li>
+        <li>Mythos-class models: <span class="tc-key">30-day data retention bắt buộc</span> cho tất cả traffic, mọi mục đích trừ safety analysis</li>
+      </ul>
+      <div class="tc-footer">
+        <span class="tc-src">Jun 9</span>
+        <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPEN SOURCE & TOOLS -->
+<div class="repo-section">
+  <div class="sec-label">🛠 Open Source &amp; Tools</div>
+  <div class="repo-grid">
+
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/addyosmani/agent-skills" onclick="window.open(this.href);return false;">addyosmani/agent-skills</a></div>
+      <div class="repo-meta">
+        <span class="repo-stars">★ 56.4K</span>
+        <span class="spike-badge">+201 this week</span>
+        <span class="lang-tag">Shell</span>
+      </div>
+      <div class="repo-desc">Production-grade engineering skills cho AI coding agents — 23 skills bao gồm spec-driven dev, TDD, security hardening, CI/CD. Google engineering principles (Hyrum's Law, Beyonce Rule). Hoạt động với Claude Code, Cursor, Codex, Gemini CLI.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">AI Coding Agents</span>
+        <a href="https://github.com/addyosmani/agent-skills" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/anomalyco/opencode" onclick="window.open(this.href);return false;">anomalyco/opencode</a></div>
+      <div class="repo-meta">
+        <span class="repo-stars">★ 55.4K</span>
+        <span class="spike-badge">+621 (28d)</span>
+        <span class="lang-tag">TypeScript</span>
+      </div>
+      <div class="repo-desc">Open-source coding agent với momentum cao nhất hiện tại. Terminal-native, hỗ trợ multi-model. Đang cạnh tranh trực tiếp với Claude Code về tốc độ tăng trưởng community.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Coding Agents</span>
+        <a href="https://github.com/anomalyco/opencode" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/mem0ai/mem0" onclick="window.open(this.href);return false;">mem0ai/mem0</a></div>
+      <div class="repo-meta">
+        <span class="repo-stars">★ 40.0K</span>
+        <span class="spike-badge">+125 (28d)</span>
+        <span class="lang-tag">Python</span>
+      </div>
+      <div class="repo-desc">Memory layer phổ biến nhất cho LLM agents — user/session/agent memory, đa dạng vector store backends. Đang hưởng lợi từ wave quan tâm về agent memory sau Cloudflare Agents Week.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Agent Memory</span>
+        <a href="https://github.com/mem0ai/mem0" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/anthropics/claude-code" onclick="window.open(this.href);return false;">anthropics/claude-code</a></div>
+      <div class="repo-meta">
+        <span class="repo-stars">★ 44.6K</span>
+        <span class="spike-badge">+396 (28d)</span>
+        <span class="lang-tag">TypeScript</span>
+      </div>
+      <div class="repo-desc">Official Claude Code repo — #21 trên ossinsight trending. Spike liên quan đến Opus 4.7 release, /ultrareview feature, và community plugin ecosystem đang phát triển nhanh.</div>
+      <div class="repo-footer">
+        <span class="rel-tag">Coding Agents</span>
+        <a href="https://github.com/anthropics/claude-code" class="cta" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ĐỌC THÊM -->
+<div class="notes-section">
+  <div class="sec-label">📚 Đọc thêm</div>
+  <div class="notes-grid">
+
+    <div class="note-card">
+      <div class="note-label">🏛 Policy</div>
+      <div class="note-title"><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" onclick="window.open(this.href);return false;">Fable 5 System Card: 319 trang về safety — distillation classifier, AAV biology eval, cyber red-teaming results</a></div>
+      <div class="note-text">Chi tiết đầy đủ về how Anthropic đánh giá Mythos-class models, bao gồm protein design benchmarks và jailbreak resistance metrics.</div>
+      <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+    <div class="note-card">
+      <div class="note-label">📊 Research</div>
+      <div class="note-title"><a href="https://ossinsight.io/trending/ai" onclick="window.open(this.href);return false;">OSSInsight AI Trending: opencode tăng 621 stars (28d) — momentum cao nhất trong coding agents category</a></div>
+      <div class="note-text">Real-time GitHub rankings: langgenius/dify (#4), open-webui (#5), llama.cpp (#6), OpenHands (#10) tiếp tục dẫn đầu. MCP server repos tăng mạnh.</div>
+      <a href="https://ossinsight.io/trending/ai" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+    <div class="note-card">
+      <div class="note-label">💰 Pricing</div>
+      <div class="note-title"><a href="https://featherless.ai/blog/llm-api-pricing-comparison-2026-complete-guide-inference-costs" onclick="window.open(this.href);return false;">LLM Inference Pricing 2026: GPT-4 equivalent hiện chỉ còn $0.40/million tokens — giảm 10x mỗi năm</a></div>
+      <div class="note-text">Featherless.ai so sánh 7 major providers. Flash/mini tier có thể giảm thêm 30-50%. Inference optimization tiếp tục là competitive advantage chính.</div>
+      <a href="https://featherless.ai/blog/llm-api-pricing-comparison-2026-complete-guide-inference-costs" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="fl-brand">AI Intelligence · Vulcan Labs Daily</div>
+      <div class="fl-meta">Issue #68 · June 13, 2026 · 14 stories · Curated for AI product &amp; engineering teams</div>
+    </div>
+    <div class="footer-right">
+      <div class="signal-label">Signal sources</div>
+      <div class="signal-chips">
+        <span class="signal-chip">🧠 Claude Memory</span>
+        <span class="signal-chip">💬 Slack</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+</body>
+</html>

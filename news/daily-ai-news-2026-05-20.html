@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<title>AI Intelligence — 20 May 2026</title>
+<style>
+/* ─── Design tokens ─────────────────────────────── */
+:root {
+  --bg:  #07070a;
+  --s1:  #0f0f14;
+  --s2:  #16161d;
+  --s3:  #1d1d27;
+  --s4:  #30303e;
+
+  --rule:  rgba(255,255,255,0.07);
+  --rule2: rgba(255,255,255,0.13);
+  --rule3: rgba(255,255,255,0.22);
+
+  --t1: #f0ece4;
+  --t2: #9a958c;
+  --t3: #6e6b67;
+
+  --gold:   #c8a76a;
+  --gold-a: rgba(200,167,106,0.10);
+  --gold-b: rgba(200,167,106,0.20);
+  --gold-c: rgba(200,167,106,0.35);
+
+  --blue:   #5d8dee;
+  --blue-a: rgba(93,141,238,0.10);
+  --blue-b: rgba(93,141,238,0.20);
+  --blue-c: rgba(93,141,238,0.35);
+
+  --teal:   #3ecf8e;
+  --teal-a: rgba(62,207,142,0.10);
+  --teal-b: rgba(62,207,142,0.20);
+
+  --red:    #e55252;
+  --red-a:  rgba(229,82,82,0.10);
+  --red-b:  rgba(229,82,82,0.22);
+
+  --purple:   #9d78f0;
+  --purple-a: rgba(157,120,240,0.10);
+  --purple-b: rgba(157,120,240,0.22);
+
+  --r: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+strong { color: var(--t1); font-weight: 600; }
+img { display: block; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(93,141,238,0.07) 0%, transparent 60%),
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  color: var(--t1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* ─── Load animation ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.masthead      { animation: fadeUp .4s ease both; }
+.focus-strip   { animation: fadeUp .4s ease both .02s; }
+.ticker        { animation: fadeUp .4s ease both .03s; }
+.hero-grid     { animation: fadeUp .5s ease both .05s; }
+.card-grid     { animation: fadeUp .5s ease both .15s; }
+.briefing-grid { animation: fadeUp .5s ease both .25s; }
+.tech-grid     { animation: fadeUp .5s ease both .28s; }
+.notes-grid    { animation: fadeUp .5s ease both .30s; }
+
+/* ─── Masthead ──────────────────────────────────── */
+.masthead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0 18px;
+  border-bottom: 1px solid var(--rule2);
+}
+.mast-brand { display: flex; align-items: center; gap: 10px; }
+.mast-icon {
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, #c8a76a 0%, #9a7038 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 16px rgba(200,167,106,0.4), 0 2px 6px rgba(0,0,0,0.4);
+}
+.mast-icon svg { width: 15px; height: 15px; fill: #fff; }
+.mast-name {
+  font-size: 13px; font-weight: 800; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--t1);
+}
+.mast-sep { width: 1px; height: 13px; background: var(--rule2); }
+.mast-sub  { font-size: 11px; color: var(--t3); }
+.mast-right { display: flex; align-items: center; gap: 10px; }
+.mast-issue {
+  font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--t3); background: var(--s3); border: 1px solid var(--rule2);
+  padding: 3px 8px; border-radius: 5px;
+}
+.mast-date { font-size: 11px; color: var(--t3); }
+
+/* ─── Focus strip ─────────────────────────────── */
+.focus-strip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0 12px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+.focus-label { font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); white-space: nowrap; }
+.focus-chip {
+  font-size: 9.5px; font-weight: 600; color: var(--t2);
+  background: var(--s2); border: 1px solid var(--rule2);
+  padding: 3px 9px; border-radius: 100px;
+  transition: border-color .15s, color .15s;
+}
+.focus-chip:hover { border-color: var(--rule3); color: var(--t1); }
+
+/* ─── Ticker ─────────────────────────────────────── */
+@keyframes ticker-glow {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.ticker {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 16px;
+  background: linear-gradient(90deg, rgba(229,82,82,0.10), rgba(229,82,82,0.06), rgba(229,82,82,0.10));
+  background-size: 200% 100%;
+  animation: fadeUp .4s ease both .03s, ticker-glow 3s ease infinite;
+  border-bottom: 1px solid var(--red-b);
+  margin-bottom: 32px;
+}
+.live-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--red-b); border: 1px solid rgba(229,82,82,0.4);
+  border-radius: 100px; padding: 3px 9px 3px 7px;
+  font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--red); flex-shrink: 0;
+}
+.live-dot {
+  width: 6px; height: 6px; background: var(--red); border-radius: 50%; position: relative;
+}
+.live-dot::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 50%;
+  border: 1.5px solid rgba(229,82,82,0.5);
+  animation: ripple 1.5s ease-out infinite;
+}
+@keyframes ripple {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.ticker-body { flex: 1; font-size: 12px; color: var(--t2); }
+.ticker-body strong { color: var(--t1); }
+.ticker-cta { font-size: 11px; font-weight: 700; color: var(--red); white-space: nowrap; }
+.ticker-cta::after { content: ' ↗'; opacity: .8; }
+
+/* ─── Section header ─────────────────────────────── */
+.sec { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.sec-label {
+  font-size: 9px; font-weight: 800; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--t3); white-space: nowrap;
+}
+.sec-rule { flex: 1; height: 1px; background: var(--rule); }
+.sec-count {
+  font-size: 9px; color: var(--t3); background: var(--s3);
+  border: 1px solid var(--rule); padding: 2px 8px; border-radius: 100px; white-space: nowrap;
+}
+
+/* ─── Tag system ─────────────────────────────────── */
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 800; letter-spacing: .10em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 5px; white-space: nowrap; line-height: 1;
+  vertical-align: middle;
+}
+.tag-icon { font-size: 9px; line-height: 1; }
+.tag-gold   { color: var(--gold);   background: var(--gold-a);   border: 1px solid var(--gold-b);   }
+.tag-blue   { color: var(--blue);   background: var(--blue-a);   border: 1px solid var(--blue-b);   }
+.tag-teal   { color: var(--teal);   background: var(--teal-a);   border: 1px solid var(--teal-b);   }
+.tag-red    { color: var(--red);    background: var(--red-a);    border: 1px solid var(--red-b);    }
+.tag-purple { color: var(--purple); background: var(--purple-a); border: 1px solid var(--purple-b); }
+.tag-muted  { color: var(--t3);     background: var(--s3);       border: 1px solid var(--rule2);    }
+
+/* ─── Company logo marks ─────────────────────────── */
+.co-mark {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; overflow: hidden;
+  font-size: 15px; font-weight: 900; letter-spacing: -.02em;
+  box-shadow: 0 2px 10px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.co-mark:hover { transform: scale(1.06); }
+.co-anthropic { background: linear-gradient(135deg, #d06848 0%, #a04020 100%); }
+.co-google    { background: #fff; }
+.co-moonshot  { background: linear-gradient(135deg, #6040e0 0%, #3820b0 100%); }
+.co-mem0      { background: linear-gradient(135deg, #1a6af7 0%, #0e44c8 100%); }
+.co-openai    { background: linear-gradient(135deg, #10a37f 0%, #047c5f 100%); }
+.co-mark .co-svg { width: 22px; height: 22px; flex-shrink: 0; }
+.co-mark .co-fav {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; padding: 7px; border-radius: 10px;
+}
+
+/* ─── Source row ─────────────────────────────────── */
+.src-row { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.src-fav  { width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
+.src-name { font-size: 10.5px; color: var(--t3); }
+.src-dot  { color: var(--rule3); font-size: 10px; }
+.cta {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 700; transition: opacity .15s;
+}
+.cta:hover { opacity: .75; }
+.cta::after { content: '↗'; font-size: 10px; opacity: .65; }
+.cta-gold   { color: var(--gold); }
+.cta-blue   { color: var(--blue); }
+.cta-teal   { color: var(--teal); }
+.cta-red    { color: var(--red);  }
+.cta-purple { color: var(--purple); }
+
+/* ─── Hero grid ──────────────────────────────────── */
+.hero-grid { display: grid; grid-template-columns: 1fr 314px; gap: 12px; margin-bottom: 32px; }
+
+/* ─── Featured card ──────────────────────────────── */
+.hero-wrap {
+  border-radius: calc(var(--r) + 2px);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--blue-c), transparent 50%, var(--blue-a));
+  background-size: 300% 300%;
+  animation: border-shift 6s ease infinite;
+  box-shadow: 0 0 40px rgba(93,141,238,0.12), 0 4px 20px rgba(0,0,0,0.5);
+}
+@keyframes border-shift {
+  0%   { background-position: 0% 50%;   }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;   }
+}
+.hero-card {
+  background: var(--s1);
+  border-radius: var(--r);
+  display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+}
+.hero-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--blue-c) 0%, transparent 60%);
+}
+.hero-glow {
+  position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; pointer-events: none;
+  background: radial-gradient(circle, rgba(93,141,238,0.10) 0%, transparent 65%);
+}
+.hero-inner { padding: 26px 26px 0; flex: 1; position: relative; z-index: 1; }
+.hero-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 14px;
+}
+.hero-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; flex: 1; }
+.hero-head {
+  font-size: 21px; font-weight: 800; line-height: 1.22;
+  letter-spacing: -.028em; color: var(--t1); margin-bottom: 12px;
+}
+.hero-text { font-size: 13.5px; color: var(--t2); line-height: 1.72; }
+
+.hero-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  margin: 20px 26px 0;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.02);
+}
+.stat-cell {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background .2s;
+}
+.stat-cell:hover { background: rgba(93,141,238,0.05); }
+.stat-cell:nth-child(even) { border-right: none; }
+.stat-cell:nth-last-child(-n+2) { border-bottom: none; }
+@keyframes countGlow {
+  0%,100% { text-shadow: 0 0 20px rgba(93,141,238,0); }
+  50%      { text-shadow: 0 0 20px rgba(93,141,238,0.5); }
+}
+.stat-val {
+  display: block; font-size: 22px; font-weight: 800;
+  letter-spacing: -.035em; color: var(--blue); line-height: 1; margin-bottom: 4px;
+  animation: countGlow 4s ease infinite;
+}
+.stat-lbl { font-size: 10px; color: var(--t3); line-height: 1.35; }
+
+.hero-foot {
+  padding: 14px 26px; border-top: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 20px; gap: 12px;
+}
+
+/* ─── Sidebar ────────────────────────────────────── */
+.sidebar { display: flex; flex-direction: column; gap: 12px; }
+
+/* Watch card */
+.watch-card {
+  background: var(--s1); border: 1px solid var(--red-b);
+  border-radius: var(--r); overflow: hidden; flex: 1;
+  box-shadow: 0 0 30px rgba(229,82,82,0.06), 0 2px 12px rgba(0,0,0,0.4);
+}
+.watch-head {
+  padding: 10px 16px; background: var(--red-a);
+  border-bottom: 1px solid var(--red-b);
+  display: flex; align-items: center; gap: 8px;
+}
+.watch-badge { font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.watch-when {
+  margin-left: auto; font-size: 9px; color: rgba(229,82,82,0.6);
+  background: rgba(229,82,82,0.08); padding: 2px 7px;
+  border-radius: 100px; border: 1px solid rgba(229,82,82,0.15);
+}
+.watch-body { padding: 15px 16px; }
+.watch-title { font-size: 14px; font-weight: 700; color: var(--t1); margin-bottom: 10px; line-height: 1.3; }
+.watch-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.watch-items li {
+  font-size: 12px; color: var(--t2); padding-left: 13px;
+  position: relative; line-height: 1.45;
+}
+.watch-items li::before { content: '›'; position: absolute; left: 2px; color: var(--red); font-weight: 800; }
+.watch-items li strong { color: var(--t1); font-weight: 600; }
+.watch-links {
+  display: flex; gap: 10px; margin-top: 13px;
+  padding-top: 12px; border-top: 1px solid var(--rule);
+}
+.watch-link { font-size: 11px; font-weight: 700; color: var(--red); }
+.watch-link::after { content: ' ↗'; opacity: .7; }
+
+/* Mini card */
+.mini-card {
+  background: var(--s1); border: 1px solid var(--rule); border-radius: var(--r);
+  padding: 14px 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  transition: border-color .2s, box-shadow .2s;
+}
+.mini-card:hover { border-color: var(--rule2); box-shadow: 0 4px 16px rgba(0,0,0,0.45); }
+.mini-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.mini-title { font-size: 13px; font-weight: 700; color: var(--t1); line-height: 1.35; flex: 1; }
+.mini-text { font-size: 11.5px; color: var(--t2); line-height: 1.55; margin-bottom: 10px; }
+.mini-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--rule); }
+
+/* ─── 3-column card grid ─────────────────────────── */
+.card-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 32px; }
+.card {
+  background: var(--s1); border: 1px solid var(--rule);
+  border-radius: var(--r); display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--rule2); }
+.card.card-blue:hover   { box-shadow: 0 8px 28px rgba(0,0,0,.55), 0 0 20px rgba(93,141,238,0.12); }
+.card.card-purple:hover { box-shadow: 0 8px 28px rgba(0,0,0,.55), 0 0 20px rgba(157,120,240,0.12); }
+.card.card-teal:hover   { box-shadow: 0 8px 28px rgba(0,0,0,.55), 0 0 20px rgba(62,207,142,0.10); }
+.card-accent { height: 3px; flex-shrink: 0; }
+.acc-blue   { background: linear-gradient(90deg, var(--blue)   40%, transparent); }
+.acc-teal   { background: linear-gradient(90deg, var(--teal)   40%, transparent); }
+.acc-purple { background: linear-gradient(90deg, var(--purple) 40%, transparent); }
+.acc-gold   { background: linear-gradient(90deg, var(--gold)   40%, transparent); }
+.card-blue::after   { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 60px; background: linear-gradient(180deg, var(--blue-a) 0%, transparent 100%); pointer-events: none; }
+.card-purple::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 60px; background: linear-gradient(180deg, var(--purple-a) 0%, transparent 100%); pointer-events: none; }
+.card-teal::after   { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 60px; background: linear-gradient(180deg, var(--teal-a) 0%, transparent 100%); pointer-events: none; }
+.card-inner { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; position: relative; z-index: 1; }
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.card-meta { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.card-kicker-row { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.card-date { font-size: 9.5px; color: var(--t3); }
+.card-head { font-size: 13.5px; font-weight: 700; line-height: 1.35; letter-spacing: -.012em; color: var(--t1); margin-bottom: 8px; }
+.card-text { font-size: 12.5px; color: var(--t2); line-height: 1.65; flex: 1; margin-bottom: 14px; }
+.card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--rule); }
+
+/* ─── Briefing ───────────────────────────────────── */
+.briefing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+.brief-col { display: flex; flex-direction: column; gap: 8px; }
+
+a.brief-row {
+  display: flex; gap: 12px; padding: 13px 15px;
+  background: var(--s1); border: 1px solid var(--rule); border-radius: 9px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,.3);
+  transition: background .15s, border-color .15s, transform .15s, box-shadow .15s;
+}
+a.brief-row:hover {
+  background: var(--s2); border-color: var(--rule2);
+  transform: translateX(3px); box-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+a.brief-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--blue); opacity: 0; transition: opacity .15s;
+  border-radius: 9px 0 0 9px;
+}
+a.brief-row:hover::before { opacity: 1; }
+.brief-n { font-size: 19px; font-weight: 800; letter-spacing: -.04em; color: var(--s4); line-height: 1; width: 24px; flex-shrink: 0; padding-top: 2px; }
+.brief-body { flex: 1; min-width: 0; }
+.brief-title { font-size: 12.5px; font-weight: 600; color: var(--t1); line-height: 1.4; margin-bottom: 3px; }
+.brief-desc  { font-size: 11.5px; color: var(--t2); line-height: 1.5; }
+.brief-foot  { display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+.brief-fav   { width: 12px; height: 12px; border-radius: 2px; }
+.age { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 1px 5px; border-radius: 3px; margin-left: 4px; vertical-align: middle; }
+.age-w { color: var(--gold); background: var(--gold-a); }
+.age-m { color: var(--t3); background: var(--s3); }
+
+/* ─── Technical deep-dive ────────────────────── */
+.tech-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 32px;
+}
+.tech-card {
+  display: block;
+  background: var(--s1); border: 1px solid var(--rule);
+  border-left-width: 3px;
+  border-radius: var(--r); padding: 16px 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+  position: relative; overflow: hidden;
+}
+.tech-card:hover { transform: translateY(-2px); }
+.tc-purple { border-left-color: var(--purple); }
+.tc-purple:hover { box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 18px rgba(157,120,240,0.10); }
+.tc-teal   { border-left-color: var(--teal); }
+.tc-teal:hover   { box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 18px rgba(62,207,142,0.10); }
+.tc-gold   { border-left-color: var(--gold); }
+.tc-gold:hover   { box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 18px rgba(200,167,106,0.10); }
+.tc-blue   { border-left-color: var(--blue); }
+.tc-blue:hover   { box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 18px rgba(93,141,238,0.10); }
+.tc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.tc-src { font-size: 10px; color: var(--t3); }
+.tc-head { font-size: 13px; font-weight: 700; color: var(--t1); line-height: 1.35; margin-bottom: 12px; }
+.tc-bullets { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.tc-b { font-size: 12px; color: var(--t2); line-height: 1.5; padding-left: 12px; position: relative; }
+.tc-b::before { content: '·'; position: absolute; left: 2px; color: var(--t3); }
+.tc-key {
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  font-size: 10.5px; font-weight: 700; color: var(--t1);
+  background: var(--s3); padding: 1px 5px; border-radius: 4px;
+  border: 1px solid var(--rule2); margin-right: 4px;
+}
+.tc-rel {
+  font-size: 11px; color: var(--t3); font-style: italic;
+  padding-top: 10px; border-top: 1px solid var(--rule); line-height: 1.4;
+}
+
+/* ─── Context notes ──────────────────────────────── */
+.notes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 32px; }
+.note-card {
+  background: var(--s1); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 14px 16px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.note-card:hover { border-color: var(--rule2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+.note-label { font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); margin-bottom: 7px; }
+.note-title { font-size: 12.5px; font-weight: 600; color: var(--t1); margin-bottom: 5px; line-height: 1.35; }
+.note-title a { color: var(--t1); border-bottom: 1px solid var(--rule2); transition: border-color .15s; }
+.note-title a:hover { border-bottom-color: var(--t2); }
+.note-text { font-size: 11.5px; color: var(--t2); line-height: 1.55; }
+
+/* ─── Footer ─────────────────────────────────────── */
+.footer {
+  padding: 18px 0 0; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 8px;
+}
+.f-l, .f-r { font-size: 10.5px; color: var(--t3); line-height: 1.65; }
+.f-r { text-align: right; }
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 940px) {
+  .hero-grid  { grid-template-columns: 1fr; }
+  .card-grid  { grid-template-columns: 1fr 1fr; }
+  .notes-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .page { padding: 0 16px 60px; }
+  .card-grid     { grid-template-columns: 1fr; }
+  .briefing-grid { grid-template-columns: 1fr; }
+  .notes-grid    { grid-template-columns: 1fr; }
+  .tech-grid     { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── Masthead ─────────────────────────── -->
+<header class="masthead">
+  <div class="mast-brand">
+    <div class="mast-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2L4.5 14H11L9.5 22L19.5 10H13L13 2Z"/>
+      </svg>
+    </div>
+    <span class="mast-name">AI Intelligence</span>
+    <span class="mast-sep"></span>
+    <span class="mast-sub">Vulcan Labs Daily</span>
+  </div>
+  <div class="mast-right">
+    <span class="mast-issue">Issue #49</span>
+    <span class="mast-date">Wednesday, 20 May 2026</span>
+  </div>
+</header>
+
+<!-- ── Focus chips ──────────────────────── -->
+<div class="focus-strip">
+  <span class="focus-label">Focus hôm nay</span>
+  <span class="focus-chip">Gemini Omni · Google I/O 2026</span>
+  <span class="focus-chip">Agentic memory (Mem0, MemPalace)</span>
+  <span class="focus-chip">Frontier model releases</span>
+  <span class="focus-chip">Claude Managed Agents</span>
+  <span class="focus-chip">LLM cost optimization</span>
+  <span class="focus-chip">AI coding agents at scale</span>
+</div>
+
+<!-- ── Live ticker ──────────────────────── -->
+<div class="ticker" style="margin-top:0;border-top:none;">
+  <span class="live-pill">
+    <span class="live-dot"></span>
+    Live
+  </span>
+  <span class="ticker-body">
+    <strong>Google I/O 2026 — Hôm nay (May 20)</strong> · Gemini Omni "any-to-any" chính thức · Antigravity 2.0 agent platform · Gemini 3.5 Flash 4× faster · Search agents rolling out
+  </span>
+  <a href="https://blog.google/innovation-and-ai/sundar-pichai-io-2026/" target="_blank" class="ticker-cta">Keynote</a>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     BREAKING THIS WEEK
+─────────────────────────────────────────────── -->
+<div class="sec">
+  <span class="sec-label">Breaking This Week</span>
+  <span class="sec-rule"></span>
+  <span class="sec-count">May 14 – 20</span>
+</div>
+
+<div class="hero-grid">
+
+  <!-- Hero: Gemini Omni -->
+  <div class="hero-wrap">
+    <div class="hero-card">
+      <div class="hero-glow"></div>
+      <div class="hero-inner">
+        <div class="hero-header">
+          <div class="hero-tags">
+            <span class="tag tag-gold"><span class="tag-icon">⭐</span>&nbsp;Story of the week</span>
+            <span class="tag tag-blue"><span class="tag-icon">🌐</span>&nbsp;Frontier Model</span>
+            <span class="tag tag-muted"><span class="tag-icon">🎬</span>&nbsp;Multimodal</span>
+          </div>
+          <!-- Google logo -->
+          <div class="co-mark co-google" title="Google">
+            <img class="co-fav" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
+          </div>
+        </div>
+        <h1 class="hero-head">Google Gemini Omni — "Any-to-Any" World Model: text, image, audio, video vào và ra từ một model duy nhất</h1>
+        <p class="hero-text">Gemini Omni Flash — model đầu tiên trong series — nhận <strong>bất kỳ combination nào</strong> của text, images, audio, và video làm input, và produce output cùng các modalities đó — tất cả từ <strong>một single model</strong> thay vì relay của nhiều specialized systems. User có thể edit video bằng cách nói chuyện với Omni. Rolling out ngay hôm nay cho Google AI Plus, Pro, và Ultra subscribers qua Gemini app và Google Flow. YouTube Shorts nhận Omni tuần tới; developer API access trong vài tuần nữa.<br><br>Cùng với Omni, Google ra mắt <strong>Gemini 3.5 Flash</strong> — built for agentic coding và long-horizon tasks — với claim 4× faster hơn các rival frontier models. Cả hai đã available cho developers starting today.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-cell"><span class="stat-val">4×4</span><span class="stat-lbl">Input + Output modalities (text · img · audio · video)</span></div>
+        <div class="stat-cell"><span class="stat-val">4×</span><span class="stat-lbl">Faster — Gemini 3.5 Flash so với rival frontiers</span></div>
+        <div class="stat-cell"><span class="stat-val">Today</span><span class="stat-lbl">Rollout: Gemini Plus/Pro/Ultra subscribers globally</span></div>
+        <div class="stat-cell"><span class="stat-val">G I/O</span><span class="stat-lbl">Keynote: Sundar Pichai — May 20, 2026</span></div>
+      </div>
+      <div class="hero-foot">
+        <div class="src-row">
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=venturebeat.com&sz=32" alt="">
+          <span class="src-name">VentureBeat</span>
+          <span class="src-dot">·</span>
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=blog.google&sz=32" alt="">
+          <span class="src-name">Google Blog · May 20</span>
+        </div>
+        <a href="https://venturebeat.com/technology/google-unveils-gemini-omni-any-to-any-ai-model-what-enterprises-should-know" target="_blank" class="cta cta-blue">Đọc đầy đủ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Watch: Kimi K2 deprecated May 25 -->
+    <div class="watch-card">
+      <div class="watch-head">
+        <span class="live-dot" style="width:7px;height:7px;background:var(--red);border-radius:50%;position:relative;flex-shrink:0;"></span>
+        <span class="watch-badge">⚠ Urgent · Action needed</span>
+        <span class="watch-when">5 ngày còn lại</span>
+      </div>
+      <div class="watch-body">
+        <p class="watch-title">Kimi K2 series deprecated May 25 — Migration deadline sắp đến</p>
+        <ul class="watch-items">
+          <li>Moonshot AI xác nhận: <strong>K2, K2-Preview, K2-Reference</strong> ngừng hoạt động vào May 25, 2026</li>
+          <li>Migration path: <strong>Kimi K2.6</strong> — 1T parameter MoE, 32B activated/token, 256K context window</li>
+          <li>K2.6 claims beat <strong>Claude Opus 4.6</strong> trên một số benchmarks; Agent Swarm: 300 sub-agents, 4,000 coordinated steps/run</li>
+          <li>Open-source, native video support, available trên API và Kimi Code CLI</li>
+        </ul>
+        <div class="watch-links">
+          <a href="https://www.kimi.com/blog/kimi-k2-6" target="_blank" class="watch-link">K2.6 Tech Blog</a>
+          <a href="https://deepinfra.com/blog/kimi-k2-6-model-overview" target="_blank" class="watch-link">Architecture</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini: Code w/ Claude London today -->
+    <div class="mini-card">
+      <div class="mini-header">
+        <p class="mini-title">Code with Claude — London (May 20–21, hôm nay)</p>
+        <div class="co-mark co-anthropic" title="Anthropic" style="width:30px;height:30px;border-radius:8px;">
+          <img class="co-fav" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="">
+        </div>
+      </div>
+      <p class="mini-text">Anthropic đang take Code w/ Claude global — event hôm nay tại London, Tokyo ngày June 5–6. Sau SF event May 6 announce <strong>Managed Agents + Dreaming + Outcomes</strong>, các London session focus vào production deployment patterns và partner integrations.</p>
+      <div class="mini-foot">
+        <div class="src-row">
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="">
+          <span class="src-name">anthropic.com · May 20</span>
+        </div>
+        <a href="https://www.anthropic.com/news" target="_blank" class="cta cta-gold">Đọc</a>
+      </div>
+    </div>
+
+  </div><!-- /sidebar -->
+</div><!-- /hero-grid -->
+
+<!-- ─────────────────────────────────────────────
+     TIN TUẦN NÀY — 3-col card grid
+─────────────────────────────────────────────── -->
+<div class="sec">
+  <span class="sec-label">Tin tuần này</span>
+  <span class="sec-rule"></span>
+  <span class="sec-count">3 stories</span>
+</div>
+
+<div class="card-grid">
+
+  <!-- Card 1: Google Antigravity 2.0 -->
+  <div class="card card-blue">
+    <div class="card-accent acc-blue"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-kicker-row">
+            <span class="tag tag-blue"><span class="tag-icon">🤖</span>&nbsp;Multi-Agent</span>
+            <span class="card-date">May 19, 2026</span>
+          </div>
+        </div>
+        <div class="co-mark co-google" title="Google" style="width:34px;height:34px;">
+          <img class="co-fav" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
+        </div>
+      </div>
+      <p class="card-head">Google Antigravity 2.0 — Standalone agent-first dev platform: CLI + SDK + Managed Execution</p>
+      <p class="card-text">Standalone agent-first platform: CLI, SDK, dynamic subagents cho parallelized workflows, scheduled tasks, tích hợp AI Studio + Firebase.</p>
+      <div class="card-foot">
+        <div class="src-row">
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=9to5google.com&sz=32" alt="">
+          <span class="src-name">9to5Google · May 19</span>
+        </div>
+        <a href="https://9to5google.com/2026/05/19/google-antigravity-agentic-developer-suite/" target="_blank" class="cta cta-blue">Đọc</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Claude Managed Agents: Dreaming + Outcomes -->
+  <div class="card card-purple">
+    <div class="card-accent acc-gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-kicker-row">
+            <span class="tag tag-gold"><span class="tag-icon">🧠</span>&nbsp;Agentic Memory</span>
+            <span class="card-date">May 2026</span>
+          </div>
+        </div>
+        <div class="co-mark co-anthropic" title="Anthropic" style="width:34px;height:34px;">
+          <img class="co-fav" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" alt="">
+        </div>
+      </div>
+      <p class="card-head">Claude Managed Agents: "Dreaming" memory consolidation, Outcomes loop, và multi-agent orchestration</p>
+      <p class="card-text"><strong>Dreaming</strong> — memory consolidation trong idle cycles. <strong>Outcomes</strong> — iterate đến khi meet criteria. <strong>Multi-agent</strong> — coordinator + specialist sub-agents trên shared filesystem.</p>
+      <div class="card-foot">
+        <div class="src-row">
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=infoq.com&sz=32" alt="">
+          <span class="src-name">InfoQ · May 2026</span>
+        </div>
+        <a href="https://www.infoq.com/news/2026/05/code-with-claude/" target="_blank" class="cta cta-purple">Đọc</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: State of AI Agent Memory 2026 -->
+  <div class="card card-teal">
+    <div class="card-accent acc-purple"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-kicker-row">
+            <span class="tag tag-purple"><span class="tag-icon">💾</span>&nbsp;Memory</span>
+            <span class="card-date">May 2026</span>
+          </div>
+        </div>
+        <div class="co-mark co-mem0" title="Mem0" style="width:34px;height:34px;">
+          <img class="co-fav" src="https://www.google.com/s2/favicons?domain=mem0.ai&sz=64" alt="">
+        </div>
+      </div>
+      <p class="card-head">State of AI Agent Memory 2026: Benchmarks, Architectures & Production Gaps</p>
+      <p class="card-text">Top gains: temporal queries <strong>+29.6 pts</strong>, multi-hop reasoning <strong>+23.1 pts</strong>. 21 framework integrations. Production gap lớn nhất: hybrid memory khi facts thay đổi theo thời gian.</p>
+      <div class="card-foot">
+        <div class="src-row">
+          <img class="src-fav" src="https://www.google.com/s2/favicons?domain=mem0.ai&sz=32" alt="">
+          <span class="src-name">mem0.ai · 2026</span>
+        </div>
+        <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026" target="_blank" class="cta cta-teal">Đọc</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /card-grid -->
+
+<!-- ─────────────────────────────────────────────
+     ĐÁNG ĐỌC — relevance cao
+─────────────────────────────────────────────── -->
+<div class="sec">
+  <span class="sec-label">Đáng đọc — relevance cao</span>
+  <span class="sec-rule"></span>
+  <span class="sec-count">6 stories</span>
+</div>
+
+<div class="briefing-grid">
+  <div class="brief-col">
+
+    <a class="brief-row" href="https://thetechportal.com/2026/05/20/google-introduces-gemini-omni-gemini-3-5-flash-ai-powered-search-upgrades-and-more-at-i-o-2026/" target="_blank">
+      <span class="brief-n">01</span>
+      <div class="brief-body">
+        <p class="brief-title">Gemini 3.5 Flash — 4× faster, built for agentic coding, available ngay hôm nay <span class="age age-w">Hôm nay</span></p>
+          <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=thetechportal.com&sz=32" alt="">
+          <span class="src-name">The Tech Portal</span>
+          <span class="tag tag-blue" style="margin-left:4px">Frontier Model</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="brief-row" href="https://blog.google/products-and-platforms/products/search/search-io-2026/" target="_blank">
+      <span class="brief-n">02</span>
+      <div class="brief-body">
+        <p class="brief-title">Google Search Agents: background information agents 24/7 chạy nền <span class="age age-w">Hôm nay</span></p>
+        <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=blog.google&sz=32" alt="">
+          <span class="src-name">Google Blog</span>
+          <span class="tag tag-teal" style="margin-left:4px">Agents</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="brief-row" href="https://www.anthropic.com/news/pwc-expanded-partnership" target="_blank">
+      <span class="brief-n">03</span>
+      <div class="brief-body">
+        <p class="brief-title">Anthropic × PwC: 30,000 certifications, joint CoE, Claude Code global rollout <span class="age age-w">May 14</span></p>
+        <p class="brief-desc">30K PwC professionals sẽ được certify; joint CoE và Claude Code rollout toàn cầu.</p>
+        <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="">
+          <span class="src-name">Anthropic · May 14</span>
+          <span class="tag tag-gold" style="margin-left:4px">Enterprise</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  <div class="brief-col">
+
+    <a class="brief-row" href="https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/" target="_blank">
+      <span class="brief-n">04</span>
+      <div class="brief-body">
+        <p class="brief-title">Google Antigravity: Agent-First IDE — CLI, SDK, Managed Execution, Enterprise Support <span class="age age-w">May 19</span></p>
+        <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=developers.googleblog.com&sz=32" alt="">
+          <span class="src-name">Google Developers Blog</span>
+          <span class="tag tag-blue" style="margin-left:4px">Dev Platform</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="brief-row" href="https://techcrunch.com/2026/05/19/how-to-use-googles-new-ai-agents-to-go-beyond-your-standard-searches/" target="_blank">
+      <span class="brief-n">05</span>
+      <div class="brief-body">
+        <p class="brief-title">Cách dùng Google AI agents mới: vượt qua standard search, practical guide <span class="age age-w">May 19</span></p>
+        <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=techcrunch.com&sz=32" alt="">
+          <span class="src-name">TechCrunch · May 19</span>
+          <span class="tag tag-teal" style="margin-left:4px">UX Patterns</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="brief-row" href="https://claude.com/blog/claude-managed-agents" target="_blank">
+      <span class="brief-n">06</span>
+      <div class="brief-body">
+        <p class="brief-title">Claude Managed Agents: get to production 10x faster — official launch blog <span class="age age-w">April 8</span></p>
+        <p class="brief-desc">Composable APIs: sandboxed execution, checkpointing, credential management, scoped permissions.</p>
+        <div class="brief-foot">
+          <img class="brief-fav" src="https://www.google.com/s2/favicons?domain=claude.com&sz=32" alt="">
+          <span class="src-name">claude.com · April 8</span>
+          <span class="tag tag-gold" style="margin-left:4px">Agent Infra</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div><!-- /briefing-grid -->
+
+<!-- ─────────────────────────────────────────────
+     TECHNICAL DEEP-DIVE
+─────────────────────────────────────────────── -->
+<div class="sec">
+  <span class="sec-label">Technical Deep-dive</span>
+  <span class="sec-rule"></span>
+  <span class="sec-count">4 topics</span>
+</div>
+
+<div class="tech-grid">
+
+  <!-- TC1: Gemini Omni Architecture -->
+  <a class="tech-card tc-blue" href="https://venturebeat.com/technology/google-unveils-gemini-omni-any-to-any-ai-model-what-enterprises-should-know" target="_blank">
+    <div class="tc-top">
+      <span class="tag tag-blue">Architecture</span>
+      <span class="tc-src">VentureBeat · May 20</span>
+    </div>
+    <p class="tc-head">Gemini Omni: Unified Any-to-Any Inference Architecture</p>
+    <div class="tc-bullets">
+      <p class="tc-b"><span class="tc-key">any-to-any</span> Single model nhận &amp; produce text, images, audio, video — không còn relay architecture với nhiều specialist models</p>
+      <p class="tc-b"><span class="tc-key">Omni Flash</span> First-gen model trong series — tối ưu cho real-time use cases, lower latency so với full Omni</p>
+      <p class="tc-b"><span class="tc-key">video edit</span> User nói chuyện với Omni để edit video — first-class video understanding trong inference loop</p>
+    </div>
+  </a>
+
+  <!-- TC2: Claude Dreaming Memory -->
+  <a class="tech-card tc-purple" href="https://www.infoq.com/news/2026/05/code-with-claude/" target="_blank">
+    <div class="tc-top">
+      <span class="tag tag-purple">Memory · Agents</span>
+      <span class="tc-src">InfoQ · May 2026</span>
+    </div>
+    <p class="tc-head">Claude "Dreaming": Automated LTM Consolidation trong Managed Agents</p>
+    <div class="tc-bullets">
+      <p class="tc-b"><span class="tc-key">Dreaming</span> Agents tự consolidate memory trong idle cycles — tương tự sleep/consolidation cycle ở con người, episodic → semantic memory</p>
+      <p class="tc-b"><span class="tc-key">Outcomes</span> Agents iterate cho đến khi meet defined criteria — built-in eval loop, không cần external orchestration để retry</p>
+      <p class="tc-b"><span class="tc-key">sub-agents</span> Coordinator agent delegate sang specialist sub-agents với own model + prompts + tools, chạy parallel trên shared filesystem</p>
+    </div>
+  </a>
+
+  <!-- TC3: Kimi K2.6 MoE Architecture -->
+  <a class="tech-card tc-teal" href="https://deepinfra.com/blog/kimi-k2-6-model-overview" target="_blank">
+    <div class="tc-top">
+      <span class="tag tag-teal">Architecture · MoE</span>
+      <span class="tc-src">DeepInfra · April 2026</span>
+    </div>
+    <p class="tc-head">Kimi K2.6: 1T Parameter MoE Architecture — Agent Swarm System</p>
+    <div class="tc-bullets">
+      <p class="tc-b"><span class="tc-key">1T MoE</span> 1 trillion parameters, <strong>32B activated per token</strong> — cost-effective inference do sparse activation</p>
+      <p class="tc-b"><span class="tc-key">256K context</span> Extended context window với native video understanding — single inference cho long documents hoặc video content</p>
+      <p class="tc-b"><span class="tc-key">Agent Swarm</span> 300 domain-specialized sub-agents, up to 4,000 coordinated steps per autonomous run — production multi-agent orchestration</p>
+    </div>
+  </a>
+
+  <!-- TC4: LLM Cost Optimization -->
+  <a class="tech-card tc-gold" href="https://regolo.ai/inference-efficiency-and-gpu-cost-optimization-in-2026-how-to-cut-llm-serving-waste/" target="_blank">
+    <div class="tc-top">
+      <span class="tag tag-gold">Cost Optimization</span>
+      <span class="tc-src">Regolo.ai · 2026</span>
+    </div>
+    <p class="tc-head">5 Layers cắt LLM Serving Cost: Model sizing → Runtime → Infra</p>
+    <div class="tc-bullets">
+      <p class="tc-b"><span class="tc-key">Layer 1–2</span> <strong>Model right-sizing &amp; quantization</strong> — match model tier to task complexity, INT4/INT8 cho non-critical paths</p>
+      <p class="tc-b"><span class="tc-key">Layer 3–4</span> <strong>Runtime optimization</strong> — continuous batching, KV cache reuse (prompt caching), speculative decoding</p>
+      <p class="tc-b"><span class="tc-key">Layer 5</span> <strong>Infra shape matching</strong> — serverless inference cho bursty traffic, spot capacity cho batch jobs; Gartner dự báo 90% cost reduction by 2030</p>
+    </div>
+  </a>
+
+</div><!-- /tech-grid -->
+
+<!-- ─────────────────────────────────────────────
+     ĐỌC THÊM — context notes
+─────────────────────────────────────────────── -->
+<div class="sec">
+  <span class="sec-label">Đọc thêm</span>
+  <span class="sec-rule"></span>
+  <span class="sec-count">3 context notes</span>
+</div>
+
+<div class="notes-grid">
+
+  <div class="note-card">
+    <p class="note-label">🏛 Open-Source Memory</p>
+    <p class="note-title"><a href="https://github.com/mempalace/mempalace" target="_blank">MemPalace: 170 tokens để recall everything — Method of Loci cho AI agents</a></p>
+    <p class="note-text">19,500+ GitHub stars trong tuần đầu. Claim 96.6% LongMemEval nhưng methodology controversial — MIT-licensed, runs locally với ChromaDB + SQLite.</p>
+  </div>
+
+  <div class="note-card">
+    <p class="note-label">🔬 Production Memory Research</p>
+    <p class="note-title"><a href="https://www.infoq.com/news/2026/04/linkedin-cognitive-memory-agent/" target="_blank">LinkedIn Cognitive Memory Agent — InfoQ deep-dive</a></p>
+    <p class="note-text">Key finding: retrieval latency là bottleneck, không phải storage — separate indexing pipeline pre-computes relevance scores.</p>
+  </div>
+
+  <div class="note-card">
+    <p class="note-label">🖥 Agentic Hardware</p>
+    <p class="note-title"><a href="https://blogs.nvidia.com/blog/vera-cpu-delivery/" target="_blank">NVIDIA Vera CPU: First deliveries tới Anthropic, OpenAI, Oracle</a></p>
+    <p class="note-text">First deliveries: Anthropic, OpenAI, Oracle Cloud. Vera + Rubin claim 10× inference cost reduction; agentic workloads cần 4× more CPU vs current data center ratio.</p>
+  </div>
+
+</div><!-- /notes-grid -->
+
+<!-- ─────────────────────────────────────────────
+     FOOTER
+─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="f-l">
+    <strong style="color:var(--t2)">AI Intelligence · Vulcan Labs Daily</strong><br>
+    Issue #49 · Wednesday, May 20, 2026<br>
+    Showing 14 stories from last 24–48h · 0 deduped against prior digests (first run)<br>
+    Curated for AI product &amp; engineering teams
+  </div>
+  <div class="f-r">
+    Run: 2026-05-20 · auto-generated by daily-ai-news scheduled task<br>
+    Focus: Google I/O 2026 · Agentic memory · Frontier models · Claude agents · LLM cost<br>
+    Blocked domains: <span style="color:var(--t3)">thenextweb.com · wired.com · medium.com · substack.com</span>
+  </div>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>

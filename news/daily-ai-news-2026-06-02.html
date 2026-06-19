@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — 2 tháng 6, 2026</title>
+<style>
+  :root {
+    --bg: #07070a;
+    --s1: #0f0f14;
+    --s2: #16161d;
+    --s3: #1d1d27;
+    --s4: #30303e;
+    --t1: #f0ece4;
+    --t2: #9a958c;
+    --t3: #6e6b67;
+    --gold: #c8a76a;
+    --blue: #5d8dee;
+    --teal: #3ecf8e;
+    --red: #e55252;
+    --purple: #9d78f0;
+    --r: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    background-image: radial-gradient(circle at 20% 20%, rgba(93,141,238,0.04) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(157,120,240,0.04) 0%, transparent 50%),
+                      radial-gradient(ellipse at 50% 10%, rgba(200,167,106,0.03) 0%, transparent 40%);
+    color: var(--t1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes borderShift {
+    0%,100% { border-color: var(--gold); }
+    50%      { border-color: #e4c88a; box-shadow: 0 0 24px rgba(200,167,106,0.35); }
+  }
+  @keyframes countGlow {
+    from { text-shadow: 0 0 0 transparent; }
+    to   { text-shadow: 0 0 12px rgba(200,167,106,0.6); }
+  }
+  @keyframes ripple {
+    0%   { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  @keyframes tickerMove {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(-100%); }
+  }
+
+  section { animation: fadeUp 0.5s ease both; }
+  section:nth-child(2) { animation-delay: 0.07s; }
+  section:nth-child(3) { animation-delay: 0.14s; }
+  section:nth-child(4) { animation-delay: 0.21s; }
+  section:nth-child(5) { animation-delay: 0.28s; }
+  section:nth-child(6) { animation-delay: 0.35s; }
+  section:nth-child(7) { animation-delay: 0.42s; }
+  section:nth-child(8) { animation-delay: 0.49s; }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--s1);
+    border-bottom: 1px solid rgba(200,167,106,0.15);
+    padding: 18px 0;
+  }
+  .masthead .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #d4a843 0%, #a07832 100%);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(200,167,106,0.3);
+  }
+  .brand-text { display: flex; flex-direction: column; }
+  .brand-name { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; color: var(--t1); }
+  .brand-sub  { font-size: 11px; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500; }
+  .masthead-right { display: flex; align-items: center; gap: 10px; }
+  .issue-badge {
+    background: rgba(200,167,106,0.12);
+    border: 1px solid rgba(200,167,106,0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .date-badge {
+    background: var(--s2);
+    border: 1px solid var(--s4);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--t2);
+  }
+
+  /* ── FOCUS CHIPS ── */
+  .focus-bar {
+    background: var(--s1);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .chip-label {
+    font-size: 10px;
+    color: var(--t3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .chip {
+    background: var(--s3);
+    border: 1px solid var(--s4);
+    border-radius: 20px;
+    padding: 3px 11px;
+    font-size: 11px;
+    color: var(--t2);
+    font-weight: 500;
+  }
+  .chip.chip-1 { border-color: rgba(200,167,106,0.4); color: var(--gold); background: rgba(200,167,106,0.07); }
+  .chip.chip-2 { border-color: rgba(93,141,238,0.35); color: var(--blue); background: rgba(93,141,238,0.07); }
+  .chip.chip-3 { border-color: rgba(62,207,142,0.35); color: var(--teal); background: rgba(62,207,142,0.07); }
+  .chip.chip-4 { border-color: rgba(157,120,240,0.35); color: var(--purple); background: rgba(157,120,240,0.07); }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: linear-gradient(90deg, rgba(229,82,82,0.15) 0%, rgba(229,82,82,0.08) 100%);
+    border-top: 1px solid rgba(229,82,82,0.25);
+    border-bottom: 1px solid rgba(229,82,82,0.15);
+    padding: 9px 0;
+    overflow: hidden;
+  }
+  .ticker-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .live-dot {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .live-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--red);
+    animation: ripple 1.4s ease-out infinite;
+  }
+  .ticker-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--red);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .ticker-text { font-size: 13px; color: var(--t1); font-weight: 500; }
+  .ticker-text a { color: var(--gold); }
+
+  /* ── SEC LABELS ── */
+  .sec-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    color: var(--t3);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── MAIN AREA ── */
+  main { padding: 28px 0; }
+
+  /* ── HERO SECTION ── */
+  .hero-section { margin-bottom: 28px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 314px;
+    gap: 16px;
+  }
+
+  /* Hero Card */
+  .hero-card {
+    background: var(--s1);
+    border: 2px solid var(--gold);
+    border-radius: var(--r);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    animation: borderShift 3s ease-in-out infinite;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 0% 0%, rgba(200,167,106,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .tag-gold   { background: rgba(200,167,106,0.15); color: var(--gold); }
+  .tag-blue   { background: rgba(93,141,238,0.15); color: var(--blue); }
+  .tag-teal   { background: rgba(62,207,142,0.15); color: var(--teal); }
+  .tag-red    { background: rgba(229,82,82,0.15); color: var(--red); }
+  .tag-purple { background: rgba(157,120,240,0.15); color: var(--purple); }
+
+  .hero-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.4px;
+    color: var(--t1);
+    margin-bottom: 10px;
+  }
+  .hero-desc { font-size: 14px; color: var(--t2); margin-bottom: 14px; line-height: 1.6; }
+  .hero-bullets { list-style: none; margin-bottom: 16px; display: flex; flex-direction: column; gap: 7px; }
+  .hero-bullets li { font-size: 13px; color: var(--t1); display: flex; gap: 8px; }
+  .hero-bullets li::before { content: '→'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .hero-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .hero-source { font-size: 12px; color: var(--t3); display: flex; align-items: center; gap: 6px; }
+  .hero-source img { width: 14px; height: 14px; border-radius: 2px; }
+  .cta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    padding: 6px 14px;
+    background: rgba(200,167,106,0.1);
+    border: 1px solid rgba(200,167,106,0.3);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .cta:hover { background: rgba(200,167,106,0.18); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--s4);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: -0.5px;
+    animation: countGlow 2s ease infinite alternate;
+  }
+  .stat-lbl { font-size: 10px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Sidebar cards */
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+  .watch-card {
+    background: var(--s1);
+    border: 2px solid var(--red);
+    border-radius: var(--r);
+    padding: 18px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .watch-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 100% 0%, rgba(229,82,82,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .watch-label { font-size: 10px; color: var(--red); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 6px; }
+  .watch-title { font-size: 15px; font-weight: 700; color: var(--t1); margin-bottom: 7px; line-height: 1.3; }
+  .watch-desc  { font-size: 12px; color: var(--t2); line-height: 1.55; margin-bottom: 12px; }
+  .watch-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px;
+  }
+
+  .mini-card {
+    background: var(--s2);
+    border: 1px solid var(--s4);
+    border-radius: var(--r);
+    padding: 15px;
+  }
+  .mini-tag  { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 5px; }
+  .mini-title{ font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 5px; line-height: 1.3; }
+  .mini-text { font-size: 12px; color: var(--t2); }
+  .mini-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── CARD SECTION (3-col) ── */
+  .card-section { margin-bottom: 28px; }
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .card {
+    background: var(--s1);
+    border-radius: var(--r);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card-blue::before   { background: linear-gradient(90deg, var(--blue), #3a65be); }
+  .card-purple::before { background: linear-gradient(90deg, var(--purple), #7a58d0); }
+  .card-teal::before   { background: linear-gradient(90deg, var(--teal), #28a870); }
+
+  .co-mark {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .co-anthropic { background: linear-gradient(135deg, #c8784a, #8a4a28); color: #fff; }
+  .co-google    { background: #fff; color: #4285f4; font-size: 11px; }
+  .co-github    { background: #1b1f24; color: #fff; font-size: 12px; }
+  .co-salesforce{ background: linear-gradient(135deg, #00a1e0, #0070d2); color: #fff; }
+  .co-arxiv     { background: linear-gradient(135deg, #e55252, #b03030); color: #fff; font-size: 10px; }
+  .co-openai    { background: #10a37f; color: #fff; }
+
+  .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .card-date { font-size: 10px; color: var(--t3); margin-bottom: 6px; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--t1); margin-bottom: 7px; line-height: 1.35; }
+  .card-text  { font-size: 12px; color: var(--t2); line-height: 1.5; margin-bottom: 12px; flex: 1; }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 10px;
+    margin-top: auto;
+  }
+  .src-name { font-size: 11px; color: var(--t3); }
+
+  /* ── BRIEFING (2-col) ── */
+  .brief-section { margin-bottom: 28px; }
+  .brief-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .brief-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--s1);
+    border-radius: 9px;
+    border: 1px solid transparent;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+  }
+  .brief-item:hover {
+    transform: translateX(3px);
+    border-color: rgba(93,141,238,0.25);
+    box-shadow: -3px 0 0 var(--blue);
+  }
+  .brief-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t3);
+    min-width: 22px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+  .brief-body { flex: 1; min-width: 0; }
+  .brief-tags { display: flex; gap: 5px; margin-bottom: 4px; }
+  .brief-title { font-size: 13px; font-weight: 600; color: var(--t1); margin-bottom: 3px; line-height: 1.35; }
+  .brief-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+  .brief-src { font-size: 11px; color: var(--t3); }
+  .brief-cta { font-size: 11px; color: var(--blue); font-weight: 600; }
+
+  /* ── TECH DEEP-DIVE (2-col) ── */
+  .tech-section { margin-bottom: 28px; }
+  .tech-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .tc-card {
+    background: var(--s1);
+    border-radius: var(--r);
+    padding: 18px;
+    border-left: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+  }
+  .tc-blue   { border-left-color: var(--blue); }
+  .tc-purple { border-left-color: var(--purple); }
+  .tc-teal   { border-left-color: var(--teal); }
+  .tc-gold   { border-left-color: var(--gold); }
+
+  .tc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .tc-src { font-size: 11px; color: var(--t3); }
+  .tc-title { font-size: 15px; font-weight: 700; color: var(--t1); margin-bottom: 12px; line-height: 1.3; }
+  .tc-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+  .tc-bullets li {
+    font-size: 12px;
+    color: var(--t2);
+    display: flex;
+    gap: 8px;
+    line-height: 1.45;
+  }
+  .tc-bullets li::before { content: '▸'; color: var(--blue); flex-shrink: 0; }
+  .tc-key { color: var(--t1); font-weight: 600; font-family: monospace; font-size: 11px; background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; }
+  .tc-footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 14px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* ── OPEN SOURCE (4-col) ── */
+  .oss-section { margin-bottom: 28px; }
+  .oss-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .repo-card {
+    background: var(--s2);
+    border: 1px solid var(--s4);
+    border-radius: var(--r);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  .repo-name {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 7px;
+  }
+  .repo-stars {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+  }
+  .repo-star-count { font-size: 12px; color: var(--t2); }
+  .star-spike {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(200,167,106,0.12);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  .repo-meta { display: flex; gap: 6px; margin-bottom: 8px; }
+  .repo-lang { font-size: 10px; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--t3); padding: 2px 7px; border-radius: 4px; }
+  .repo-desc { font-size: 12px; color: var(--t2); line-height: 1.45; flex: 1; margin-bottom: 10px; }
+  .repo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+  .repo-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--teal);
+    background: rgba(62,207,142,0.1);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .repo-cta { font-size: 11px; color: var(--blue); font-weight: 600; }
+
+  /* ── ĐỌC THÊM (3-col) ── */
+  .notes-section { margin-bottom: 28px; }
+  .notes-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .note {
+    background: var(--s1);
+    border: 1px solid var(--s4);
+    border-radius: var(--r);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .note-label { font-size: 11px; color: var(--t3); margin-bottom: 7px; }
+  .note-title { font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 6px; line-height: 1.35; }
+  .note-text  { font-size: 12px; color: var(--t2); line-height: 1.5; flex: 1; margin-bottom: 10px; }
+  .note-cta   { font-size: 11px; color: var(--gold); font-weight: 600; text-align: right; margin-top: auto; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--s1);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 20px 0;
+  }
+  .footer .wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .footer-left { display: flex; flex-direction: column; gap: 5px; }
+  .footer-brand { font-size: 13px; font-weight: 700; color: var(--t1); }
+  .footer-meta  { font-size: 11px; color: var(--t3); }
+  .footer-tagline { font-size: 11px; color: var(--t3); font-style: italic; }
+  .footer-right { display: flex; flex-direction: column; gap: 7px; align-items: flex-end; }
+  .signal-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--t3); font-weight: 600; }
+  .signal-chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .signal-chip {
+    font-size: 10px;
+    color: var(--t2);
+    background: var(--s3);
+    border: 1px solid var(--s4);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 940px) {
+    .hero-grid    { grid-template-columns: 1fr; }
+    .cards-3      { grid-template-columns: 1fr 1fr; }
+    .tech-cols    { grid-template-columns: 1fr 1fr; }
+    .oss-grid     { grid-template-columns: 1fr 1fr; }
+    .notes-3      { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .cards-3      { grid-template-columns: 1fr; }
+    .brief-cols   { grid-template-columns: 1fr; }
+    .tech-cols    { grid-template-columns: 1fr; }
+    .oss-grid     { grid-template-columns: 1fr; }
+    .notes-3      { grid-template-columns: 1fr; }
+    .masthead .wrap { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L4.5 13.5H11.5L11 22L19.5 10.5H12.5L13 2Z" fill="white" stroke="white" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">AI Intelligence</div>
+        <div class="brand-sub">Vulcan Labs Daily</div>
+      </div>
+    </div>
+    <div class="masthead-right">
+      <div class="issue-badge">Issue #58</div>
+      <div class="date-badge">Thứ Ba · 2 tháng 6, 2026</div>
+    </div>
+  </div>
+</header>
+
+<!-- FOCUS CHIPS -->
+<div class="focus-bar">
+  <div class="wrap">
+    <div class="chips">
+      <span class="chip-label">Focus:</span>
+      <span class="chip chip-1">Anthropic / Claude</span>
+      <span class="chip chip-2">Agentic memory</span>
+      <span class="chip chip-3">Multi-agent orchestration</span>
+      <span class="chip chip-4">AI coding agents</span>
+      <span class="chip">LLM cost optimization</span>
+      <span class="chip">Frontier LLMs</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="wrap">
+    <div class="ticker-inner">
+      <div class="live-dot"></div>
+      <span class="ticker-tag">Breaking</span>
+      <span class="ticker-text">
+        Anthropic nộp hồ sơ IPO bí mật lên SEC — định giá gần <strong>$1 trillion</strong> —
+        <a href="https://www.anthropic.com/news/confidential-draft-s1-sec" onclick="window.open(this.href);return false;">Xem thêm →</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+<!-- ── BREAKING THIS WEEK ── -->
+<section class="hero-section">
+  <div class="sec-label">Breaking This Week</div>
+  <div class="hero-grid">
+
+    <!-- HERO CARD -->
+    <div class="hero-card">
+      <div class="hero-tags">
+        <span class="tag tag-gold">Anthropic</span>
+        <span class="tag tag-blue">IPO</span>
+        <span class="tag tag-teal">Frontier AI</span>
+      </div>
+      <h1 class="hero-title">Anthropic nộp S-1 bí mật lên SEC — chuẩn bị IPO ở mức định giá ~$965B</h1>
+      <p class="hero-desc">
+        Ngày 1 tháng 6, Anthropic chính thức nộp draft registration statement (Form S-1) lên Ủy ban Chứng khoán Mỹ, mở đường cho đợt IPO lịch sử. Công ty chưa công bố số cổ phiếu hay mức giá, nhưng đợt này đến ngay sau khi Anthropic huy động được $65B Series H ở valuation $965B — lần đầu tiên một AI lab vượt mặt OpenAI ($852B) về định giá.
+      </p>
+      <ul class="hero-bullets">
+        <li>Revenue run-rate vượt $47B/năm, tăng từ $9B cuối 2025 — tốc độ tăng ~5× trong nửa năm</li>
+        <li>IPO sẽ race với OpenAI (cũng đang chuẩn bị filing) và SpaceX (roadshow dự kiến 4/6, target $1.75T)</li>
+        <li>Clause <em>"subject to market conditions"</em> — IPO chính thức chờ SEC review, có thể H2 2026</li>
+      </ul>
+      <div class="hero-footer">
+        <span class="hero-source">
+          <img src="https://www.google.com/s2/favicons?domain=techcrunch.com&sz=16" alt="">
+          TechCrunch · 1/6/2026
+        </span>
+        <a class="cta" href="https://techcrunch.com/2026/06/01/anthropic-files-to-go-public/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-val">$965B</div>
+          <div class="stat-lbl">Valuation post-Series H</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">$65B</div>
+          <div class="stat-lbl">Series H raised</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">$47B</div>
+          <div class="stat-lbl">ARR run-rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">5×</div>
+          <div class="stat-lbl">Revenue growth (6 tháng)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <!-- WATCH CARD -->
+      <div class="watch-card">
+        <div class="watch-label">⚡ Watch</div>
+        <div class="watch-title">GitHub Copilot chuyển sang token billing — effective 1/6</div>
+        <div class="watch-desc">
+          Tất cả Copilot plans chuyển sang usage-based billing dùng GitHub AI Credits ($0.01/credit). Pro+ $39/tháng bao gồm $39 credits; Business $19/seat. Admins có budget controls mới theo enterprise/user.
+        </div>
+        <div class="watch-footer">
+          <span class="hero-source" style="font-size:11px;color:var(--t3)">
+            <img src="https://www.google.com/s2/favicons?domain=github.blog&sz=16" alt="">
+            GitHub Blog · 1/6/2026
+          </span>
+          <a class="cta" style="font-size:11px" href="https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+
+      <!-- MINI CARD -->
+      <div class="mini-card">
+        <div class="mini-tag">🔥 Hot</div>
+        <div class="mini-title">Copilot token billing gây tranh cãi trong cộng đồng dev</div>
+        <div class="mini-text">TechCrunch: "What a joke" — heavy users thấy chi phí tăng đột biến, đặc biệt với agent workflows và multi-turn conversations qua API.</div>
+        <div class="mini-footer">
+          <span style="font-size:11px;color:var(--t3)">TechCrunch · 30/5</span>
+          <a class="cta" style="font-size:11px" href="https://techcrunch.com/2026/05/30/what-a-joke-github-copilots-new-token-based-billing-spurs-consternation-among-devs/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TIN TUẦN NÀY ── -->
+<section class="card-section">
+  <div class="sec-label">Tin tuần này</div>
+  <div class="cards-3">
+
+    <!-- Card 1: Opus 4.8 -->
+    <div class="card card-blue">
+      <div class="co-mark co-anthropic">A</div>
+      <div class="card-tags">
+        <span class="tag tag-gold">Anthropic</span>
+        <span class="tag tag-blue">Model Release</span>
+      </div>
+      <div class="card-date">28/5/2026</div>
+      <h3 class="card-title">Claude Opus 4.8 + Dynamic Workflows: điều phối hàng trăm sub-agent song song</h3>
+      <p class="card-text">
+        Anthropic ra Opus 4.8 với Dynamic Workflows (research preview) — cho phép Opus điều phối codebase-scale migrations qua hundreds of parallel sub-agents, từ kickoff đến merge với existing test suite làm bar.
+      </p>
+      <div class="card-footer">
+        <span class="src-name">TechCrunch</span>
+        <a class="cta" style="font-size:11px" href="https://techcrunch.com/2026/05/28/anthropic-releases-opus-4-8-with-new-dynamic-workflow-tool/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Gemini 3.5 Flash -->
+    <div class="card card-teal">
+      <div class="co-mark co-google" style="font-size:10px;font-weight:700;color:#4285f4;">G</div>
+      <div class="card-tags">
+        <span class="tag tag-teal">Google</span>
+        <span class="tag tag-blue">Agentic</span>
+      </div>
+      <div class="card-date">19/5/2026</div>
+      <h3 class="card-title">Gemini 3.5 Flash GA: Google đặt cược vào agents, không phải chatbots</h3>
+      <p class="card-text">
+        Ra mắt tại Google I/O, Gemini 3.5 Flash là model mạnh nhất của Google cho coding và agentic tasks — 4× nhanh hơn frontier models, có thể chạy liên tục nhiều giờ. Antigravity 2.0 IDE đi kèm.
+      </p>
+      <div class="card-footer">
+        <span class="src-name">TechCrunch</span>
+        <a class="cta" style="font-size:11px" href="https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- Card 3: Anthropic Mythos coming -->
+    <div class="card card-purple">
+      <div class="co-mark co-anthropic">A</div>
+      <div class="card-tags">
+        <span class="tag tag-purple">Anthropic</span>
+        <span class="tag tag-red">Security</span>
+      </div>
+      <div class="card-date">28/5/2026</div>
+      <h3 class="card-title">Anthropic gợi ý Mythos-class models sắp GA — sau khi hoàn thiện safeguards</h3>
+      <p class="card-text">
+        Trong launch post Opus 4.8, Anthropic tuyên bố "making swift progress on safeguards" và kỳ vọng ra Mythos cho toàn khách hàng "trong vài tuần tới" — model hiện chỉ available qua Project Glasswing (40 tổ chức).
+      </p>
+      <div class="card-footer">
+        <span class="src-name">Anthropic</span>
+        <a class="cta" style="font-size:11px" href="https://www.anthropic.com/news/claude-opus-4-8" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── ĐÁNG ĐỌC ── -->
+<section class="brief-section">
+  <div class="sec-label">Đáng đọc — relevance cao</div>
+  <div class="brief-cols">
+
+    <div class="brief-item" onclick="window.open('https://www.anthropic.com/news/confidential-draft-s1-sec');return false;">
+      <div class="brief-num">01</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-gold" style="font-size:9px">Anthropic</span><span class="tag tag-blue" style="font-size:9px">IPO</span></div>
+        <div class="brief-title">Anthropic official statement: confidential S-1 filing với SEC (primary source)</div>
+        <div class="brief-footer">
+          <span class="brief-src">anthropic.com · 1/6</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://github.blog/news-insights/company-news/github-copilot-individual-plans-introducing-flex-allotments-in-pro-and-pro-and-a-new-max-plan/');return false;">
+      <div class="brief-num">02</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-blue" style="font-size:9px">GitHub</span><span class="tag tag-purple" style="font-size:9px">Pricing</span></div>
+        <div class="brief-title">GitHub Copilot: Flex allotments trong Pro/Pro+ và plan Max mới</div>
+        <div class="brief-footer">
+          <span class="brief-src">github.blog · 1/6</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://techcrunch.com/2026/05/28/anthropic-raises-65-billion-nears-1t-valuation-ahead-of-ipo/');return false;">
+      <div class="brief-num">03</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-gold" style="font-size:9px">Funding</span></div>
+        <div class="brief-title">Anthropic $65B Series H: co-led bởi Altimeter, Sequoia, Dragoneer, Capital Group</div>
+        <div class="brief-footer">
+          <span class="brief-src">TechCrunch · 28/5</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://the-decoder.com/anthropic-ships-claude-opus-4-8-as-a-modest-but-tangible-improvement-that-tops-gpt-5-5-in-most-benchmarks/');return false;">
+      <div class="brief-num">04</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-gold" style="font-size:9px">Benchmark</span></div>
+        <div class="brief-title">Opus 4.8 "modest but tangible" — tops GPT-5.5 trên hầu hết benchmarks (The Decoder)</div>
+        <div class="brief-footer">
+          <span class="brief-src">the-decoder.com · 28/5</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://arxiv.org/html/2603.04740v1');return false;">
+      <div class="brief-num">05</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-red" style="font-size:9px">Research</span><span class="tag tag-teal" style="font-size:9px">Memory</span></div>
+        <div class="brief-title">arXiv: Responsible memory architecture design cho increasingly persistent AI agents (Mar 2026)</div>
+        <div class="brief-footer">
+          <span class="brief-src">arxiv.org</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://blog.google/products-and-platforms/products/search/search-io-2026/');return false;">
+      <div class="brief-num">06</div>
+      <div class="brief-body">
+        <div class="brief-tags"><span class="tag tag-teal" style="font-size:9px">Google</span><span class="tag tag-blue" style="font-size:9px">Search AI</span></div>
+        <div class="brief-title">Google Search I/O 2026: AI agents tích hợp trực tiếp vào Search — người dùng tạo và quản lý agents ngay trong SERP</div>
+        <div class="brief-footer">
+          <span class="brief-src">blog.google · 19/5</span>
+          <span class="brief-cta">Read more →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TECHNICAL DEEP-DIVE ── -->
+<section class="tech-section">
+  <div class="sec-label">Technical Deep-dive</div>
+  <div class="tech-cols">
+
+    <!-- TC 1: Anthropic IPO significance -->
+    <div class="tc-card tc-gold">
+      <div class="tc-top">
+        <span class="tag tag-gold">Anthropic · IPO Economics</span>
+        <span class="tc-src">CNBC / TechCrunch</span>
+      </div>
+      <h3 class="tc-title">Anthropic IPO: Unit economics của AI lab sắp lên sàn</h3>
+      <ul class="tc-bullets">
+        <li>Revenue run-rate <span class="tc-key">$47B/year</span> so với OpenAI <span class="tc-key">~$30B</span> — Anthropic chiếm ngôi đầu enterprise AI revenue</li>
+        <li>Series H investors nhận ưu tiên liquidity khi IPO — cấu trúc <span class="tc-key">PBC (Public Benefit Corp)</span> giữ safety mission, không bị M&A dễ dàng</li>
+        <li>Valuation <span class="tc-key">$965B</span> tương đương ~20× ARR — thị trường đặt cược mạnh vào tăng trưởng tiếp theo của agentic AI</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" style="font-size:11px" href="https://www.cnbc.com/2026/06/01/anthropic-ipo-s1-prospectus.html" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- TC 2: Dynamic Workflows -->
+    <div class="tc-card tc-blue">
+      <div class="tc-top">
+        <span class="tag tag-blue">Anthropic · Multi-agent</span>
+        <span class="tc-src">Anthropic blog</span>
+      </div>
+      <h3 class="tc-title">Dynamic Workflows: kiến trúc điều phối sub-agent mới của Claude Code</h3>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">Opus 4.8 as orchestrator</span> + hundreds of lightweight sub-agents xử lý parallel task shards — phù hợp cho codebase migration quy mô lớn</li>
+        <li>Sub-agents có thể share <span class="tc-key">test suite state</span> như contract — giảm regression risk khi migrate hàng trăm nghìn dòng code</li>
+        <li>Được đánh giá bởi Bridgewater: model "proactively flags issues with inputs/outputs" — giảm human oversight burden trong long-horizon workflows</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" style="font-size:11px" href="https://www.anthropic.com/news/claude-opus-4-8" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- TC 3: Gemini 3.5 Flash architecture -->
+    <div class="tc-card tc-teal">
+      <div class="tc-top">
+        <span class="tag tag-teal">Google · Agentic Model</span>
+        <span class="tc-src">TechCrunch</span>
+      </div>
+      <h3 class="tc-title">Gemini 3.5 Flash: thiết kế cho agentic throughput, không phải TTFT</h3>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">4×</span> nhanh hơn frontier models; optimized version <span class="tc-key">12×</span> nhanh hơn với chất lượng tương đương — key metric cho parallel agent deployments</li>
+        <li>Co-developed với <span class="tc-key">Antigravity 2.0</span> — agents có "native environment" để live, work, execute; demo build cả OS từ scratch</li>
+        <li>Khi 3.5 Pro ra (dự kiến tháng 7): <span class="tc-key">Pro = orchestrator</span>, Flash = sub-agents — two-tier agent hierarchy rõ ràng từ Google</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" style="font-size:11px" href="https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- TC 4: GitHub Copilot token economics -->
+    <div class="tc-card tc-purple">
+      <div class="tc-top">
+        <span class="tag tag-purple">GitHub · LLM Cost</span>
+        <span class="tc-src">GitHub Blog</span>
+      </div>
+      <h3 class="tc-title">GitHub Copilot token billing: implications cho AI coding cost models</h3>
+      <ul class="tc-bullets">
+        <li>Chuyển từ request-based sang <span class="tc-key">token-based metered billing</span> — input + output + cached tokens, mỗi credit = $0.01; budget controls per enterprise/team</li>
+        <li>Transition song song với Anthropic June 15 Agent SDK billing split — cả hai đều tách programmatic usage ra khỏi flat-rate subscription</li>
+        <li><span class="tc-key">Industry signal</span>: flat-rate subsidized AI không bền vững khi agent usage scale; token economics là tương lai của developer AI tooling</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" style="font-size:11px" href="https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── OPEN SOURCE & TOOLS ── -->
+<section class="oss-section">
+  <div class="sec-label">Open Source &amp; Tools</div>
+  <div class="oss-grid">
+
+    <!-- Repo 1: memU -->
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/NevaMind-AI/memU" onclick="window.open(this.href);return false;">NevaMind-AI/memU</a></div>
+      <div class="repo-stars">
+        <span class="repo-star-count">⭐ 13.5k</span>
+        <span class="star-spike">+trending</span>
+      </div>
+      <div class="repo-meta">
+        <span class="repo-lang">Python</span>
+        <span class="repo-lang">Apache 2.0</span>
+      </div>
+      <p class="repo-desc">24/7 proactive memory framework cho AI agents — hierarchical memory as file system, giảm token cost cho long-running agents, 92% accuracy trên Locomo benchmark.</p>
+      <div class="repo-footer">
+        <span class="repo-tag">Agentic memory</span>
+        <a class="repo-cta" href="https://github.com/NevaMind-AI/memU" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <!-- Repo 2: VoltAgent awesome papers -->
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/VoltAgent/awesome-ai-agent-papers" onclick="window.open(this.href);return false;">VoltAgent/awesome-ai-agent-papers</a></div>
+      <div class="repo-stars">
+        <span class="repo-star-count">⭐ growing</span>
+        <span class="star-spike">2026 papers</span>
+      </div>
+      <div class="repo-meta">
+        <span class="repo-lang">Markdown</span>
+      </div>
+      <p class="repo-desc">Curated collection của AI agent research papers 2026 — agent engineering, memory, evaluation, workflows, autonomous systems. Updated weekly.</p>
+      <div class="repo-footer">
+        <span class="repo-tag">Multi-agent</span>
+        <a class="repo-cta" href="https://github.com/VoltAgent/awesome-ai-agent-papers" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <!-- Repo 3: rohitg00/agentmemory -->
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/rohitg00/agentmemory" onclick="window.open(this.href);return false;">rohitg00/agentmemory</a></div>
+      <div class="repo-stars">
+        <span class="repo-star-count">⭐ trending</span>
+        <span class="star-spike">#1 memory MCP</span>
+      </div>
+      <div class="repo-meta">
+        <span class="repo-lang">Python</span>
+      </div>
+      <p class="repo-desc">Persistent memory cho AI coding agents — 53 tools, 8 skills (remember, recall, recap, handoff, forget, commit-context, commit-history, session-history), MCP-compatible.</p>
+      <div class="repo-footer">
+        <span class="repo-tag">Coding agents</span>
+        <a class="repo-cta" href="https://github.com/rohitg00/agentmemory" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <!-- Repo 4: Antigravity / Google ax -->
+    <div class="repo-card">
+      <div class="repo-name"><a href="https://github.com/google/ax" onclick="window.open(this.href);return false;">google/ax</a></div>
+      <div class="repo-stars">
+        <span class="repo-star-count">⭐ new</span>
+        <span class="star-spike">Google I/O drop</span>
+      </div>
+      <div class="repo-meta">
+        <span class="repo-lang">TypeScript</span>
+        <span class="repo-lang">Apache 2.0</span>
+      </div>
+      <p class="repo-desc">Google's open-source agent execution framework — powers Antigravity 2.0; supports multi-agent task graphs, tool use, và long-running autonomous loops.</p>
+      <div class="repo-footer">
+        <span class="repo-tag">Agent frameworks</span>
+        <a class="repo-cta" href="https://github.com/google/ax" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── ĐỌC THÊM ── -->
+<section class="notes-section">
+  <div class="sec-label">Đọc thêm</div>
+  <div class="notes-3">
+
+    <div class="note">
+      <div class="note-label">📊 Industry Trend</div>
+      <div class="note-title"><a href="https://epoch.ai/data-insights/llm-inference-price-trends" onclick="window.open(this.href);return false;">LLM inference price trends — Epoch AI</a></div>
+      <p class="note-text">Inference costs giảm 99.7% trong 3 năm (GPT-4 $30/M tokens → Gemini Flash $0.10/M). Dự báo tiếp tục giảm 3–5× mỗi năm đến 2027, nhưng chậm hơn giai đoạn 2021–2025.</p>
+      <div class="note-cta"><a href="https://epoch.ai/data-insights/llm-inference-price-trends" onclick="window.open(this.href);return false;">Read more →</a></div>
+    </div>
+
+    <div class="note">
+      <div class="note-label">🔬 Research</div>
+      <div class="note-title"><a href="https://arxiv.org/html/2605.26252" onclick="window.open(this.href);return false;">arXiv: Is Agent Memory a Database? Rethinking Data Foundations</a></div>
+      <p class="note-text">Paper phân loại agent memory thành 5 families — tiered designs như MemGPT và MemOS implement two-level paging. Đặt câu hỏi liệu database primitives có phù hợp cho AI memory không.</p>
+      <div class="note-cta"><a href="https://arxiv.org/html/2605.26252" onclick="window.open(this.href);return false;">Read more →</a></div>
+    </div>
+
+    <div class="note">
+      <div class="note-label">⚠️ To Watch</div>
+      <div class="note-title"><a href="https://the-decoder.com/claude-subscriptions-get-separate-budgets-for-programmatic-use-billed-at-full-api-prices/" onclick="window.open(this.href);return false;">Anthropic Agent SDK billing split — effective 15/6</a></div>
+      <p class="note-text">Từ 15/6, programmatic usage (Agent SDK, claude -p, third-party tools) tách ra credit pool riêng — Pro $20, Max 5x $100, Max 20x $200/tháng, billing ở full API rates.</p>
+      <div class="note-cta"><a href="https://the-decoder.com/claude-subscriptions-get-separate-budgets-for-programmatic-use-billed-at-full-api-prices/" onclick="window.open(this.href);return false;">Read more →</a></div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- .wrap -->
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-left">
+      <div class="footer-brand">AI Intelligence · Vulcan Labs Daily</div>
+      <div class="footer-meta">Issue #58 · 2 tháng 6, 2026 · 13 stories · 4 repos</div>
+      <div class="footer-tagline">Curated for AI product &amp; engineering teams</div>
+    </div>
+    <div class="footer-right">
+      <div class="signal-label">Signal sources</div>
+      <div class="signal-chips">
+        <span class="signal-chip">🧠 Claude Memory</span>
+        <span class="signal-chip">💬 Slack</span>
+        <span class="signal-chip">📁 Drive</span>
+        <span class="signal-chip">✉️ Gmail</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
