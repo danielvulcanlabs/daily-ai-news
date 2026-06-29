@@ -6,23 +6,13 @@
 <title>AI Intelligence — June 18, 2026</title>
 <style>
 :root {
-  --bg: #07070a;
-  --s1: #0f0f14;
-  --s2: #16161d;
-  --s3: #1d1d27;
-  --s4: #30303e;
-  --t1: #f0ece4;
-  --t2: #9a958c;
-  --t3: #6e6b67;
-  --gold: #c8a76a;
-  --blue: #5d8dee;
-  --teal: #3ecf8e;
-  --red: #e55252;
-  --purple: #9d78f0;
-  --r: 12px;
+  --bg: #07070a; --s1: #0f0f14; --s2: #16161d; --s3: #1d1d27; --s4: #30303e;
+  --t1: #f0ece4; --t2: #9a958c; --t3: #6e6b67;
+  --gold: #c8a76a; --blue: #5d8dee; --teal: #3ecf8e;
+  --red: #e55252; --purple: #9d78f0; --r: 12px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;background-image:radial-gradient(ellipse at 20% 20%, rgba(93,141,238,0.07) 0%, transparent 60%),radial-gradient(ellipse at 80% 80%, rgba(157,120,240,0.05) 0%, transparent 60%)}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;background-image:radial-gradient(ellipse at 20% 20%,rgba(93,141,238,0.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(157,120,240,0.05) 0%,transparent 60%)}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
@@ -58,7 +48,7 @@ a{color:inherit;text-decoration:none}
 
 /* Hero grid */
 .hero-grid{display:grid;grid-template-columns:1fr 314px;gap:20px;margin-bottom:36px}
-.hero-card{background:var(--s1);border-radius:var(--r);padding:28px;border:1px solid var(--s4);position:relative;overflow:hidden;animation:fadeUp 0.5s ease both}
+.hero-card{background:var(--s1);border-radius:var(--r);padding:28px;border:1px solid var(--s4);position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;display:flex;flex-direction:column}
 .hero-card::before{content:'';position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,var(--gold),transparent,var(--gold));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:border-shift 3s linear infinite}
 @keyframes border-shift{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -104,108 +94,97 @@ a{color:inherit;text-decoration:none}
 .comark{width:28px;height:28px;border-radius:7px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
 .comark-openai{background:linear-gradient(135deg,#10a37f,#065a46);color:#fff}
 .comark-anthropic{background:linear-gradient(135deg,#d4956a,#7a4a2e);color:#fff}
-.comark-xiaomi{background:linear-gradient(135deg,#ff6900,#cc4400);color:#fff}
+.comark-spacex{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#5d8dee}
 .card-date{font-size:11px;color:var(--t3);margin-bottom:8px}
 .card-footer-flex{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px}
 
 /* Briefing 2-col */
 .briefing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
-.brief-item{background:var(--s1);border-radius:var(--r);padding:16px 18px;border:1px solid var(--s4);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform 0.2s,border-color 0.2s;position:relative;animation:fadeUp 0.5s 0.2s ease both}
-.brief-item:hover{transform:translateX(3px);border-left:3px solid var(--blue)}
-.brief-num{font-size:11px;font-weight:700;color:var(--t3)}
-.brief-tag{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:0.3px;width:fit-content}
-.brief-title{font-size:14px;font-weight:600;color:var(--t1);line-height:1.4}
+.brief-item{background:var(--s1);border-radius:var(--r);padding:16px 18px;border:1px solid var(--s4);cursor:pointer;transition:transform 0.15s,border-color 0.15s;display:flex;flex-direction:column;gap:8px}
+.brief-item:hover{transform:translateX(3px);border-color:var(--blue)}
+.brief-num{font-size:11px;font-weight:700;color:var(--t3);font-variant-numeric:tabular-nums}
+.brief-tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;background:rgba(93,141,238,0.12);color:var(--blue)}
+.brief-title{font-size:13px;font-weight:600;color:var(--t1);line-height:1.4}
 .brief-footer{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
 .brief-src{font-size:11px;color:var(--t3)}
 
-/* Technical deep-dive */
-.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:36px}
-.tc-card{background:var(--s1);border-radius:var(--r);padding:22px;border:1px solid var(--s4);border-left:3px solid;animation:fadeUp 0.5s 0.2s ease both;display:flex;flex-direction:column}
-.tc-blue{border-left-color:var(--blue)}
-.tc-teal{border-left-color:var(--teal)}
-.tc-purple{border-left-color:var(--purple)}
-.tc-gold{border-left-color:var(--gold)}
-.tc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.tc-tag{padding:3px 9px;border-radius:12px;font-size:11px;font-weight:600}
+/* Tech deep-dive */
+.tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:36px}
+.tc-card{background:var(--s1);border-radius:var(--r);padding:22px;border:1px solid var(--s4);border-left:3px solid var(--blue);animation:fadeUp 0.5s 0.2s ease both;display:flex;flex-direction:column}
+.tc-card.tc-purple{border-left-color:var(--purple)}
+.tc-card.tc-teal{border-left-color:var(--teal)}
+.tc-card.tc-gold{border-left-color:var(--gold)}
+.tc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tc-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--blue);background:rgba(93,141,238,0.1);padding:3px 8px;border-radius:10px}
+.tc-card.tc-purple .tc-tag{color:var(--purple);background:rgba(157,120,240,0.1)}
+.tc-card.tc-teal .tc-tag{color:var(--teal);background:rgba(62,207,142,0.1)}
+.tc-card.tc-gold .tc-tag{color:var(--gold);background:rgba(200,167,106,0.1)}
 .tc-src{font-size:11px;color:var(--t3)}
-.tc-title{font-size:16px;font-weight:700;color:var(--t1);line-height:1.35;margin-bottom:14px}
-.tc-bullets{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.tc-bullets li{font-size:13px;color:var(--t2);line-height:1.5;padding-left:16px;position:relative}
-.tc-bullets li::before{content:'·';position:absolute;left:0;color:var(--teal);font-weight:700;font-size:18px;line-height:1}
-.tc-key{background:var(--s3);color:var(--teal);padding:1px 6px;border-radius:4px;font-family:monospace;font-size:12px}
-.tc-footer{margin-top:auto;border-top:1px solid var(--s3);padding-top:12px;display:flex;justify-content:flex-end}
+.tc-title{font-size:15px;font-weight:700;color:var(--t1);line-height:1.35;margin-bottom:14px}
+.tc-bullets{list-style:none;margin-bottom:0;flex:1}
+.tc-bullets li{font-size:12px;color:var(--t2);line-height:1.5;padding:4px 0;padding-left:14px;position:relative;border-bottom:1px solid var(--s3)}
+.tc-bullets li:last-child{border-bottom:none}
+.tc-bullets li::before{content:'·';position:absolute;left:0;color:var(--teal);font-weight:700;font-size:16px;line-height:1.2}
+.tc-key{font-family:monospace;font-size:11px;background:var(--s3);padding:1px 5px;border-radius:4px;color:var(--gold)}
+.tc-footer{border-top:1px solid var(--s3);padding-top:12px;margin-top:14px;display:flex;justify-content:flex-end}
 
-/* Open Source repos */
-.repos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px}
-.repo-card{background:var(--s1);border-radius:var(--r);padding:16px;border:1px solid var(--s4);display:flex;flex-direction:column;gap:8px;animation:fadeUp 0.5s 0.25s ease both}
-.repo-name{font-family:monospace;font-size:13px;font-weight:700;color:var(--blue)}
-.repo-stars{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.stars-count{font-size:12px;color:var(--t2)}
-.stars-spike{background:rgba(200,167,106,0.15);color:var(--gold);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+/* GitHub repos */
+.repos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+.repo-card{background:var(--s1);border-radius:var(--r);padding:18px;border:1px solid var(--s4);display:flex;flex-direction:column;gap:10px}
+.repo-name{font-family:monospace;font-size:13px;font-weight:700;color:var(--teal)}
+.repo-stars{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t3)}
+.star-spike{background:rgba(200,167,106,0.15);color:var(--gold);font-size:10px;font-weight:700;padding:2px 6px;border-radius:8px}
 .repo-tags{display:flex;gap:6px;flex-wrap:wrap}
-.lang-tag{font-size:10px;background:var(--s3);color:var(--t2);padding:2px 7px;border-radius:10px}
-.relevance-tag{font-size:10px;background:rgba(62,207,142,0.12);color:var(--teal);padding:2px 7px;border-radius:10px}
-.repo-desc{font-size:12px;color:var(--t2);line-height:1.5}
+.repo-lang{font-size:10px;font-weight:600;background:var(--s3);color:var(--t2);padding:2px 7px;border-radius:8px}
+.repo-desc{font-size:12px;color:var(--t2);line-height:1.5;flex:1}
 .repo-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.repo-rel{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--teal);background:rgba(62,207,142,0.1);padding:2px 7px;border-radius:8px}
 
-/* Notes 3-col */
-.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
-.note-card{background:var(--s1);border-radius:var(--r);padding:18px;border:1px solid var(--s4);display:flex;flex-direction:column;gap:8px;animation:fadeUp 0.5s 0.3s ease both}
-.note-label{font-size:11px;font-weight:700;color:var(--t3)}
-.note-title{font-size:14px;font-weight:600;color:var(--t1);line-height:1.4}
-.note-text{font-size:13px;color:var(--t2);line-height:1.55}
-.note-cta{font-size:12px;font-weight:600;color:var(--blue);text-align:right;margin-top:auto}
+/* Notes */
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.note{background:var(--s1);border-radius:var(--r);padding:18px;border:1px solid var(--s4)}
+.note-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--t3);margin-bottom:8px}
+.note-title{font-size:13px;font-weight:600;color:var(--t1);line-height:1.4;margin-bottom:8px}
+.note-text{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:10px}
+.note-cta{display:block;text-align:right;font-size:12px;font-weight:600;color:var(--blue)}
+.note-cta:hover{color:var(--teal)}
 
 /* Footer */
-.footer{border-top:1px solid var(--s3);padding:28px 0;margin-top:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
-.footer-brand{font-size:13px;color:var(--t2)}
-.footer-brand strong{color:var(--t1)}
-.footer-brand p{margin-top:4px;color:var(--t3);font-size:12px}
-.signal-sources{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
-.signal-chips{display:flex;gap:8px;flex-wrap:wrap}
-.sig-chip{background:var(--s2);border:1px solid var(--s4);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--t2)}
+.footer{border-top:1px solid var(--s3);padding:24px 0 40px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.footer-brand{font-size:13px;font-weight:700;color:var(--t2);margin-bottom:4px}
+.footer-meta{font-size:11px;color:var(--t3);line-height:1.8}
+.signal-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.signal-chip{font-size:10px;background:var(--s2);border:1px solid var(--s4);border-radius:12px;padding:3px 9px;color:var(--t3)}
 
-/* Responsive */
-@media(max-width:940px){
-  .hero-grid{grid-template-columns:1fr}
-  .cards-grid{grid-template-columns:1fr 1fr}
-  .tech-grid{grid-template-columns:1fr}
-  .briefing-grid{grid-template-columns:1fr}
-  .repos-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
-  .cards-grid{grid-template-columns:1fr}
-  .repos-grid{grid-template-columns:1fr}
-  .notes-grid{grid-template-columns:1fr}
-  .masthead{flex-direction:column;gap:14px;align-items:flex-start}
-}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr}.cards-grid{grid-template-columns:1fr 1fr}.tc-grid{grid-template-columns:1fr}.repos-grid{grid-template-columns:1fr 1fr}.briefing-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}.repos-grid{grid-template-columns:1fr}.notes-grid{grid-template-columns:1fr}.briefing-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <!-- MASTHEAD -->
-<header class="masthead">
+<div class="masthead">
   <div class="mast-left">
     <div class="mast-icon">
       <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     </div>
     <div>
       <div class="mast-brand">AI Intelligence · Vulcan Labs Daily</div>
-      <div class="mast-sub">Curated for AI product &amp; engineering teams</div>
+      <div class="mast-sub">Curated for AI Product &amp; Engineering Teams</div>
     </div>
   </div>
   <div class="mast-right">
     <div class="issue-badge">Issue #72</div>
     <div class="mast-date">Thursday, June 18, 2026</div>
   </div>
-</header>
+</div>
 
 <!-- FOCUS CHIPS -->
 <div class="focus-row">
   <span class="chip chip-1">⚡ Claude Code Workflows</span>
   <span class="chip chip-2">🔁 Loop Engineering</span>
-  <span class="chip chip-3">🤖 Frontier Models</span>
+  <span class="chip chip-3">🌐 Frontier Models</span>
   <span class="chip chip-4">🧠 Agent Memory</span>
   <span class="chip chip-5">💰 LLM Inference Cost</span>
 </div>
@@ -219,23 +198,23 @@ a{color:inherit;text-decoration:none}
 <!-- BREAKING THIS WEEK -->
 <div class="sec-label">Breaking This Week</div>
 <div class="hero-grid">
-  <!-- HERO CARD -->
+  <!-- HERO -->
   <div class="hero-card">
     <div class="hero-tags">
-      <span class="tag tag-red">🔥 Top Read</span>
+      <span class="tag tag-red">Breaking</span>
       <span class="tag tag-gold">Talent War</span>
       <span class="tag tag-blue">OpenAI</span>
     </div>
-    <h1 class="hero-title">Noam Shazeer rời Google, gia nhập OpenAI — "A signal of where power sits"</h1>
+    <div class="hero-title">Noam Shazeer rời Google, gia nhập OpenAI — "A signal of where power sits"</div>
     <p class="hero-desc">Đồng trưởng dự án Gemini và người đồng sáng tác paper Transformer 2017 tuyên bố rời Google để gia nhập OpenAI đang chuẩn bị IPO. Đây là cú blow thứ hai trong vòng 2 năm với Google sau khi họ phải trả $2.7B để lôi kéo ông từ Character.AI.</p>
     <ul class="hero-bullets">
       <li>Shazeer được coi là kiến trúc sư chính đưa Gemini thu hẹp khoảng cách với ChatGPT trong 18 tháng qua.</li>
-      <li>Sự ra đi xảy ra đúng lúc Anthropic đang bị chính phủ Mỹ giữ lại Fable 5 / Mythos 5 và Google đang sa lầy vào AI policy tại G7.</li>
+      <li>Sự ra đi xảy ra đúng lúc Google đang mất đà sau Fable 5 export control và áp lực IPO từ phía OpenAI.</li>
       <li>Talent concentration ngày càng đổ về phía OpenAI trong bối cảnh IPO — tín hiệu về dòng tiền và ảnh hưởng thị trường.</li>
     </ul>
     <div class="hero-footer">
-      <div class="src-tag"><div class="src-dot"></div>Reuters · June 18, 2026</div>
-      <a class="cta" href="https://www.reuters.com/technology/googles-gemini-co-lead-noam-shazeer-join-openai-2026-06-18/" onclick="window.open(this.href);return false;">Read more →</a>
+      <div class="src-tag"><div class="src-dot"></div>NDTV Profit · Jun 18</div>
+      <a class="cta" href="https://www.ndtvprofit.com/technology/who-is-noam-shazeer-gemini-co-lead-set-to-join-openai-calls-exit-a-difficult-decision-11652750" target="_blank" rel="noopener">Read more →</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-val">$2.7B</div><div class="stat-lbl">Google trả để lôi kéo Shazeer năm 2024</div></div>
@@ -245,46 +224,35 @@ a{color:inherit;text-decoration:none}
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <!-- WATCH CARD -->
+    <!-- WATCH -->
     <div class="watch-card">
-      <div class="watch-label">🔴 Watch</div>
-      <div class="hero-tags" style="margin-bottom:10px">
-        <span class="tag tag-red">M&amp;A · $60B</span>
-        <span class="tag tag-gold">AI Coding</span>
-      </div>
+      <div class="watch-label">⚠ Watch</div>
+      <div class="hero-tags"><span class="tag tag-red">M&amp;A · $60B</span><span class="tag tag-blue">AI Coding</span></div>
       <div class="card-title">SpaceX mua Cursor với định giá $60 tỷ sau IPO kỷ lục</div>
-      <div class="card-text">Elon Musk's SpaceX hoàn tất thỏa thuận all-stock mua lại Anysphere (Cursor) chỉ vài ngày sau khi IPO trên Nasdaq. Deal đặt Cursor cạnh tranh trực tiếp với Claude Code và Codex của OpenAI.</div>
+      <p class="card-text">SpaceX hoàn tất thỏa thuận all-stock mua lại Anysphere (Cursor) chỉ vài ngày sau khi IPO trên Nasdaq. Deal đặt Cursor cạnh tranh trực tiếp với Claude Code và Codex của OpenAI.</p>
       <div class="card-footer">
-        <span class="src-tag" style="font-size:11px;color:var(--t3)">CNBC · Jun 16</span>
-        <a class="cta" href="https://www.cnbc.com/2026/06/16/spacex-spcx-cursor-acquisition-ipo.html" onclick="window.open(this.href);return false;">Read more →</a>
+        <div class="src-tag"><div class="src-dot" style="background:var(--red)"></div>TechCrunch · Jun 16</div>
+        <a class="cta" href="https://techcrunch.com/2026/06/16/spacex-to-acquire-cursor-for-60b-in-stock-days-after-blockbuster-ipo/" target="_blank" rel="noopener">Read more →</a>
       </div>
     </div>
-
-    <!-- MINI CARD 1 -->
+    <!-- MINI 1 -->
     <div class="mini-card">
-      <div class="hero-tags" style="margin-bottom:8px">
-        <span class="tag tag-blue">Anthropic</span>
-        <span class="tag tag-teal">Billing</span>
-      </div>
-      <div class="card-title" style="font-size:14px">Anthropic hoãn thay đổi billing Agent SDK vào ngày dự kiến có hiệu lực</div>
-      <div class="card-text" style="font-size:12px">Kế hoạch tách Agent SDK usage sang credit riêng (từ $20–200/tháng) bị hoãn vô thời hạn sau tuần lễ hỗn loạn Fable/Mythos 5.</div>
+      <div class="hero-tags"><span class="tag tag-purple">Anthropic</span><span class="tag tag-gold">Legal</span></div>
+      <div class="card-title">Anthropic bị kiện class action về Claude Max usage limits</div>
+      <p class="card-text">Nguyên đơn Karl Kahn cáo buộc Max 5x chỉ cho ~3.5x và Max 20x thực tế cho 6–8x — thấp hơn nhiều so với quảng cáo. Suit filed June 15 tại California.</p>
       <div class="card-footer">
-        <span class="src-tag" style="font-size:11px;color:var(--t3)">The New Stack · Jun 16</span>
-        <a class="cta" href="https://thenewstack.io/anthropic-pauses-claude-agent-sdk-subscription-change/" onclick="window.open(this.href);return false;">Read more →</a>
+        <div class="src-tag"><div class="src-dot" style="background:var(--purple)"></div>CNET · Jun 16</div>
+        <a class="cta" href="https://www.cnet.com/tech/services-and-software/anthropic-sued-alleged-false-advertising-claude-max-subscription-usage-limits/" target="_blank" rel="noopener">Read more →</a>
       </div>
     </div>
-
-    <!-- MINI CARD 2 -->
+    <!-- MINI 2 -->
     <div class="mini-card">
-      <div class="hero-tags" style="margin-bottom:8px">
-        <span class="tag tag-purple">G7</span>
-        <span class="tag tag-gold">AI Policy</span>
-      </div>
-      <div class="card-title" style="font-size:14px">G7 Summit: AI CEOs ngồi cùng bàn với lãnh đạo G7 lần đầu tiên</div>
-      <div class="card-text" style="font-size:12px">Altman, Hassabis, Amodei dự G7 tại Évian — frontier AI risks, sovereignty, voluntary commitments là các chủ đề chính trên bàn.</div>
+      <div class="hero-tags"><span class="tag tag-teal">Anthropic</span><span class="tag tag-blue">IPO</span></div>
+      <div class="card-title">Anthropic nộp S-1 confidential lên SEC</div>
+      <p class="card-text">Sau vòng $65B funding, Anthropic chính thức file draft S-1. IPO race giữa Anthropic và OpenAI đang diễn ra song song.</p>
       <div class="card-footer">
-        <span class="src-tag" style="font-size:11px;color:var(--t3)">CNBC · Jun 17</span>
-        <a class="cta" href="https://www.cnbc.com/2026/06/17/g7-trump-ai-tech-leaders-openai-anthropic-google.html" onclick="window.open(this.href);return false;">Read more →</a>
+        <div class="src-tag"><div class="src-dot" style="background:var(--teal)"></div>TechCrunch · Jun 1</div>
+        <a class="cta" href="https://techcrunch.com/2026/06/01/anthropic-files-to-go-public/" target="_blank" rel="noopener">Read more →</a>
       </div>
     </div>
   </div>
@@ -293,115 +261,114 @@ a{color:inherit;text-decoration:none}
 <!-- TIN TUẦN NÀY -->
 <div class="sec-label">Tin tuần này</div>
 <div class="cards-grid">
-
   <div class="news-card card-blue">
-    <div class="comark comark-anthropic">A</div>
-    <div class="hero-tags" style="margin-bottom:8px">
-      <span class="tag tag-blue">Claude Code</span>
-      <span class="tag tag-gold">Agent SDK</span>
-    </div>
-    <div class="card-date">June 2, 2026</div>
-    <div class="card-title">Dynamic Workflows trong Claude Code: Claude tự viết harness cho từng task</div>
-    <div class="card-text" style="margin-top:8px;font-size:13px;color:var(--t2)">Claude Code nay có thể viết và orchestrate custom JavaScript harness on-the-fly, chạy hàng trăm parallel subagents, tránh agentic laziness, self-bias và goal drift trong single context window.</div>
+    <div class="comark comark-openai">OAI</div>
+    <div class="hero-tags"><span class="tag tag-blue">Claude Code</span></div>
+    <div class="card-date">Jun 2, 2026</div>
+    <div class="card-title">Dynamic Workflows trong Claude Code: harness cho mọi task</div>
+    <p class="card-text">Anthropic publish "A harness for every task" — 6 pattern orchestration: fan-out-synthesize, adversarial-verify, tournament, loop-until-done, classify-route.</p>
     <div class="card-footer-flex">
-      <span style="font-size:11px;color:var(--t3)">claude.com · Jun 2</span>
-      <a class="cta" href="https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code" onclick="window.open(this.href);return false;">Read more →</a>
+      <div class="src-tag"><div class="src-dot"></div>claude.com · Jun 2</div>
+      <a class="cta" href="https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
-
   <div class="news-card card-purple">
-    <div class="comark" style="background:linear-gradient(135deg,#5a3f7a,#2e1e44);color:#fff;font-size:12px">O'R</div>
-    <div class="hero-tags" style="margin-bottom:8px">
-      <span class="tag tag-purple">Deep-dive</span>
-      <span class="tag tag-teal">Agent Stack</span>
-    </div>
-    <div class="card-date">June 8, 2026</div>
-    <div class="card-title">O'Reilly: 6 tầng giữa LLM và production agent — bản đồ lại toàn bộ AI agent stack 2026</div>
-    <div class="card-text" style="margin-top:8px;font-size:13px;color:var(--t2)">MCP standardized tool layer, memory nay là first-class architectural primitive, eval/guardrails là tầng least mature nhất. Bản đồ quan trọng nhất năm cho ai build production agents.</div>
+    <div class="comark comark-anthropic">An</div>
+    <div class="hero-tags"><span class="tag tag-purple">Agentic AI</span></div>
+    <div class="card-date">Jun 7, 2026</div>
+    <div class="card-title">Agentic AI Platform War: ai nào kiểm soát enterprise memory năm 2026</div>
+    <p class="card-text">Snowflake, Databricks, Microsoft, Google, OpenAI, Anthropic đang converge trên memory + context + action layer cho enterprise agentic deployments.</p>
     <div class="card-footer-flex">
-      <span style="font-size:11px;color:var(--t3)">O'Reilly · Jun 8</span>
-      <a class="cta" href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" onclick="window.open(this.href);return false;">Read more →</a>
+      <div class="src-tag"><div class="src-dot"></div>Windows Forum · Jun 7</div>
+      <a class="cta" href="https://windowsforum.com/threads/agentic-ai-platform-war-who-controls-enterprise-memory-context-and-action-june-2026.423571/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
-
   <div class="news-card card-teal">
-    <div class="comark comark-xiaomi">Mi</div>
-    <div class="hero-tags" style="margin-bottom:8px">
-      <span class="tag tag-teal">Coding Agent</span>
-      <span class="tag tag-blue">Benchmark</span>
-    </div>
-    <div class="card-date">June 14, 2026</div>
-    <div class="card-title">Xiaomi MiMo Code: open-source harness tuyên bố vượt Claude Code sau 200 steps</div>
-    <div class="card-text" style="margin-top:8px;font-size:13px;color:var(--t2)">"Endurance gap" — số steps agent trụ được trước khi mất mạch — là chiến trường mới. Berkeley's Agents' Last Exam chấm điểm artifact shipped, không phải demo, và kết quả đáng lo ngại.</div>
+    <div class="comark" style="background:linear-gradient(135deg,#3ecf8e,#1a7a50);color:#fff">Mem</div>
+    <div class="hero-tags"><span class="tag tag-teal">Agent Memory</span></div>
+    <div class="card-date">Apr 1, 2026</div>
+    <div class="card-title">State of AI Agent Memory 2026: Benchmarks, Architectures</div>
+    <p class="card-text">Mem0 report: +29.6 điểm improvement trên memory benchmarks, so sánh Mem0, Zep, LangMem, Letta, MemGPT về accuracy và latency.</p>
     <div class="card-footer-flex">
-      <span style="font-size:11px;color:var(--t3)">The New Stack · Jun 14</span>
-      <a class="cta" href="https://thenewstack.io/coding-agent-endurance-gap/" onclick="window.open(this.href);return false;">Read more →</a>
+      <div class="src-tag"><div class="src-dot"></div>Mem0 · Apr 2026</div>
+      <a class="cta" href="https://mem0.ai/blog/state-of-ai-agent-memory-2026" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
-
 </div>
 
 <!-- ĐÁNG ĐỌC -->
 <div class="sec-label">Đáng đọc — relevance cao</div>
 <div class="briefing-grid">
 
-  <div class="brief-item" onclick="window.open('https://oreillyradar.substack.com/p/long-running-agents');return false;">
-    <div class="brief-num">01</div>
-    <span class="brief-tag tag-blue">Long-running Agents</span>
-    <div class="brief-title">Addy Osmani (O'Reilly Radar): Long-Running Agents — brain, hands, session split và 3 walls mọi team đều gặp</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">01</span>
+      <span class="brief-tag">Loop Engineering</span>
+    </div>
+    <div class="brief-title">Loop Engineering: AI coding đã bước vào kỷ nguyên systems</div>
     <div class="brief-footer">
-      <span class="brief-src">oreillyradar.substack.com</span>
-      <a class="cta" href="https://oreillyradar.substack.com/p/long-running-agents" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">MindStudio</span>
+      <a class="cta" href="https://www.mindstudio.ai/blog/what-is-loop-engineering-ai-coding-agents" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
-  <div class="brief-item" onclick="window.open('https://www.mindstudio.ai/blog/what-is-loop-engineering-ai-coding-agents');return false;">
-    <div class="brief-num">02</div>
-    <span class="brief-tag tag-teal">Loop Engineering</span>
-    <div class="brief-title">Loop Engineering là gì? The new meta thay thế manual prompting bằng goal-based automation</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">02</span>
+      <span class="brief-tag">Agentic</span>
+    </div>
+    <div class="brief-title">Long-running Agents: brain/hands/session architecture cho production</div>
     <div class="brief-footer">
-      <span class="brief-src">mindstudio.ai · Jun 9</span>
-      <a class="cta" href="https://www.mindstudio.ai/blog/what-is-loop-engineering-ai-coding-agents" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">O'Reilly Radar</span>
+      <a class="cta" href="https://oreillyradar.substack.com/p/long-running-agents" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
-  <div class="brief-item" onclick="window.open('https://thenewstack.io/loops-are-replacing-prompts-verification-is-about-to-be-your-biggest-problem/');return false;">
-    <div class="brief-num">03</div>
-    <span class="brief-tag tag-gold">Engineering</span>
-    <div class="brief-title">TNS: "Loops are replacing prompts" — verification sắp trở thành bottleneck lớn nhất của agentic systems</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">03</span>
+      <span class="brief-tag">Claude Code</span>
+    </div>
+    <div class="brief-title">Người build Claude Code: "Tôi bỏ prompting, chỉ viết loops"</div>
     <div class="brief-footer">
-      <span class="brief-src">thenewstack.io · Jun 13</span>
-      <a class="cta" href="https://thenewstack.io/loops-are-replacing-prompts-verification-is-about-to-be-your-biggest-problem/" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">The New Stack</span>
+      <a class="cta" href="https://thenewstack.io/the-anthropic-leader-who-built-claude-code-says-he-ditched-prompting-now-he-just-writes-loops/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
-  <div class="brief-item" onclick="window.open('https://thenewstack.io/the-anthropic-leader-who-built-claude-code-says-he-ditched-prompting-now-he-just-writes-loops/');return false;">
-    <div class="brief-num">04</div>
-    <span class="brief-tag tag-blue">Claude Code</span>
-    <div class="brief-title">Người tạo ra Claude Code: "Tôi đã bỏ prompting — giờ tôi chỉ viết loops"</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">04</span>
+      <span class="brief-tag">Frameworks</span>
+    </div>
+    <div class="brief-title">Top Agentic Frameworks 2026: LangGraph, CrewAI, AutoGen so sánh</div>
     <div class="brief-footer">
-      <span class="brief-src">thenewstack.io · Jun 10</span>
-      <a class="cta" href="https://thenewstack.io/the-anthropic-leader-who-built-claude-code-says-he-ditched-prompting-now-he-just-writes-loops/" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">JetBrains</span>
+      <a class="cta" href="https://blog.jetbrains.com/pycharm/2026/06/top-agentic-frameworks-for-building-applications-2026/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
-  <div class="brief-item" onclick="window.open('https://github.com/Zijian-Ni/awesome-ai-agents-2026');return false;">
-    <div class="brief-num">05</div>
-    <span class="brief-tag tag-purple">Open Source</span>
-    <div class="brief-title">awesome-ai-agents-2026: Gemini 3.5 Flash "Deep Think" reasoning mode, 2M context window — curated June 2026</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">05</span>
+      <span class="brief-tag">Loop Engineering</span>
+    </div>
+    <div class="brief-title">Loops đang thay thế prompts — verification là vấn đề lớn tiếp theo</div>
     <div class="brief-footer">
-      <span class="brief-src">github.com · Jun 9</span>
-      <a class="cta" href="https://github.com/Zijian-Ni/awesome-ai-agents-2026" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">The New Stack</span>
+      <a class="cta" href="https://thenewstack.io/loops-are-replacing-prompts-verification-is-about-to-be-your-biggest-problem/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
-  <div class="brief-item" onclick="window.open('https://www.cnbc.com/2026/06/17/g7-trump-ai-tech-leaders-openai-anthropic-google.html');return false;">
-    <div class="brief-num">06</div>
-    <span class="brief-tag tag-red">AI Policy</span>
-    <div class="brief-title">G7 Évian: Frontier labs muốn "voluntary commitments" về youth safety và cyber risks trước khi luật ràng buộc ra đời</div>
+  <div class="brief-item">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brief-num">06</span>
+      <span class="brief-tag">White House</span>
+    </div>
+    <div class="brief-title">White House EO: Promoting Advanced AI Innovation and Security</div>
     <div class="brief-footer">
-      <span class="brief-src">cnbc.com · Jun 17</span>
-      <a class="cta" href="https://www.cnbc.com/2026/06/17/g7-trump-ai-tech-leaders-openai-anthropic-google.html" onclick="window.open(this.href);return false;">Read more →</a>
+      <span class="brief-src">Whitehouse.gov · Jun 2</span>
+      <a class="cta" href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
@@ -409,74 +376,61 @@ a{color:inherit;text-decoration:none}
 
 <!-- TECHNICAL DEEP-DIVE -->
 <div class="sec-label">Technical Deep-dive</div>
-<div class="tech-grid">
+<div class="tc-grid">
 
-  <div class="tc-card tc-blue">
-    <div class="tc-top">
-      <span class="tc-tag tag-blue">Dynamic Workflows</span>
-      <span class="tc-src">Anthropic / claude.com</span>
-    </div>
-    <div class="tc-title">5 patterns Claude dùng khi tự viết harness cho task phức tạp</div>
+  <div class="tc-card">
+    <div class="tc-top"><span class="tc-tag">Claude Code</span><span class="tc-src">claude.com</span></div>
+    <div class="tc-title">6 Dynamic Workflow Patterns trong Claude Code</div>
     <ul class="tc-bullets">
-      <li><span class="tc-key">fan-out-synthesize</span>: chia task thành nhiều subagents song song, barrier step tổng hợp kết quả — tránh cross-contamination.</li>
-      <li><span class="tc-key">adversarial-verify</span>: mỗi subagent sinh output có một "verifier agent" đối nghịch review — combat self-preferential bias.</li>
-      <li><span class="tc-key">tournament</span>: N agents thử đồng thời, judge agent so sánh pairwise cho đến khi có winner — tốt cho naming / design.</li>
-      <li><span class="tc-key">loop-until-done</span>: spawn agents đến khi stop condition (no new findings, all errors resolved) — không fixed iteration count.</li>
-      <li><span class="tc-key">classify-and-route</span>: classifier agent đọc task, chọn model phù hợp (Sonnet vs Opus) dựa trên complexity thực tế.</li>
+      <li><span class="tc-key">fan-out-synthesize</span>: spawn N agents song song, tổng hợp kết quả</li>
+      <li><span class="tc-key">adversarial-verify</span>: một agent generate, một agent phản biện</li>
+      <li><span class="tc-key">loop-until-done</span>: agent tự lặp đến khi đạt tiêu chí exit</li>
+      <li><span class="tc-key">classify-route</span>: classify task rồi route sang specialist agent</li>
     </ul>
     <div class="tc-footer">
-      <a class="cta" href="https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code" onclick="window.open(this.href);return false;">Read more →</a>
-    </div>
-  </div>
-
-  <div class="tc-card tc-teal">
-    <div class="tc-top">
-      <span class="tc-tag tag-teal">Agent Memory</span>
-      <span class="tc-src">O'Reilly Radar</span>
-    </div>
-    <div class="tc-title">3 tầng memory trong production agent — và lúc nào cần từng tầng</div>
-    <ul class="tc-bullets">
-      <li><span class="tc-key">in-context</span> (tier 1): conversation history trong prompt — đủ cho short sessions; context rot khi &gt;70% window đầy.</li>
-      <li><span class="tc-key">vector-search</span> (tier 2): pgvector + Postgres là default 2026; thêm khi history vượt context limit — không cần dedicated DB.</li>
-      <li><span class="tc-key">persistent-memory</span> (tier 3): Mem0 / Letta / Zep cho cross-session learning; thiết kế memory governance từ đầu vì memory drift là failure mode thực tế.</li>
-      <li>"<span class="tc-key">context engineering</span>" thay thế "prompt engineering" làm core discipline — kiến trúc những gì agent thấy mỗi lần gọi.</li>
-    </ul>
-    <div class="tc-footer">
-      <a class="cta" href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" onclick="window.open(this.href);return false;">Read more →</a>
+      <a class="cta" href="https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
   <div class="tc-card tc-purple">
-    <div class="tc-top">
-      <span class="tc-tag tag-purple">Long-running Agents</span>
-      <span class="tc-src">O'Reilly Radar / Addy Osmani</span>
-    </div>
-    <div class="tc-title">Kiến trúc brain/hands/session: 3 tường mà mọi long-running agent đều gặp</div>
+    <div class="tc-top"><span class="tc-tag">Agent Architecture</span><span class="tc-src">O'Reilly Radar</span></div>
+    <div class="tc-title">O'Reilly 6-Layer AI Agent Stack 2026</div>
     <ul class="tc-bullets">
-      <li><span class="tc-key">finite-context</span>: context rot bắt đầu sớm hơn hard limit; full context reset (không phải summarization) là fix đúng cho runs &gt; vài giờ.</li>
-      <li><span class="tc-key">session-as-event-log</span>: append-only log là primitive quan trọng nhất — không có nó, container failure = session failure. Anthropic báo cáo p95 latency giảm 90% khi decoupling brain/hands.</li>
-      <li><span class="tc-key">done-condition-first</span>: viết điều kiện kết thúc trước khi agent bắt đầu — leverage cao nhất để tránh agent "done" sớm.</li>
-      <li>Cursor's planner/worker/judge split: planners spawn subplanners, workers chỉ execute, judges quyết khi nào xong — mô hình đang chạy production.</li>
+      <li>Layer 1–2: <span class="tc-key">Models+Inference</span> → <span class="tc-key">Protocols+Tools (MCP)</span></li>
+      <li>Layer 3–4: <span class="tc-key">Memory</span> (working/episodic/semantic) → <span class="tc-key">Frameworks</span></li>
+      <li>Layer 5–6: <span class="tc-key">Eval</span> (continuous, not one-shot) → <span class="tc-key">Guardrails</span></li>
+      <li>Memory layer là điểm cạnh tranh chính giữa các platform 2026</li>
     </ul>
     <div class="tc-footer">
-      <a class="cta" href="https://oreillyradar.substack.com/p/long-running-agents" onclick="window.open(this.href);return false;">Read more →</a>
+      <a class="cta" href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" target="_blank" rel="noopener">Read more →</a>
+    </div>
+  </div>
+
+  <div class="tc-card tc-teal">
+    <div class="tc-top"><span class="tc-tag">Memory Architecture</span><span class="tc-src">Mem0 / Atlan</span></div>
+    <div class="tc-title">AI Agent Memory Frameworks: Mem0 vs Zep vs LangMem vs Letta</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">Mem0</span>: graph-based semantic memory, +29.6pt trên benchmarks</li>
+      <li><span class="tc-key">Zep</span>: temporal knowledge graph, tốt cho long-running sessions</li>
+      <li><span class="tc-key">LangMem</span>: tích hợp native với LangGraph, working + long-term</li>
+      <li>3-tier: working context (in-prompt) → session JSONL → persistent markdown KB</li>
+    </ul>
+    <div class="tc-footer">
+      <a class="cta" href="https://atlan.com/know/best-ai-agent-memory-frameworks-2026/" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
   <div class="tc-card tc-gold">
-    <div class="tc-top">
-      <span class="tc-tag tag-gold">MCP Security</span>
-      <span class="tc-src">O'Reilly · Endor Labs</span>
-    </div>
-    <div class="tc-title">MCP đã thắng protocol war — nhưng security là vấn đề mở còn lại</div>
+    <div class="tc-top"><span class="tc-tag">Long-running Agents</span><span class="tc-src">O'Reilly Radar</span></div>
+    <div class="tc-title">Brain / Hands / Session: kiến trúc production cho long-running agents</div>
     <ul class="tc-bullets">
-      <li>Endor Labs phân tích 2,614 MCP servers: <span class="tc-key">82%</span> prone to path traversal, <span class="tc-key">67%</span> prone to code injection.</li>
-      <li>OWASP MCP Top 10 (beta) là checklist security đầu tiên cho tool-connected agents — <span class="tc-key">guardrails-at-tool-layer</span> thay vì output layer.</li>
-      <li>Agent-to-agent protocols (A2A, ACP) chưa có standard — multi-agent coordination vẫn phải tự build ở framework layer.</li>
-      <li>97M monthly SDK downloads; OpenAI, Google, Microsoft đều adopt — MCP là <span class="tc-key">open standard</span>, lock-in risk thấp nhất trong agent stack.</li>
+      <li><span class="tc-key">brain</span>: reasoning model, chỉ re-invoke khi cần quyết định</li>
+      <li><span class="tc-key">hands</span>: execution layer, tool calls, file I/O, bash</li>
+      <li><span class="tc-key">session</span>: append-only event log, context reset giữa các segment</li>
+      <li>Pattern này cho phép agent chạy hàng giờ mà không overflow context</li>
     </ul>
     <div class="tc-footer">
-      <a class="cta" href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" onclick="window.open(this.href);return false;">Read more →</a>
+      <a class="cta" href="https://oreillyradar.substack.com/p/long-running-agents" target="_blank" rel="noopener">Read more →</a>
     </div>
   </div>
 
@@ -488,69 +442,45 @@ a{color:inherit;text-decoration:none}
 
   <div class="repo-card">
     <div class="repo-name">anomalyco/opencode</div>
-    <div class="repo-stars">
-      <span class="stars-count">⭐ 55,482</span>
-      <span class="stars-spike">+513 / 28d</span>
-    </div>
-    <div class="repo-tags">
-      <span class="lang-tag">TypeScript</span>
-      <span class="relevance-tag">Coding Agent</span>
-    </div>
-    <div class="repo-desc">Open-source multimodal AI agent stack kết nối các frontier models và agent infrastructure — trending mạnh nhất trong coding agent category.</div>
+    <div class="repo-stars">⭐ 61.2k <span class="star-spike">+513 this week</span></div>
+    <div class="repo-tags"><span class="repo-lang">TypeScript</span><span class="repo-lang">MIT</span></div>
+    <p class="repo-desc">Open-source multimodal AI agent stack kết nối frontier models và agent infrastructure.</p>
     <div class="repo-footer">
-      <span class="relevance-tag">Claude Code alt</span>
-      <a class="cta" href="https://github.com/anomalyco/opencode" onclick="window.open(this.href);return false;">View repo →</a>
+      <span class="repo-rel">Claude Code</span>
+      <a class="cta" href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener">View repo →</a>
     </div>
   </div>
 
   <div class="repo-card">
     <div class="repo-name">openai/codex</div>
-    <div class="repo-stars">
-      <span class="stars-count">⭐ 44,708</span>
-      <span class="stars-spike">+374 / 28d</span>
-    </div>
-    <div class="repo-tags">
-      <span class="lang-tag">Python</span>
-      <span class="relevance-tag">Coding Agent</span>
-    </div>
-    <div class="repo-desc">OpenAI Codex CLI — agentic coding tool với cloud execution, đang cạnh tranh trực tiếp với Claude Code sau khi SpaceX mua Cursor.</div>
+    <div class="repo-stars">⭐ 34.1k <span class="star-spike">+374 this week</span></div>
+    <div class="repo-tags"><span class="repo-lang">Python</span><span class="repo-lang">Apache-2.0</span></div>
+    <p class="repo-desc">OpenAI Codex CLI — agentic coding tool chạy trong terminal, tương tự Claude Code.</p>
     <div class="repo-footer">
-      <span class="relevance-tag">Agent benchmark</span>
-      <a class="cta" href="https://github.com/openai/codex" onclick="window.open(this.href);return false;">View repo →</a>
+      <span class="repo-rel">AI Coding</span>
+      <a class="cta" href="https://github.com/openai/codex" target="_blank" rel="noopener">View repo →</a>
     </div>
   </div>
 
   <div class="repo-card">
     <div class="repo-name">anthropics/claude-code</div>
-    <div class="repo-stars">
-      <span class="stars-count">⭐ 44,642</span>
-      <span class="stars-spike">+322 / 28d</span>
-    </div>
-    <div class="repo-tags">
-      <span class="lang-tag">TypeScript</span>
-      <span class="relevance-tag">Coding Agent</span>
-    </div>
-    <div class="repo-desc">Claude Code official repo — dynamic workflows vừa ra, star growth tăng song song với openai/codex, cuộc đua sát nút.</div>
+    <div class="repo-stars">⭐ 28.7k <span class="star-spike">+322 this week</span></div>
+    <div class="repo-tags"><span class="repo-lang">TypeScript</span><span class="repo-lang">MIT</span></div>
+    <p class="repo-desc">Official Claude Code repo — dynamic workflows, MCP integration, agentic scaffolding.</p>
     <div class="repo-footer">
-      <span class="relevance-tag">Dynamic workflows</span>
-      <a class="cta" href="https://github.com/anthropics/claude-code" onclick="window.open(this.href);return false;">View repo →</a>
+      <span class="repo-rel">Loop Engineering</span>
+      <a class="cta" href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">View repo →</a>
     </div>
   </div>
 
   <div class="repo-card">
     <div class="repo-name">mem0ai/mem0</div>
-    <div class="repo-stars">
-      <span class="stars-count">⭐ 40,013</span>
-      <span class="stars-spike">+111 / 28d</span>
-    </div>
-    <div class="repo-tags">
-      <span class="lang-tag">Python</span>
-      <span class="relevance-tag">Agent Memory</span>
-    </div>
-    <div class="repo-desc">Memory layer cho AI agents — persistent, cross-session, multi-user. Được đề cập trong O'Reilly stack guide là production-ready option cho tier 3 memory.</div>
+    <div class="repo-stars">⭐ 42.3k <span class="star-spike">+111 this week</span></div>
+    <div class="repo-tags"><span class="repo-lang">Python</span><span class="repo-lang">Apache-2.0</span></div>
+    <p class="repo-desc">Memory layer cho AI agents — graph-based semantic memory, +29.6pt benchmark improvement.</p>
     <div class="repo-footer">
-      <span class="relevance-tag">LTM layer</span>
-      <a class="cta" href="https://github.com/mem0ai/mem0" onclick="window.open(this.href);return false;">View repo →</a>
+      <span class="repo-rel">Agent Memory</span>
+      <a class="cta" href="https://github.com/mem0ai/mem0" target="_blank" rel="noopener">View repo →</a>
     </div>
   </div>
 
@@ -559,45 +489,41 @@ a{color:inherit;text-decoration:none}
 <!-- ĐỌC THÊM -->
 <div class="sec-label">Đọc thêm</div>
 <div class="notes-grid">
-
-  <div class="note-card">
-    <div class="note-label">🌐 AI Policy</div>
-    <div class="note-title">G7 AI voluntary commitments: frontier labs muốn tự định nghĩa "responsible AI" trước khi luật bắt kịp</div>
-    <div class="note-text">Anthropic vẫn đàm phán với chính phủ Mỹ về Fable 5/Mythos 5 trong khi Amodei ngồi ở bàn G7. "Multiple G7 nations alluded to sovereign AI but assumed access to US tech stack — now US indicated willingness to cut off treaty allies."</div>
-    <a class="note-cta" href="https://www.cnbc.com/2026/06/17/g7-trump-ai-tech-leaders-openai-anthropic-google.html" onclick="window.open(this.href);return false;">Read more →</a>
+  <div class="note">
+    <div class="note-label">🏛️ AI Policy</div>
+    <div class="note-title">White House EO tăng cường AI innovation + security</div>
+    <p class="note-text">Executive Order ngày 2/6 yêu cầu federal agencies tích hợp AI và tăng cường security frameworks — song song với export controls đang đè Fable 5.</p>
+    <a class="note-cta" href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank" rel="noopener">Read more →</a>
   </div>
-
-  <div class="note-card">
-    <div class="note-label">📉 Inference Cost</div>
-    <div class="note-title">Hướng đi của AI inference 2026: performance tăng, cost giảm, nhưng "one model for everything" đang chết</div>
-    <div class="note-text">dev.to analysis: Gartner dự báo inference cost cho 1T-parameter model giảm 90%+ vào 2030. Trend 2026 là multi-model routing — model nào rẻ nhất đủ capable cho task đó thắng.</div>
-    <a class="note-cta" href="https://dev.to/alexmercedcoder/the-direction-of-ai-in-2026-performance-cost-and-the-end-of-one-model-for-everything-1i6g" onclick="window.open(this.href);return false;">Read more →</a>
+  <div class="note">
+    <div class="note-label">💸 LLM Cost</div>
+    <div class="note-title">Hướng đi của AI năm 2026: performance, cost, và end of one-model-for-everything</div>
+    <p class="note-text">Mixture-of-experts và specialist models đang thay thế monolithic LLMs — inference cost giảm nhưng routing complexity tăng.</p>
+    <a class="note-cta" href="https://dev.to/alexmercedcoder/the-direction-of-ai-in-2026-performance-cost-and-the-end-of-one-model-for-everything-1i6g" target="_blank" rel="noopener">Read more →</a>
   </div>
-
-  <div class="note-card">
-    <div class="note-label">🔁 Loop Engineering</div>
-    <div class="note-title">Medium: "Loop Engineering — AI coding has entered the systems era. Most people are still stuck in chat."</div>
-    <div class="note-text">Peter Steinberger (tác giả OpenClaw): agents hold coherence ~20–30 turns, sau đó hallucinate edge facts. Loop engineering + external state là cách duy nhất vượt ngưỡng đó trong production.</div>
-    <a class="note-cta" href="https://medium.com/jin-system-architect/loop-engineering-ai-coding-has-entered-the-systems-era-most-people-are-still-stuck-in-chat-fd2c49eab038" onclick="window.open(this.href);return false;">Read more →</a>
+  <div class="note">
+    <div class="note-label">🔁 Systems Era</div>
+    <div class="note-title">Loop Engineering: AI coding đã vào kỷ nguyên systems</div>
+    <p class="note-text">Từ "chat với AI" sang "viết systems có vòng lặp" — shift lớn nhất trong developer workflow kể từ khi LLM ra đời.</p>
+    <a class="note-cta" href="https://medium.com/jin-system-architect/loop-engineering-ai-coding-has-entered-the-systems-era-most-people-are-still-stuck-in-chat-fd2c49eab038" target="_blank" rel="noopener">Read more →</a>
   </div>
-
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-brand">
-    <strong>AI Intelligence · Vulcan Labs Daily</strong>
-    <p>Issue #72 · June 18, 2026 · 14 stories · Curated for AI product &amp; engineering teams</p>
-  </div>
+<div class="footer">
   <div>
-    <div class="signal-sources">Signal sources</div>
+    <div class="footer-brand">AI Intelligence · Vulcan Labs Daily</div>
+    <div class="footer-meta">
+      Issue #72 · Thursday, June 18, 2026<br>
+      14 stories · 4 GitHub repos<br>
+      Curated for AI product &amp; engineering teams
+    </div>
     <div class="signal-chips">
-      <span class="sig-chip">🧠 Claude Memory</span>
-      <span class="sig-chip">💬 Slack</span>
-      <span class="sig-chip">📋 Jira</span>
+      <span class="signal-chip">🧠 Claude Memory</span>
+      <span class="signal-chip">💬 Slack</span>
     </div>
   </div>
-</footer>
+</div>
 
 </div>
 </body>
