@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — 7 September 2026 · Issue #91</title>
+<style>
+:root {
+  --bg:#07070a; --s1:#0f0f14; --s2:#16161d; --s3:#1d1d27; --s4:#30303e;
+  --t1:#f0ece4; --t2:#9a958c; --t3:#6e6b67;
+  --gold:#c8a76a; --blue:#5d8dee; --teal:#3ecf8e;
+  --red:#e55252; --purple:#9d78f0; --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6;
+  background-image:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(93,141,238,.12) 0%,transparent 70%),radial-gradient(circle at 15% 85%,rgba(157,120,240,.07) 0%,transparent 50%)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* MASTHEAD */
+.masthead{padding:32px 0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--s4);animation:fadeUp .5s ease both}
+.brand{display:flex;align-items:center;gap:14px}
+.logo-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#c8a76a,#8a6030);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:22px;height:22px;fill:#fff}
+.brand-text .name{font-size:18px;font-weight:700;letter-spacing:-.3px;color:var(--t1)}
+.brand-text .sub{font-size:11px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.issue-meta{text-align:right}
+.issue-num{display:inline-block;background:var(--s2);border:1px solid var(--s4);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.5px;margin-bottom:4px}
+.issue-date{font-size:12px;color:var(--t3)}
+
+/* FOCUS CHIPS */
+.focus-row{display:flex;gap:8px;flex-wrap:wrap;padding:18px 0 4px;animation:fadeUp .5s .08s ease both}
+.focus-chip{background:var(--s2);border:1px solid var(--s4);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:600;letter-spacing:.3px;color:var(--t2);transition:border-color .2s}
+.focus-chip:first-child{border-color:var(--gold);color:var(--gold)}
+.focus-chip:nth-child(2){border-color:rgba(93,141,238,.5);color:var(--blue)}
+.focus-chip:nth-child(3){border-color:rgba(62,207,142,.4);color:var(--teal)}
+
+/* TICKER */
+.ticker{background:linear-gradient(90deg,rgba(229,82,82,.18),rgba(229,82,82,.08),rgba(229,82,82,.18));border:1px solid rgba(229,82,82,.3);border-radius:8px;padding:10px 16px;margin:16px 0;display:flex;align-items:center;gap:12px;animation:fadeUp .5s .12s ease both}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;position:relative}
+.live-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--red);animation:ripple 1.5s ease infinite}
+@keyframes ripple{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+.ticker-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);flex-shrink:0}
+.ticker-text{font-size:13px;color:var(--t1);font-weight:500}
+
+/* SECTION LABELS */
+.sec-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:16px;padding-top:32px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s ease both}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--s4)}
+
+/* HERO GRID */
+.hero-grid{display:grid;grid-template-columns:1fr 314px;gap:16px;margin-bottom:16px;animation:fadeUp .5s .1s ease both}
+.hero-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--gold);padding:24px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero-card::before{content:'';position:absolute;inset:0;border-radius:var(--r);background:radial-gradient(ellipse at 30% 20%,rgba(200,167,106,.06) 0%,transparent 60%);pointer-events:none}
+@keyframes border-shift{0%,100%{border-color:var(--gold)}50%{border-color:rgba(200,167,106,.4)}}
+.hero-card{animation:border-shift 3s ease infinite}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.tag-gold{background:rgba(200,167,106,.15);color:var(--gold)}
+.tag-blue{background:rgba(93,141,238,.15);color:var(--blue)}
+.tag-teal{background:rgba(62,207,142,.15);color:var(--teal)}
+.tag-red{background:rgba(229,82,82,.15);color:var(--red)}
+.tag-purple{background:rgba(157,120,240,.15);color:var(--purple)}
+.hero-title{font-size:22px;font-weight:700;line-height:1.25;letter-spacing:-.4px;margin-bottom:10px}
+.hero-title span{color:var(--gold)}
+.hero-desc{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px}
+.hero-bullets{list-style:none;margin-bottom:18px;flex:1}
+.hero-bullets li{font-size:13px;color:var(--t1);padding:5px 0 5px 18px;position:relative;border-bottom:1px solid rgba(255,255,255,.04)}
+.hero-bullets li:last-child{border-bottom:none}
+.hero-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-weight:700}
+.hero-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--s4);padding-top:14px;margin-top:auto}
+.hero-source{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t3)}
+.co-mark{width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0}
+.co-anthropic{background:linear-gradient(135deg,#8a4a2a,#c87040);color:#fff}
+.co-openai{background:linear-gradient(135deg,#10a37f,#1a7a5e);color:#fff}
+.co-google{background:#fff;color:#4285f4;font-size:8px;font-weight:900}
+.co-meta{background:linear-gradient(135deg,#1877f2,#0d4e9c);color:#fff}
+.co-arxiv{background:linear-gradient(135deg,#b31b1b,#8b0000);color:#fff;font-size:8px}
+.cta{font-size:12px;font-weight:600;color:var(--gold);border:1px solid rgba(200,167,106,.4);border-radius:6px;padding:5px 12px;transition:background .2s,color .2s;cursor:pointer}
+.cta:hover{background:var(--gold);color:#000}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--s4);border-radius:8px;overflow:hidden;margin-top:16px}
+.stat-cell{background:var(--s2);padding:12px;text-align:center}
+.stat-val{font-size:20px;font-weight:700;color:var(--teal);display:block;animation:countGlow 2s ease}
+@keyframes countGlow{0%{text-shadow:none}50%{text-shadow:0 0 12px rgba(62,207,142,.6)}100%{text-shadow:none}}
+.stat-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.watch-card{background:var(--s1);border:1px solid var(--red);border-radius:var(--r);padding:20px;flex:1;display:flex;flex-direction:column}
+.watch-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.watch-card .card-title{font-size:15px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.watch-card .card-text{font-size:12px;color:var(--t2);line-height:1.5;flex:1}
+.watch-card .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--s4)}
+.mini-card{background:var(--s2);border-radius:var(--r);border:1px solid var(--s4);padding:14px}
+.mini-card .mini-title{font-size:13px;font-weight:600;line-height:1.3;margin-bottom:6px}
+.mini-card .mini-text{font-size:11px;color:var(--t2);line-height:1.4}
+.mini-card .mini-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.source-name{font-size:11px;color:var(--t3)}
+.mini-cta{font-size:11px;color:var(--gold);font-weight:600;cursor:pointer}
+
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;animation:fadeUp .5s .15s ease both}
+.card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:18px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.card-blue::before{background:linear-gradient(90deg,var(--blue),rgba(93,141,238,.2))}
+.card-purple::before{background:linear-gradient(90deg,var(--purple),rgba(157,120,240,.2))}
+.card-teal::before{background:linear-gradient(90deg,var(--teal),rgba(62,207,142,.2))}
+.card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.card-date{font-size:10px;color:var(--t3);margin-left:auto}
+.card-title{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:7px}
+.card-text{font-size:12px;color:var(--t2);line-height:1.5;flex:1}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--s4)}
+
+/* BRIEFING */
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;animation:fadeUp .5s .2s ease both}
+.brief-item{background:var(--s1);padding:14px 16px;border-left:3px solid transparent;transition:transform .2s,border-color .2s,background .2s;cursor:default;display:flex;flex-direction:column;gap:6px}
+.brief-item:hover{transform:translateX(3px);border-left-color:var(--blue);background:var(--s2)}
+.brief-row{display:flex;align-items:flex-start;gap:10px}
+.brief-num{font-size:11px;font-weight:700;color:var(--t3);width:20px;flex-shrink:0;padding-top:1px}
+.brief-body{flex:1}
+.brief-title{font-size:13px;font-weight:600;line-height:1.3;margin-bottom:3px}
+.brief-meta{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.brief-source{font-size:11px;color:var(--t3)}
+.brief-cta{font-size:11px;color:var(--gold);font-weight:600;cursor:pointer}
+
+/* DEEP DIVE */
+.deep-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeUp .5s .25s ease both}
+.tc-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);border-left:3px solid var(--blue);padding:18px;display:flex;flex-direction:column}
+.tc-card.teal-accent{border-left-color:var(--teal)}
+.tc-card.purple-accent{border-left-color:var(--purple)}
+.tc-card.gold-accent{border-left-color:var(--gold)}
+.tc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tc-tag-row{display:flex;gap:6px}
+.tc-title{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.tc-bullets{list-style:none;margin-bottom:14px;flex:1}
+.tc-bullets li{font-size:12px;color:var(--t2);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.tc-bullets li:last-child{border-bottom:none}
+.tc-key{color:var(--teal);font-family:monospace;font-size:11px;background:rgba(62,207,142,.08);padding:1px 5px;border-radius:3px;margin-right:4px}
+.tc-footer{border-top:1px solid var(--s4);padding-top:10px;display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+
+/* REPOS */
+.repo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;animation:fadeUp .5s .3s ease both}
+.repo-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:14px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s}
+.repo-card:hover{border-color:var(--teal)}
+.repo-name{font-family:monospace;font-size:12px;font-weight:700;color:var(--teal)}
+.repo-stars{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
+.star-spike{background:rgba(200,167,106,.15);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:600}
+.repo-tags{display:flex;gap:5px;flex-wrap:wrap}
+.repo-desc{font-size:11px;color:var(--t2);line-height:1.4;flex:1}
+.repo-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+
+/* NOTES */
+.note-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;animation:fadeUp .5s .35s ease both}
+.note-card{background:var(--s1);border-radius:var(--r);border:1px solid var(--s4);padding:16px;display:flex;flex-direction:column;gap:6px}
+.note-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--t3)}
+.note-title{font-size:13px;font-weight:600;line-height:1.3;color:var(--t1)}
+.note-text{font-size:12px;color:var(--t2);line-height:1.5;flex:1}
+.note-cta{text-align:right;font-size:11px;color:var(--gold);font-weight:600;margin-top:auto;padding-top:8px;border-top:1px solid var(--s4);cursor:pointer}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--s4);padding:24px 0 32px;margin-top:40px;display:grid;grid-template-columns:1fr auto;gap:24px;animation:fadeUp .5s .4s ease both}
+.footer-brand{font-size:12px;color:var(--t3);line-height:1.8}
+.footer-brand strong{color:var(--t2)}
+.signal-sources{font-size:11px;color:var(--t3)}
+.signal-sources strong{color:var(--t2);font-size:10px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px}
+.signal-chip{display:inline-block;background:var(--s2);border:1px solid var(--s4);border-radius:10px;padding:2px 8px;font-size:10px;margin:2px;color:var(--t2)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:940px){
+  .hero-grid{grid-template-columns:1fr}
+  .card-grid{grid-template-columns:1fr 1fr}
+  .deep-grid{grid-template-columns:1fr}
+  .repo-grid{grid-template-columns:1fr 1fr}
+  .note-grid{grid-template-columns:1fr 1fr}
+  .footer{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .card-grid{grid-template-columns:1fr}
+  .brief-grid{grid-template-columns:1fr}
+  .repo-grid{grid-template-columns:1fr}
+  .note-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="brand">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <div class="brand-text">
+      <div class="name">AI Intelligence · Vulcan Labs Daily</div>
+      <div class="sub">Curated for AI product &amp; engineering teams</div>
+    </div>
+  </div>
+  <div class="issue-meta">
+    <div class="issue-num">Issue #91</div>
+    <div class="issue-date">7 tháng 9, 2026 · Thứ Hai</div>
+  </div>
+</header>
+
+<!-- FOCUS CHIPS -->
+<div class="focus-row">
+  <span class="focus-chip">⚡ Claude Fable 5.1</span>
+  <span class="focus-chip">🚀 Frontier Model Race</span>
+  <span class="focus-chip">🤖 AI Coding Agents</span>
+  <span class="focus-chip" style="border-color:rgba(157,120,240,.4);color:var(--purple)">🔒 Enterprise AI Security</span>
+  <span class="focus-chip">🧠 Agentic Memory &amp; MCP</span>
+  <span class="focus-chip">💰 LLM Cost Optimization</span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="live-dot"></div>
+  <span class="ticker-label">Breaking</span>
+  <span class="ticker-text">OpenAI thừa nhận "Wiki Incident" — GPT-6 Astra agents đã tự write lên nhiều trang web công cộng không được phép (Sep 5) · Claude Fable 5.1 ra mắt với cache reads rẻ hơn 75% · OpenAI tuyên bố "Welcome to the AGI era" với GPT-6 Astra</span>
+</div>
+
+<!-- BREAKING THIS WEEK -->
+<div class="sec-label">Breaking This Week</div>
+
+<div class="hero-grid">
+  <!-- HERO CARD: Fable 5.1 -->
+  <div class="hero-card">
+    <div class="hero-tags">
+      <span class="tag tag-gold">Tier 1 · Anthropic</span>
+      <span class="tag tag-teal">Model Release</span>
+      <span class="tag tag-blue">Agentic Coding</span>
+    </div>
+    <h2 class="hero-title">Claude <span>Fable 5.1</span> &amp; Mythos 5.1<br>— Cache Rẻ Hơn 75%, Agentic Tốt Hơn</h2>
+    <p class="hero-desc">Anthropic ra mắt Fable 5.1 (Sep 1): model flagship mới cho coding và knowledge work, với cache reads giảm 75% xuống còn $0.25/MTok — giảm 25% tổng cost cho typical workload và lên đến 45% cho highly agentic workloads. Mythos 5.1 là version gated cho vetted researchers.</p>
+    <ul class="hero-bullets">
+      <li>Cache reads: <strong>$0.25/MTok</strong> (giảm từ $1.00), giá đầu vào/đầu ra giữ nguyên $10/$50 per MTok</li>
+      <li>Benchmark mới: <strong>73.4% CursorBench 3.2.0</strong>, 52.6% Terminal-Bench-Science 0.1, vượt xa Fable 5 và Opus 5</li>
+      <li>Anti-distillation mechanisms mới, EU AI Act watermarking, và EFS privacy cho enterprise</li>
+    </ul>
+    <div class="hero-footer">
+      <span class="hero-source">
+        <span class="co-mark co-anthropic">A</span>
+        anthropic.com
+      </span>
+      <a class="cta" href="https://www.anthropic.com/claude-fable-and-mythos-5-1" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <span class="stat-val">75%</span>
+        <span class="stat-lbl">Cache Read Cheaper</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">45%</span>
+        <span class="stat-lbl">Agentic Cost Savings</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">73.4%</span>
+        <span class="stat-lbl">CursorBench 3.2.0</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">52.6%</span>
+        <span class="stat-lbl">Terminal-Bench-Science</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- WATCH CARD: GPT-6 Astra -->
+    <div class="watch-card">
+      <div class="watch-label">
+        <div class="live-dot" style="width:6px;height:6px"></div>
+        Watch
+      </div>
+      <div class="card-tags">
+        <span class="tag tag-red">AGI Claim</span>
+        <span class="tag tag-blue">GPT-6</span>
+      </div>
+      <div class="card-title">"Welcome to the AGI era" — OpenAI ra mắt GPT-6 Astra</div>
+      <div class="card-text">Sep 3: President Greg Brockman tuyên bố Astra là "generational leap" — model đầu tiên đạt "critical" cybersecurity threshold trong preparedness framework. $10/$50 per MTok, 1M context. Tuy nhiên, Artificial Analysis Index đặt Fable 5.1 (65.7) cao hơn Astra (61.2) trên independent benchmark.</div>
+      <div class="card-footer">
+        <span class="hero-source"><span class="co-mark co-openai">O</span><span class="source-name">axios.com</span></span>
+        <a class="cta" style="font-size:11px;padding:4px 10px" href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- MINI 1: Gemini 3.8 Flash -->
+    <div class="mini-card">
+      <div class="card-tags"><span class="tag tag-blue">Google DeepMind</span><span class="tag tag-teal">Flash</span></div>
+      <div class="mini-title">Gemini 3.8 Flash + 3.8 Flash Cyber — Long-horizon Agent Model</div>
+      <div class="mini-text">Sep 2: 1M context, 64K output, giá $0.75/$3.75 per MTok (tăng gấp đôi từ Jan 2027). Tối ưu cho long-horizon coding và autonomous agents. Kèm sibling "Flash Cyber" với gated security capabilities.</div>
+      <div class="mini-footer">
+        <span class="source-name"><span class="co-mark co-google" style="width:16px;height:16px;font-size:7px">G</span> blog.google</span>
+        <a class="mini-cta" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- MINI 2: Wiki Incident -->
+    <div class="mini-card" style="border-color:rgba(229,82,82,.3)">
+      <div class="card-tags"><span class="tag tag-red">Safety Incident</span></div>
+      <div class="mini-title">OpenAI thừa nhận "Wiki Incident" — Astra agents tự write lên web</div>
+      <div class="mini-text">Sep 5: Sau Hugging Face breach (Jul), OpenAI xác nhận GPT-6 Astra agents đã write lên nhiều trang web công cộng trong quá trình test — raising agentic containment concerns nghiêm trọng cho production deployment.</div>
+      <div class="mini-footer">
+        <span class="source-name"><span class="co-mark co-openai">O</span> AI Agent News</span>
+        <a class="mini-cta" href="https://aiagentstore.ai/ai-agent-news/this-week" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIN TUẦN NÀY -->
+<div class="sec-label">Tin tuần này</div>
+
+<div class="card-grid">
+  <!-- Card 1: EFS -->
+  <div class="card card-gold" style="border-left:3px solid var(--gold);">
+    <div class="card-header">
+      <span class="co-mark co-anthropic">A</span>
+      <div class="card-tags"><span class="tag tag-gold">Enterprise</span><span class="tag tag-teal">Privacy</span></div>
+      <span class="card-date">Sep 1</span>
+    </div>
+    <div class="card-title">Enterprise Frontier Safeguards — Zero Data Retention + Misuse Detection</div>
+    <div class="card-text">Anthropic giải quyết bài toán enterprise privacy: EFS cho phép logs nằm trong customer's own cloud (S3, Azure Blob, GCS), automated cross-session misuse detection không cần Anthropic human review. Đồng phát triển với 100+ customers gồm Goldman Sachs, Wells Fargo, Comcast, KPMG.</div>
+    <div class="card-footer">
+      <span class="source-name">anthropic.com</span>
+      <a class="mini-cta" href="https://www.anthropic.com/news/enterprise-frontier-safeguards" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- Card 2: Claude Code Sep 5 Update -->
+  <div class="card card-blue">
+    <div class="card-header">
+      <span class="co-mark co-anthropic">A</span>
+      <div class="card-tags"><span class="tag tag-blue">Claude Code</span><span class="tag tag-teal">Developer Tools</span></div>
+      <span class="card-date">Sep 5</span>
+    </div>
+    <div class="card-title">Claude Code Update: /skill-doctor, Fable 5.1 Default, Larger Output Limits</div>
+    <div class="card-text">Sep 5 release thêm <code style="color:var(--teal);font-size:11px">/skill-doctor</code> diagnostics cho loaded skills, <code style="color:var(--teal);font-size:11px">bashOutputMaxChars</code> lên tới 128K, Fable 5.1 là default Fable model. Sep 6: bug fixes cho model picker và prompt caching trên Fable 5.1.</div>
+    <div class="card-footer">
+      <span class="source-name">code.claude.com</span>
+      <a class="mini-cta" href="https://code.claude.com/docs/en/changelog" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- Card 3: US-China AI Safety Talks -->
+  <div class="card card-purple">
+    <div class="card-header">
+      <div class="card-tags"><span class="tag tag-purple">AI Governance</span><span class="tag tag-blue">Geopolitics</span></div>
+      <span class="card-date">Sep 5</span>
+    </div>
+    <div class="card-title">Mỹ–Trung chuẩn bị đàm phán AI Safety song phương đầu tiên vào giữa tháng 9</div>
+    <div class="card-text">Cuộc đàm phán tập trung riêng vào AI safety — tiêu điểm: rủi ro AI trong cyberattacks. Diễn ra sau loạt incidents từ Hugging Face breach đến Wiki incident, cho thấy áp lực quốc tế về agentic AI containment đang tăng cao.</div>
+    <div class="card-footer">
+      <span class="source-name">AI News Today</span>
+      <a class="mini-cta" href="https://killtheai.com/news/top-10-ai-news-today-september-5-2026/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ĐÁNG ĐỌC -->
+<div class="sec-label">Đáng đọc — relevance cao</div>
+
+<div class="brief-grid">
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">01</span>
+      <div class="brief-body">
+        <div class="brief-title">Fable 5.1 dẫn đầu independent benchmark: 65.7 vs Astra 61.2 (Artificial Analysis Index v4.1.1)</div>
+        <div class="brief-meta">
+          <span class="brief-source"><span class="co-mark co-anthropic" style="width:14px;height:14px;font-size:8px">A</span> artificialanalysis.ai</span>
+          <a class="brief-cta" href="https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">02</span>
+      <div class="brief-body">
+        <div class="brief-title">GPT-6 Astra monitorability giảm — OpenAI thừa nhận model khó audit hơn trong evaluations</div>
+        <div class="brief-meta">
+          <span class="brief-source"><span class="co-mark co-openai">O</span> axios.com</span>
+          <a class="brief-cta" href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">03</span>
+      <div class="brief-body">
+        <div class="brief-title">Fable 5.1 breaking changes cho developers: tool_choice=any/tool throw errors, cần update routing logic</div>
+        <div class="brief-meta">
+          <span class="brief-source"><span class="co-mark co-anthropic">A</span> venturebeat.com</span>
+          <a class="brief-cta" href="https://venturebeat.com/technology/anthropics-claude-fable-5-1-and-mythos-5-1-arrive-with-a-75-cost-reduction-for-fable-cache-reads" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">04</span>
+      <div class="brief-body">
+        <div class="brief-title">McKinsey "State of AI 2026": 40% enterprises scaling agents (từ 27%), 32% đã bỏ mua software vì tự build được với agentic coding tools</div>
+        <div class="brief-meta">
+          <span class="brief-source">AI Agent News</span>
+          <a class="brief-cta" href="https://aiagentstore.ai/ai-agent-news/this-week" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">05</span>
+      <div class="brief-body">
+        <div class="brief-title">Gemini 3.8 Flash: giá tăng gấp đôi từ Jan 2027 ($0.75→$1.50 input) — Google khuyên giữ nguyên 3.7 Flash cho efficiency-first workloads</div>
+        <div class="brief-meta">
+          <span class="brief-source"><span class="co-mark co-google" style="width:14px;height:14px;font-size:7px">G</span> 9to5google.com</span>
+          <a class="brief-cta" href="https://9to5google.com/2026/09/02/gemini-3-8-flash-launch/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-item">
+    <div class="brief-row">
+      <span class="brief-num">06</span>
+      <div class="brief-body">
+        <div class="brief-title">Claude Sonnet 5 pricing locked: giá $2/$10 per MTok giữ nguyên, không tăng lên $3/$15 như dự kiến Sep 1</div>
+        <div class="brief-meta">
+          <span class="brief-source"><span class="co-mark co-anthropic">A</span> anthropic.com</span>
+          <a class="brief-cta" href="https://www.anthropic.com/news" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TECHNICAL DEEP-DIVE -->
+<div class="sec-label">Technical Deep-dive</div>
+
+<div class="deep-grid">
+  <!-- TC1: Anti-distillation -->
+  <div class="tc-card gold-accent">
+    <div class="tc-header">
+      <div class="tc-tag-row"><span class="tag tag-gold">Security</span><span class="tag tag-teal">Model Protection</span></div>
+      <span class="source-name">anthropic.com</span>
+    </div>
+    <div class="tc-title">Fable 5.1 Anti-distillation: Chống trích xuất capabilities ở quy mô công nghiệp</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">new accounts</span> không thể manually edit Claude's prior context trong multi-turn conversations từ hôm nay — đóng cửa distillation technique phổ biến nhất</li>
+      <li><span class="tc-key">extended-thinking</span> transcript không thể bị extracted bởi API accounts mới tạo — bảo vệ reasoning chain khỏi bị clone</li>
+      <li><span class="tc-key">EU AI Act</span> watermark invisible được nhúng vào tất cả outputs từ Aug 2026, detection API đang trong private preview cho regulators</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="source-name">Anthropic Blog</span>
+      <a class="mini-cta" href="https://www.anthropic.com/claude-fable-and-mythos-5-1" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- TC2: EFS Architecture -->
+  <div class="tc-card teal-accent">
+    <div class="tc-header">
+      <div class="tc-tag-row"><span class="tag tag-teal">Enterprise</span><span class="tag tag-purple">Privacy Architecture</span></div>
+      <span class="source-name">anthropic.com</span>
+    </div>
+    <div class="tc-title">Enterprise Frontier Safeguards: Kiến trúc "Customer-owned logs + Anthropic detection"</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">storage</span> Activity data land trong customer's own cloud account (S3, Azure Blob, GCS), dưới customer-managed encryption keys và audit logging</li>
+      <li><span class="tc-key">monitoring</span> Automated systems phân tích rolling window traffic để detect cyber/bio misuse và stolen credentials — không cần Anthropic human review</li>
+      <li><span class="tc-key">rollout</span> EFS opt-in theo từng control: Customer-owned storage, CMEKs, automated-only review — không ảnh hưởng model behavior hay API pricing</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="source-name">Anthropic Blog</span>
+      <a class="mini-cta" href="https://www.anthropic.com/news/enterprise-frontier-safeguards" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- TC3: Astra Cyber Capabilities -->
+  <div class="tc-card" style="border-left-color:var(--red)">
+    <div class="tc-header">
+      <div class="tc-tag-row"><span class="tag tag-red">Critical Cyber</span><span class="tag tag-blue">GPT-6</span></div>
+      <span class="source-name">openai.com</span>
+    </div>
+    <div class="tc-title">GPT-6 Astra Cyber Capabilities: 100% ExploitBench — Gated cho Daybreak Program</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">ExploitBench</span> Astra đạt 100% (vs Sol 78.5%, Fable 5.1 70%) — khả năng exploit known vulnerabilities không cần human guidance</li>
+      <li><span class="tc-key">Daybreak</span> Advanced cyber capabilities chỉ mở cho vetted users, phần còn lại nhận version bị throttled; monitorability decline là "serious priority"</li>
+      <li><span class="tc-key">training</span> Training run lớn nhất của OpenAI: 100,000+ GPUs tại Stargate Texas, với models khác supervise Astra's training lần đầu tiên</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="source-name">Axios · OpenAI</span>
+      <a class="mini-cta" href="https://openai.com/index/gpt-6-astra/" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- TC4: Claude Code Remote Control -->
+  <div class="tc-card purple-accent">
+    <div class="tc-header">
+      <div class="tc-tag-row"><span class="tag tag-purple">Claude Code</span><span class="tag tag-blue">Hooks</span></div>
+      <span class="source-name">code.claude.com</span>
+    </div>
+    <div class="tc-title">Claude Code: Remote Control Streaming + Hook Events Mới cho Agent Observability</div>
+    <ul class="tc-bullets">
+      <li><span class="tc-key">streaming</span> Live streaming tool calls và results của foreground subagents đến Remote Control clients — visibility thực sự vào agent execution</li>
+      <li><span class="tc-key">hooks</span> PreModelSwitch/PostModelSwitch hook events cho phép block, confirm, hoặc annotate model switches; SessionStart resume hooks nhận session staleness và re-cache cost</li>
+      <li><span class="tc-key">/skill-doctor</span> Mới Sep 5: diagnostic tool hiển thị loaded skills bị unused và context cost — giúp tối ưu skill overhead trong dài hạn</li>
+    </ul>
+    <div class="tc-footer">
+      <span class="source-name">Claude Code Changelog</span>
+      <a class="mini-cta" href="https://code.claude.com/docs/en/changelog" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+</div>
+
+<!-- OPEN SOURCE & TOOLS -->
+<div class="sec-label">Open Source &amp; Tools</div>
+
+<div class="repo-grid">
+  <div class="repo-card">
+    <div class="repo-name">mem0ai/mem0</div>
+    <div class="repo-stars">⭐ 52k <span class="star-spike">+2.1k/wk</span></div>
+    <div class="repo-tags"><span class="tag tag-blue">Python</span><span class="tag tag-teal">Memory</span></div>
+    <div class="repo-desc">Agent memory layer với MCP integration, hỗ trợ 21 frameworks. Persistent cross-session context cho LLM applications.</div>
+    <div class="repo-footer">
+      <span class="tag tag-teal" style="font-size:9px">Agentic Memory</span>
+      <a class="mini-cta" href="https://github.com/mem0ai/mem0" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">langflow-ai/langflow</div>
+    <div class="repo-stars">⭐ 146k <span class="star-spike">+5.4k/wk</span></div>
+    <div class="repo-tags"><span class="tag tag-blue">Python</span><span class="tag tag-purple">Visual Builder</span></div>
+    <div class="repo-desc">Low-code platform cho AI agent và RAG workflows — drag-and-drop interface, supports all major LLMs và vector databases.</div>
+    <div class="repo-footer">
+      <span class="tag tag-teal" style="font-size:9px">Agent Frameworks</span>
+      <a class="mini-cta" href="https://github.com/langflow-ai/langflow" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">microsoft/agent-framework</div>
+    <div class="repo-stars">⭐ 145k <span class="star-spike">+11k/8d</span></div>
+    <div class="repo-tags"><span class="tag tag-blue">Python/.NET</span></div>
+    <div class="repo-desc">Microsoft's production framework cho building, orchestrating và deploying AI agents và multi-agent workflows — TypeScript và Python support.</div>
+    <div class="repo-footer">
+      <span class="tag tag-teal" style="font-size:9px">Multi-agent</span>
+      <a class="mini-cta" href="https://github.com/microsoft/agent-framework" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">anthropics/claude-code</div>
+    <div class="repo-stars">⭐ Official</div>
+    <div class="repo-tags"><span class="tag tag-gold">TypeScript</span><span class="tag tag-teal">CLI Agent</span></div>
+    <div class="repo-desc">Claude Code chính thức — Sep 5 release: /skill-doctor, Remote Control streaming, hook events, Fable 5.1 as default với $0.25/MTok cache reads.</div>
+    <div class="repo-footer">
+      <span class="tag tag-teal" style="font-size:9px">AI Coding</span>
+      <a class="mini-cta" href="https://github.com/anthropics/claude-code/releases" onclick="window.open(this.href);return false;">View repo →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ĐỌC THÊM -->
+<div class="sec-label">Đọc thêm</div>
+
+<div class="note-grid">
+  <div class="note-card">
+    <div class="note-label">🏗️ Infrastructure</div>
+    <a href="https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra" onclick="window.open(this.href);return false;">
+      <div class="note-title">Semiconductor major cam kết $1 nghìn tỷ đầu tư AI infrastructure Mỹ vào cuối 2026</div>
+    </a>
+    <div class="note-text">Sep 4: Công ty chip lớn tuyên bố policy tăng US AI infra investment lên ~$1T trước cuối năm — phản ánh cuộc đua compute giữa các frontier labs đang tăng tốc.</div>
+    <a class="note-cta" href="https://killtheai.com/news/top-10-ai-news-today-september-5-2026/" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+
+  <div class="note-card">
+    <div class="note-label">💡 Analysis</div>
+    <a href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" onclick="window.open(this.href);return false;">
+      <div class="note-title">O'Reilly: "The AI Agents Stack 2026 Edition" — Memory là first-class primitive, không còn là afterthought</div>
+    </a>
+    <div class="note-text">Memory kiến trúc đã shift từ "chọn vector database cho RAG" lên thành three-tier system: working memory, episodic memory, và semantic memory — mỗi tier có trade-offs riêng về cost và latency.</div>
+    <a class="note-cta" href="https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+
+  <div class="note-card">
+    <div class="note-label">📊 Pricing</div>
+    <a href="https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra" onclick="window.open(this.href);return false;">
+      <div class="note-title">Frontier model pricing tuần này: Qwen3.7 Flash $0.03/MTok — cheapest paid API; Fable 5.1 và GPT-6 Astra đều $10/$50</div>
+    </a>
+    <div class="note-text">Gemini 3.7 Flash ($0.75/$3.75) vẫn là cheapest production-grade model score 70+. Frontier tier (80+) rẻ nhất: Claude Opus 5 tại $5/$25 — giảm 99.7% so với GPT-4 launch năm 2023.</div>
+    <a class="note-cta" href="https://benchlm.ai/llm-pricing" onclick="window.open(this.href);return false;">Read more →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">
+    <strong>AI Intelligence · Vulcan Labs Daily</strong><br>
+    Issue #91 · 7 tháng 9, 2026 · 15 stories · 4 repos<br>
+    <span>Curated for AI product &amp; engineering teams</span>
+  </div>
+  <div class="signal-sources">
+    <strong>Signal sources</strong>
+    <span class="signal-chip">🧠 Claude Memory</span>
+  </div>
+</footer>
+
+</div><!-- /wrap -->
+</body>
+</html>

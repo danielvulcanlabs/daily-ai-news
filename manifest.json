@@ -1,5 +1,119 @@
 [
   {
+    "date": "2026-09-09",
+    "file": "news/daily-ai-news-2026-09-09.html",
+    "issue": 92,
+    "headline": "Anthropic Kills $6B Decart Deal Pre-IPO"
+  },
+  {
+    "date": "2026-09-07",
+    "file": "news/daily-ai-news-2026-09-07.html",
+    "issue": 91,
+    "headline": "Fable 5.1 Astra AGI era"
+  },
+  {
+    "date": "2026-07-18",
+    "file": "news/daily-ai-news-2026-07-18.html",
+    "issue": 90,
+    "headline": "Kimi K3 Open-Weight Frontier Model Lands"
+  },
+  {
+    "date": "2026-07-14",
+    "file": "news/daily-ai-news-2026-07-14.html",
+    "issue": 89,
+    "headline": "GPT-5.6 GA: Sol Terra Luna Family Launches"
+  },
+  {
+    "date": "2026-07-13",
+    "file": "news/daily-ai-news-2026-07-13.html",
+    "issue": 88,
+    "headline": "Claude Cowork goes web & mobile; Grok 4.5 MoE launches; AgentPrizm governed memory platform"
+  },
+  {
+    "date": "2026-07-11",
+    "file": "news/daily-ai-news-2026-07-11.html",
+    "issue": 87,
+    "headline": "GPT-5.6 Sol public launch, three tiers"
+  },
+  {
+    "date": "2026-07-10",
+    "file": "news/daily-ai-news-2026-07-10.html",
+    "issue": 86,
+    "headline": "GPT-5.6 Sol Launches, Claude Reflect Debuts"
+  },
+  {
+    "date": "2026-07-09",
+    "file": "news/daily-ai-news-2026-07-09.html",
+    "issue": 85,
+    "headline": "GPT-5.6 Sol and Grok 4.5 Launch"
+  },
+  {
+    "date": "2026-07-08",
+    "file": "news/daily-ai-news-2026-07-08.html",
+    "issue": 84,
+    "headline": "Fable 5 Returns, Tencent Hy3 Launch"
+  },
+  {
+    "date": "2026-07-07",
+    "file": "news/daily-ai-news-2026-07-07.html",
+    "issue": 83,
+    "headline": "UN AI Governance Summit, GPT-5.6 Sol GA"
+  },
+  {
+    "date": "2026-07-06",
+    "file": "news/daily-ai-news-2026-07-06.html",
+    "issue": 82,
+    "headline": "Claude Sonnet 5 Launch, Jalapeno Chip"
+  },
+  {
+    "date": "2026-07-03",
+    "file": "news/daily-ai-news-2026-07-03.html",
+    "issue": 81,
+    "headline": "Fable 5 tro lai toan cau + Industry Jailbreak Framework; Claude Sonnet 5 ($2/$10); GPT-5.6 Sol preview"
+  },
+  {
+    "date": "2026-07-01",
+    "file": "news/daily-ai-news-2026-07-01.html",
+    "issue": 80,
+    "headline": "Claude Sonnet 5 Released, Closes Gap With Opus"
+  },
+  {
+    "date": "2026-06-30",
+    "file": "news/daily-ai-news-2026-06-30.html",
+    "issue": 79,
+    "headline": "OpenAI GPT-5.6 Sol restricted by US govt"
+  },
+  {
+    "date": "2026-06-29",
+    "file": "news/daily-ai-news-2026-06-29.html",
+    "issue": 78,
+    "headline": "Gartner: AI Coding Costs To Exceed Dev Salaries by 2028"
+  },
+  {
+    "date": "2026-06-28",
+    "file": "news/daily-ai-news-2026-06-28.html",
+    "issue": 77,
+    "headline": "Mythos 5 unbanned, GPT-5.6 drops"
+  },
+  {
+    "date": "2026-06-24",
+    "file": "news/daily-ai-news-2026-06-24.html",
+    "issue": 76,
+    "headline": "Claude Tag Launches as Persistent Slack Teammate"
+  },
+  {
+    "date": "2026-06-23",
+    "file": "news/daily-ai-news-2026-06-23.html",
+    "issue": 75,
+    "headline": "Fable 5 free trial ends, GLM-5.2 beats GPT-5.5"
+  },
+  {
+    "date": "2026-06-22",
+    "file": "news/daily-ai-news-2026-06-22.html",
+    "issue": 74,
+    "headline": "Fable 5 exits subscription, Nobel laureate joins Anthropic"
+  },
+  {
     "date": "2026-06-19",
     "file": "news/daily-ai-news-2026-06-19.html",
     "issue": 73,

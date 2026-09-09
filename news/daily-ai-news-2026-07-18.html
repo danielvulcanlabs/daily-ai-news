@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — 18 July 2026</title>
+<style>
+  :root {
+    --bg:#07070a; --s1:#0f0f14; --s2:#16161d; --s3:#1d1d27; --s4:#30303e;
+    --t1:#f0ece4; --t2:#9a958c; --t3:#6e6b67;
+    --gold:#c8a76a; --blue:#5d8dee; --teal:#3ecf8e;
+    --red:#e55252; --purple:#9d78f0;
+    --r:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background-image:radial-gradient(circle at 20% 20%,rgba(93,141,238,.07) 0%,transparent 60%),
+    radial-gradient(circle at 80% 80%,rgba(157,120,240,.05) 0%,transparent 60%),
+    radial-gradient(ellipse at 50% 0%,rgba(200,167,106,.04) 0%,transparent 50%);
+    min-height:100vh}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  a{color:inherit;text-decoration:none}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes borderShift{0%,100%{border-color:var(--gold)}50%{border-color:var(--teal)}}
+  @keyframes countGlow{0%,100%{text-shadow:0 0 8px rgba(200,167,106,.6)}50%{text-shadow:0 0 20px rgba(200,167,106,1)}}
+  @keyframes ripple{0%{transform:scale(1);opacity:1}100%{transform:scale(2.5);opacity:0}}
+  @keyframes tickerGlow{0%,100%{box-shadow:0 0 20px rgba(229,82,82,.3)}50%{box-shadow:0 0 40px rgba(229,82,82,.6)}}
+  /* Masthead */
+  .masthead{padding:36px 0 28px;border-bottom:1px solid var(--s4);animation:fadeUp .6s ease both}
+  .masthead-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand-icon{width:44px;height:44px;background:linear-gradient(135deg,#c8a76a,#e8c080);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .brand-icon svg{width:24px;height:24px;fill:none;stroke:#07070a;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .brand-text h1{font-size:20px;font-weight:700;letter-spacing:-.3px;color:var(--t1)}
+  .brand-text p{font-size:12px;color:var(--t3);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+  .issue-badge{display:flex;align-items:center;gap:12px}
+  .issue-num{background:var(--s2);border:1px solid var(--s4);border-radius:8px;padding:8px 14px;
+    font-size:13px;color:var(--gold);font-weight:600;letter-spacing:.3px}
+  .issue-date{font-size:13px;color:var(--t3)}
+  /* Focus chips */
+  .focus-bar{padding:16px 0;border-bottom:1px solid var(--s4);animation:fadeUp .6s .1s ease both;opacity:0;animation-fill-mode:forwards}
+  .focus-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .focus-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-right:4px;white-space:nowrap}
+  .chip{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid;font-weight:500;white-space:nowrap}
+  .chip-1{border-color:var(--gold);color:var(--gold);background:rgba(200,167,106,.08)}
+  .chip-2{border-color:var(--blue);color:var(--blue);background:rgba(93,141,238,.08)}
+  .chip-3{border-color:var(--teal);color:var(--teal);background:rgba(62,207,142,.08)}
+  .chip-4{border-color:var(--purple);color:var(--purple);background:rgba(157,120,240,.08)}
+  .chip-5{border-color:var(--red);color:var(--red);background:rgba(229,82,82,.08)}
+  .chip-6{border-color:var(--t3);color:var(--t3);background:rgba(110,107,103,.08)}
+  /* Ticker */
+  .ticker{background:linear-gradient(90deg,rgba(229,82,82,.15),rgba(229,82,82,.08),rgba(229,82,82,.15));
+    border-top:1px solid rgba(229,82,82,.3);border-bottom:1px solid rgba(229,82,82,.3);
+    padding:10px 0;animation:tickerGlow 2s ease-in-out infinite,fadeUp .6s .15s ease both;
+    opacity:0;animation-fill-mode:forwards}
+  .ticker-inner{display:flex;align-items:center;gap:16px}
+  .live-dot{position:relative;width:8px;height:8px;flex-shrink:0}
+  .live-dot::before{content:'';position:absolute;inset:0;background:var(--red);border-radius:50%}
+  .live-dot::after{content:'';position:absolute;inset:-4px;background:var(--red);border-radius:50%;opacity:.4;animation:ripple 1.5s ease-out infinite}
+  .ticker-label{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+  .ticker-text{font-size:13px;color:var(--t1)}
+  /* Section label */
+  .sec-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);
+    margin-bottom:16px;padding-top:36px;display:flex;align-items:center;gap:10px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--s4)}
+  /* Hero grid */
+  .hero-grid{display:grid;grid-template-columns:1fr 314px;gap:16px;animation:fadeUp .7s .2s ease both;opacity:0;animation-fill-mode:forwards}
+  .hero-card{background:var(--s1);border:1.5px solid var(--gold);border-radius:var(--r);padding:28px;
+    position:relative;overflow:hidden;animation:borderShift 4s ease-in-out infinite;
+    box-shadow:0 0 40px rgba(200,167,106,.08)}
+  .hero-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(200,167,106,.06),transparent 60%);pointer-events:none}
+  .hero-glow{position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(200,167,106,.12),transparent 70%);pointer-events:none}
+  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.8px}
+  .tag-gold{background:rgba(200,167,106,.15);color:var(--gold)}
+  .tag-blue{background:rgba(93,141,238,.15);color:var(--blue)}
+  .tag-teal{background:rgba(62,207,142,.15);color:var(--teal)}
+  .tag-red{background:rgba(229,82,82,.15);color:var(--red)}
+  .tag-purple{background:rgba(157,120,240,.15);color:var(--purple)}
+  .hero-title{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:12px;color:var(--t1)}
+  .hero-desc{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:18px}
+  .hero-bullets{list-style:none;margin-bottom:20px}
+  .hero-bullets li{font-size:13px;color:var(--t1);padding:5px 0;padding-left:18px;position:relative;line-height:1.5}
+  .hero-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:12px}
+  .hero-footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--s4);margin-bottom:20px}
+  .hero-source{font-size:12px;color:var(--t3)}
+  .cta{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.3px;cursor:pointer}
+  .cta:hover{text-decoration:underline}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{background:var(--s2);border-radius:8px;padding:12px}
+  .stat-val{font-size:18px;font-weight:700;color:var(--gold);animation:countGlow 3s ease-in-out infinite}
+  .stat-key{font-size:11px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+  /* Sidebar */
+  .sidebar{display:flex;flex-direction:column;gap:12px}
+  .watch-card{background:var(--s1);border:1.5px solid var(--red);border-radius:var(--r);padding:20px;
+    box-shadow:0 0 20px rgba(229,82,82,.06)}
+  .watch-title{font-size:15px;font-weight:600;line-height:1.4;margin:8px 0}
+  .watch-desc{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:12px}
+  .mini-card{background:var(--s2);border-radius:var(--r);padding:16px;border:1px solid var(--s4)}
+  .mini-title{font-size:13px;font-weight:600;line-height:1.4;margin:6px 0 8px}
+  .mini-desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+  .card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--s3)}
+  .src-name{font-size:11px;color:var(--t3)}
+  .co-mark{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+  .co-anthropic{background:linear-gradient(135deg,#c06030,#8a3820)}
+  .co-moonshot{background:linear-gradient(135deg,#6030b0,#402080)}
+  .co-google{background:#fff}
+  /* 3-col cards */
+  .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;animation:fadeUp .7s .3s ease both;opacity:0;animation-fill-mode:forwards}
+  .news-card{background:var(--s1);border-radius:var(--r);padding:20px;border:1px solid var(--s4);
+    border-top:3px solid;transition:transform .2s,box-shadow .2s}
+  .news-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+  .card-blue{border-top-color:var(--blue)}
+  .card-purple{border-top-color:var(--purple)}
+  .card-teal{border-top-color:var(--teal)}
+  .nc-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .nc-date{font-size:11px;color:var(--t3)}
+  .nc-title{font-size:15px;font-weight:600;line-height:1.4;margin-bottom:8px;color:var(--t1)}
+  .nc-text{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:14px}
+  /* Briefing */
+  .brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;animation:fadeUp .7s .35s ease both;opacity:0;animation-fill-mode:forwards}
+  .brief-item{padding:14px 18px;border-bottom:1px solid var(--s3);border-right:1px solid var(--s3);
+    display:flex;flex-direction:column;gap:6px;transition:transform .15s,background .15s;cursor:pointer}
+  .brief-item:nth-child(even){border-right:none}
+  .brief-item:hover{transform:translateX(3px);background:var(--s2)}
+  .brief-num{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px}
+  .brief-title{font-size:13px;font-weight:600;color:var(--t1);line-height:1.4}
+  .brief-desc{font-size:12px;color:var(--t2)}
+  .brief-meta{display:flex;justify-content:space-between;align-items:center}
+  .brief-src{font-size:11px;color:var(--t3)}
+  .brief-cta{font-size:11px;color:var(--gold);font-weight:600;cursor:pointer}
+  .brief-cta:hover{text-decoration:underline}
+  /* Tech deep-dive */
+  .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeUp .7s .4s ease both;opacity:0;animation-fill-mode:forwards}
+  .tc-card{background:var(--s1);border-radius:var(--r);padding:20px;border:1px solid var(--s4);border-left:3px solid}
+  .tc-gold{border-left-color:var(--gold)}
+  .tc-blue{border-left-color:var(--blue)}
+  .tc-teal{border-left-color:var(--teal)}
+  .tc-purple{border-left-color:var(--purple)}
+  .tc-red{border-left-color:var(--red)}
+  .tc-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .tc-src{font-size:11px;color:var(--t3)}
+  .tc-title{font-size:15px;font-weight:700;line-height:1.35;margin-bottom:12px;color:var(--t1)}
+  .tc-bullets{list-style:none}
+  .tc-bullets li{font-size:12px;color:var(--t2);padding:5px 0;padding-left:14px;position:relative;line-height:1.55}
+  .tc-bullets li::before{content:'·';position:absolute;left:2px;color:var(--gold);font-size:16px;line-height:1}
+  .tc-key{font-family:monospace;font-size:11px;background:var(--s3);padding:2px 5px;border-radius:3px;color:var(--teal)}
+  .tc-footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--s3);display:flex;justify-content:flex-end}
+  /* GitHub repos */
+  .repos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;animation:fadeUp .7s .45s ease both;opacity:0;animation-fill-mode:forwards}
+  .repo-card{background:var(--s2);border-radius:var(--r);padding:16px;border:1px solid var(--s4);transition:border-color .2s}
+  .repo-card:hover{border-color:var(--teal)}
+  .repo-name{font-family:monospace;font-size:12px;font-weight:700;color:var(--teal);margin-bottom:6px}
+  .repo-desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+  .repo-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+  .repo-stars{font-size:11px;color:var(--gold);background:rgba(200,167,106,.1);padding:2px 7px;border-radius:4px;font-weight:600}
+  .repo-lang{font-size:11px;color:var(--t3);background:var(--s3);padding:2px 7px;border-radius:4px}
+  .repo-rel{font-size:11px;color:var(--teal);background:rgba(62,207,142,.1);padding:2px 7px;border-radius:4px}
+  .repo-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--s3)}
+  /* Notes */
+  .notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;animation:fadeUp .7s .5s ease both;opacity:0;animation-fill-mode:forwards}
+  .note-card{background:var(--s1);border-radius:var(--r);padding:18px;border:1px solid var(--s4)}
+  .note-label{font-size:11px;color:var(--t3);margin-bottom:8px}
+  .note-title{font-size:14px;font-weight:600;color:var(--t1);line-height:1.4;margin-bottom:8px}
+  .note-text{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:12px}
+  .note-cta{display:block;text-align:right;font-size:11px;color:var(--gold);font-weight:600;cursor:pointer}
+  .note-cta:hover{text-decoration:underline}
+  /* Footer */
+  .footer{margin-top:48px;border-top:1px solid var(--s4);padding:28px 0 40px;animation:fadeUp .7s .6s ease both;opacity:0;animation-fill-mode:forwards}
+  .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px}
+  .footer-brand{font-size:12px;color:var(--t3);line-height:2}
+  .footer-brand strong{color:var(--gold)}
+  .footer-sources{text-align:right}
+  .footer-sources p{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;font-weight:600}
+  .footer-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .footer-chip{font-size:11px;color:var(--t3);background:var(--s2);padding:3px 8px;border-radius:4px;border:1px solid var(--s4)}
+  /* Responsive */
+  @media(max-width:940px){
+    .hero-grid{grid-template-columns:1fr}
+    .cards-grid{grid-template-columns:1fr 1fr}
+    .tc-grid{grid-template-columns:1fr}
+    .repos-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .cards-grid,.notes-grid,.repos-grid{grid-template-columns:1fr}
+    .brief-grid{grid-template-columns:1fr}
+    .brief-item{border-right:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="brand-text">
+          <h1>AI Intelligence</h1>
+          <p>Vulcan Labs Daily</p>
+        </div>
+      </div>
+      <div class="issue-badge">
+        <span class="issue-num">Issue #90</span>
+        <span class="issue-date">18 July 2026 · Saturday</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- FOCUS CHIPS -->
+  <div class="focus-bar">
+    <div class="focus-chips">
+      <span class="focus-label">Focus:</span>
+      <span class="chip chip-1">Frontier model releases</span>
+      <span class="chip chip-2">Anthropic / Claude</span>
+      <span class="chip chip-3">AI coding agents</span>
+      <span class="chip chip-4">AI document quality</span>
+      <span class="chip chip-5">Agentic memory / LTM</span>
+      <span class="chip chip-6">LLM cost optimization</span>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner wrap">
+      <div class="live-dot"></div>
+      <span class="ticker-label">Breaking</span>
+      <span class="ticker-text">Moonshot AI ra mat Kimi K3 — 2.8T-parameter open-weight model dau tien ngang tam frontier, qua mat Fable 5 va GPT-5.6 Sol trong front-end coding Arena</span>
+    </div>
+  </div>
+
+  <!-- BREAKING THIS WEEK -->
+  <div class="sec-label">Breaking This Week</div>
+
+  <div class="hero-grid">
+    <!-- HERO CARD -->
+    <div class="hero-card">
+      <div class="hero-glow"></div>
+      <div class="hero-tags">
+        <span class="tag tag-gold">Top Read</span>
+        <span class="tag tag-teal">Frontier Model</span>
+        <span class="tag tag-purple">Open-Weight</span>
+        <span class="tag tag-blue">China AI</span>
+      </div>
+      <h2 class="hero-title">Kimi K3: Model open-weight 2.8T lon nhat the gioi, ngang tam frontier closed models</h2>
+      <p class="hero-desc">Moonshot AI vua ra mat Kimi K3 — 2.8 nghin ty tham so, MoE architecture (896 experts, 16 active per token), context window 1M token. Arena blind testing: developers ua chuong Kimi K3 hon Fable 5 va GPT-5.6 Sol trong front-end coding. Open weights release ngay 27/7.</p>
+      <ul class="hero-bullets">
+        <li>2.8T total parameters, MoE — 16/896 experts active moi lan inference; dat frontier quality ma cost thap hon dense model cung scale</li>
+        <li>Arena leaderboard: K3 tied voi GPT-5.6 Sol tren text ranking, outrank Opus 4.8 — open-weight model dau tien dat muc nay</li>
+        <li>Pricing ~$3/M input · $15/M output; Moonshot valuation tang len $31.5B trong vong raise moi truoc WAIC Shanghai</li>
+      </ul>
+      <div class="hero-footer">
+        <span class="hero-source">Axios · 16 Jul 2026</span>
+        <a href="https://www.axios.com/2026/07/16/moonshot-kimi-ai-china-model-openai-anthropic" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-val">2.8T</div><div class="stat-key">Parameters</div></div>
+        <div class="stat"><div class="stat-val">1M</div><div class="stat-key">Context tokens</div></div>
+        <div class="stat"><div class="stat-val">896</div><div class="stat-key">MoE experts</div></div>
+        <div class="stat"><div class="stat-val">Jul 27</div><div class="stat-key">Weights release</div></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <!-- WATCH CARD -->
+      <div class="watch-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <div class="co-mark co-google" style="width:22px;height:22px;border-radius:4px;overflow:hidden">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          </div>
+          <span class="tag tag-red">Watch</span>
+        </div>
+        <div class="watch-title">Gemini 3.5 Pro tre deadline lan 3 — Google chuan bi "stopgap" Flash release</div>
+        <div class="watch-desc">Rebuilt model van bi hallucination, underperform GPT-5.6. Google DeepMind co the skip 3.5 Pro va jump thang toi Gemini 4.0 Flash. Prediction market: 73% xac suat release sau Aug 7.</div>
+        <div class="card-footer">
+          <span class="src-name">TechTimes · 16 Jul</span>
+          <a href="https://www.techtimes.com/articles/320736/20260716/rebuilt-gemini-35-pro-misses-third-deadline-google-eyes-stopgap-release.htm" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+      <!-- MINI CARD -->
+      <div class="mini-card">
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <span class="tag tag-blue">Claude Code</span>
+          <span class="tag tag-teal">Government</span>
+        </div>
+        <div class="mini-title">Claude Code + Cowork vao FedRAMP High — Public beta cho U.S. agencies</div>
+        <div class="mini-desc">FedRAMP High authorized, hash-chained audit logs, $1/agency unlimited seats qua Aug 2026. Agencies deploy qua MDM platforms khong can cloud provider rieng.</div>
+        <div class="card-footer">
+          <span class="src-name">claude.com · 7 Jul</span>
+          <a href="https://claude.com/blog/bringing-claude-code-and-claude-cowork-to-government" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIN TUAN NAY -->
+  <div class="sec-label">Tin tuan nay</div>
+
+  <div class="cards-grid">
+    <div class="news-card card-blue">
+      <div class="nc-meta">
+        <div class="co-mark co-anthropic" style="color:#fff;font-size:10px">A</div>
+        <span class="tag tag-blue">Product</span>
+        <span class="nc-date">14 Jul 2026</span>
+      </div>
+      <div class="nc-title">Claude for Teachers — Anthropic mo free premium access cho giao vien K-12 My</div>
+      <div class="nc-text">Verified U.S. teachers nhan free Claude Pro + teaching skills + curricula chuan 50 bang. Bao gom Claude Code va Cowork. Data khong dung de train model. Partnership voi AFT, ASSISTments, Canva Education.</div>
+      <div class="card-footer">
+        <span class="src-name">anthropic.com · 14 Jul</span>
+        <a href="https://www.anthropic.com/news/claude-for-teachers" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="news-card card-purple">
+      <div class="nc-meta">
+        <div class="co-mark co-anthropic" style="color:#fff;font-size:10px">A</div>
+        <span class="tag tag-purple">Business</span>
+        <span class="nc-date">15 Jul 2026</span>
+      </div>
+      <div class="nc-title">Anthropic + Blackstone ra mat "Ode" — $1.5B AI implementation JV</div>
+      <div class="nc-text">JV voi Blackstone, Hellman &amp; Friedman, Goldman Sachs. Ode embed forward-deployed AI engineers truc tiep vao enterprises. Claude-first nhung khong exclusive. CEO: "Co the la trillion-dollar company."</div>
+      <div class="card-footer">
+        <span class="src-name">TechCrunch · 15 Jul</span>
+        <a href="https://techcrunch.com/2026/07/15/anthropic-blackstone-bet-the-next-trillion-dollar-ai-business-is-implementation-not-models/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="news-card card-teal">
+      <div class="nc-meta">
+        <div class="co-mark co-anthropic" style="color:#fff;font-size:10px">A</div>
+        <span class="tag tag-teal">India</span>
+        <span class="nc-date">13 Jul 2026</span>
+      </div>
+      <div class="nc-title">Anthropic bat dau localize Claude pricing cho An Do — thi truong lon nhat sau My</div>
+      <div class="nc-text">Pricing tier rieng biet theo suc mua dia phuong. An Do la market tang truong nhanh nhat cua Anthropic, qua mat UK va Canada. Keo theo expand infrastructure GCP Asia South.</div>
+      <div class="card-footer">
+        <span class="src-name">TechCrunch · 13 Jul</span>
+        <a href="https://techcrunch.com/2026/07/13/anthropic-starts-localizing-claude-pricing-for-india-its-biggest-market-after-the-us/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DANG DOC -->
+  <div class="sec-label">Dang doc — Relevance cao</div>
+
+  <div class="brief-grid">
+    <div class="brief-item" onclick="window.open('https://techcrunch.com/2026/07/15/microsoft-is-reportedly-training-salespeople-to-talk-down-openai-and-anthropic/')">
+      <span class="brief-num">01</span>
+      <span class="brief-title">Microsoft dao tao salespeople noi xau OpenAI va Anthropic voi khach hang enterprise</span>
+      <span class="brief-desc">Satya Nadella lo ngai du lieu enterprise bi loi dung boi AI labs. Parallel voi trend dung open-source Chinese models thay the U.S. flagships.</span>
+      <div class="brief-meta">
+        <span class="brief-src">TechCrunch · 15 Jul</span>
+        <a href="https://techcrunch.com/2026/07/15/microsoft-is-reportedly-training-salespeople-to-talk-down-openai-and-anthropic/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="brief-item" onclick="window.open('https://techcrunch.com/2026/07/13/hermes-agent-maker-nous-research-in-talks-for-new-funding-at-1-5b-valuation/')">
+      <span class="brief-num">02</span>
+      <span class="brief-title">Nous Research (Hermes agent maker) dam phan $1.5B funding round</span>
+      <span class="brief-desc">Maker cua Hermes series open-weight models, Nous-Capybara, va agent orchestration tools. Valuation tang 3x so voi round truoc.</span>
+      <div class="brief-meta">
+        <span class="brief-src">TechCrunch · 13 Jul</span>
+        <a href="https://techcrunch.com/2026/07/13/hermes-agent-maker-nous-research-in-talks-for-new-funding-at-1-5b-valuation/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="brief-item" onclick="window.open('https://www.aimagicx.com/blog/llm-pricing-collapse-developer-guide-building-cheap-ai-2026')">
+      <span class="brief-num">03</span>
+      <span class="brief-title">LLM Pricing Collapse 2026 — chi phi inference giam 90%+ so voi 2023, Gemini Flash con $0.10/M tokens</span>
+      <span class="brief-desc">80% AI GPU spend gio la inference, khong phai training. KV cache optimization + quantization + semantic caching giam cost 2-10x them.</span>
+      <div class="brief-meta">
+        <span class="brief-src">AI Magicx · 2026</span>
+        <a href="https://www.aimagicx.com/blog/llm-pricing-collapse-developer-guide-building-cheap-ai-2026" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="brief-item" onclick="window.open('https://www.techtimes.com/articles/320525/20260715/china-ai-companion-law-takes-effect-doubao-qwen-shut-down-millions-lose-chat-data.htm')">
+      <span class="brief-num">04</span>
+      <span class="brief-title">China AI Companion Law co hieu luc: Doubao va Qwen tat tinh nang chat, hang trieu user mat du lieu</span>
+      <span class="brief-desc">Luat moi bat buoc AI companion apps phai disconnect emotional attachment features. Doubao (ByteDance) va Qwen (Alibaba) tuan thu ngay, xoa lich su chat.</span>
+      <div class="brief-meta">
+        <span class="brief-src">TechTimes · 15 Jul</span>
+        <a href="https://www.techtimes.com/articles/320525/20260715/china-ai-companion-law-takes-effect-doubao-qwen-shut-down-millions-lose-chat-data.htm" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="brief-item" onclick="window.open('https://tosea.ai/blog/ai-slides-html-vs-image-generation-guide-2026')">
+      <span class="brief-num">05</span>
+      <span class="brief-title">AI Slides 2026: HTML generation vs Image generation — huong dan chon approach dung</span>
+      <span class="brief-desc">HTML: text/data editable, dung Claude Opus / GPT-5.5. Image: visual gravity, hero slides. Professional pattern: hybrid — image cho cover, HTML cho noi dung.</span>
+      <div class="brief-meta">
+        <span class="brief-src">Tosea.ai · 2026</span>
+        <a href="https://tosea.ai/blog/ai-slides-html-vs-image-generation-guide-2026" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="brief-item" onclick="window.open('https://techcrunch.com/2026/07/16/moonshots-upcoming-kimi-3-is-expected-to-close-the-gap-with-anthropics-opus-4-8/')">
+      <span class="brief-num">06</span>
+      <span class="brief-title">Kimi K3 vs Opus 4.8: Gap da close, open-weight era bat dau thay doi gia tri cua frontier subscriptions</span>
+      <span class="brief-desc">Gia tri doc quyen cua model closed-source dang giam khi open-weight models dat parity. Thach thuc cho OpenAI, Anthropic enterprise pricing.</span>
+      <div class="brief-meta">
+        <span class="brief-src">TechCrunch · 16 Jul</span>
+        <a href="https://techcrunch.com/2026/07/16/moonshots-upcoming-kimi-3-is-expected-to-close-the-gap-with-anthropics-opus-4-8/" class="brief-cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL DEEP-DIVE -->
+  <div class="sec-label">Technical Deep-dive</div>
+
+  <div class="tc-grid">
+    <div class="tc-card tc-gold">
+      <div class="tc-meta">
+        <span class="tag tag-gold">Architecture</span>
+        <span class="tc-src">Axios / TechCrunch · 16 Jul</span>
+      </div>
+      <div class="tc-title">Kimi K3 MoE Architecture: 2.8T params, sparse activation, frontier economics</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">MoE</span>: 896 experts total, chi 16 duoc activate per token — dat 2.8T capacity ma khong can run toan bo compute, giu chi phi inference hop ly</li>
+        <li><span class="tc-key">1M context</span>: xu ly document dai, codebase lon; open-weight model dau tien dat 1M context o quality frontier nay</li>
+        <li><span class="tc-key">Arena#1</span>: vuot Fable 5 + GPT-5.6 Sol trong front-end coding, tied Sol tren text — paradigm shift open vs closed frontier quality</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://techcrunch.com/2026/07/16/moonshots-upcoming-kimi-3-is-expected-to-close-the-gap-with-anthropics-opus-4-8/" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="tc-card tc-red">
+      <div class="tc-meta">
+        <span class="tag tag-red">Reliability</span>
+        <span class="tc-src">TechTimes · 16 Jul</span>
+      </div>
+      <div class="tc-title">Gemini 3.5 Pro: Pretraining restart anatomy — recursive tool-call failures va SVG generation bugs</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">SVG structure</span>: model goc fail khi generate complex multi-layered SVG scenes — khong the fix bang fine-tuning, buoc phai restart full pretraining</li>
+        <li><span class="tc-key">Recursive tools</span>: agent loops voi multi-step tool-calling breakdown — critical failure mode cho agentic coding use case production</li>
+        <li><span class="tc-key">3rd delay</span>: rebuilt model van hallucinate, underperform GPT-5.6; deadline miss thu 3 lien tiep lam lon tu tin internal team Google DeepMind</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://www.techtimes.com/articles/320736/20260716/rebuilt-gemini-35-pro-misses-third-deadline-google-eyes-stopgap-release.htm" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="tc-card tc-purple">
+      <div class="tc-meta">
+        <span class="tag tag-purple">Research</span>
+        <span class="tc-src">arXiv 2606.06240 · 2026</span>
+      </div>
+      <div class="tc-title">TOKI: Bitemporal Operator Algebra cho contradiction resolution trong LLM agent persistent memory</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">Bitemporal</span>: tach "valid time" (khi fact dung trong thuc te) vs "transaction time" (khi agent ghi nho) — resolve contradiction chinh xac hon single-timestamp approach</li>
+        <li><span class="tc-key">TOKI ops</span>: formal algebra cho insert, retract, revise memory operations — dam bao consistency khong can re-embed toan bo knowledge base</li>
+        <li><span class="tc-key">Staleness</span>: giai quyet van de memory "confidently wrong" khi context thay doi — open problem lon nhat cua production LTM systems hien tai</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://arxiv.org/pdf/2606.06240" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="tc-card tc-blue">
+      <div class="tc-meta">
+        <span class="tag tag-blue">Survey</span>
+        <span class="tc-src">arXiv 2606.30306 · 2026</span>
+      </div>
+      <div class="tc-title">Always-On Agents: Persistent memory, state management va governance trong production LLM systems</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">Cross-session identity</span>: stable user_id assumption breaks voi anonymous sessions, multi-device users — unsolved problem lon trong production agent systems</li>
+        <li><span class="tc-key">3-tier arch</span>: working memory (context) + episodic (session logs) + semantic (knowledge graph) — hieu qua nhat khi ket hop ca 3 tang</li>
+        <li><span class="tc-key">Governance</span>: production agents can memory + permission sandboxing; agentic risk layer chua duoc standardize o bat ky platform nao</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://arxiv.org/pdf/2606.30306" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="tc-card tc-teal">
+      <div class="tc-meta">
+        <span class="tag tag-teal">Engineering</span>
+        <span class="tc-src">IBM Research · 2026</span>
+      </div>
+      <div class="tc-title">DELEGATE-52: LLM document corruption — tai sao multi-step AI editing lam document xau di</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">DELEGATE-52</span>: benchmark 52 domains, 19 models — tat ca deu degrade sau nhieu lan edit; khong co model nao giu duoc 100% fidelity</li>
+        <li><span class="tc-key">25% corruption</span>: top models corrupt trung binh 25% content trong extended use — abstraction loss, hallucination injection vao document</li>
+        <li><span class="tc-key">Implication</span>: agentic document workflows can human-in-the-loop checkpoints; pure autonomous editing pipeline chua ready cho production</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://www.ibm.com/think/news/llms-corrupt-documents-does-agentic-ai-make-worse" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+    <div class="tc-card tc-gold">
+      <div class="tc-meta">
+        <span class="tag tag-gold">Infrastructure</span>
+        <span class="tc-src">AI Magicx / Spheron · 2026</span>
+      </div>
+      <div class="tc-title">LLM Inference 2026: KV Cache optimization, quantization, semantic caching — practical cost playbook</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">Memory-bound</span>: token generation la memory-bandwidth bound, khong phai compute-bound — GPUs idle trong autoregressive decode; implication lon cho infra cost</li>
+        <li><span class="tc-key">KV cache</span>: single most impactful optimization — reduce redundant compute qua sessions, dac biet voi long-context agent loops va repeated prefill</li>
+        <li><span class="tc-key">2-10x savings</span>: ket hop INT4 quantization + semantic caching + dynamic routing sang smaller models = 2-10x inference cost reduction trong production</li>
+      </ul>
+      <div class="tc-footer">
+        <a href="https://www.aimagicx.com/blog/llm-pricing-collapse-developer-guide-building-cheap-ai-2026" class="cta" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN SOURCE & TOOLS -->
+  <div class="sec-label">Open Source &amp; Tools</div>
+
+  <div class="repos-grid">
+    <div class="repo-card">
+      <div class="repo-name">alphaonedev/ai-memory-mcp</div>
+      <div class="repo-desc">Persistent memory MCP server cho bat ky AI agent — SQLite FTS5, zero cloud deps, compatible voi Claude, ChatGPT, Grok, Gemini, Cursor. 97.8% R@5 tren LongMemEval.</div>
+      <div class="repo-meta">
+        <span class="repo-stars">Trending</span>
+        <span class="repo-lang">Python</span>
+        <span class="repo-rel">Agentic memory</span>
+      </div>
+      <div class="repo-footer">
+        <span class="repo-rel" style="font-size:10px">LTM / MCP</span>
+        <a href="https://github.com/alphaonedev/ai-memory-mcp" class="cta" style="font-size:11px" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+    <div class="repo-card">
+      <div class="repo-name">ai-boost/awesome-harness-engineering</div>
+      <div class="repo-desc">Curated list ve AI agent harness engineering: tools, patterns, evals, memory, MCP, permissions, observability, orchestration. Growing resource cho production agent teams.</div>
+      <div class="repo-meta">
+        <span class="repo-stars">Curated</span>
+        <span class="repo-lang">Markdown</span>
+        <span class="repo-rel">Agent infra</span>
+      </div>
+      <div class="repo-footer">
+        <span class="repo-rel" style="font-size:10px">Multi-agent / MCP</span>
+        <a href="https://github.com/ai-boost/awesome-harness-engineering" class="cta" style="font-size:11px" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+    <div class="repo-card">
+      <div class="repo-name">VoltAgent/awesome-ai-agent-papers</div>
+      <div class="repo-desc">Bo suu tap 300+ papers AI agent 2026 tu arXiv — agent engineering, memory, evaluation, workflows, autonomous systems. Updated weekly, structured by topic.</div>
+      <div class="repo-meta">
+        <span class="repo-stars">+500/week</span>
+        <span class="repo-lang">Markdown</span>
+        <span class="repo-rel">Research</span>
+      </div>
+      <div class="repo-footer">
+        <span class="repo-rel" style="font-size:10px">Agent papers</span>
+        <a href="https://github.com/VoltAgent/awesome-ai-agent-papers" class="cta" style="font-size:11px" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+    <div class="repo-card">
+      <div class="repo-name">google-labs-code/stitch-skills</div>
+      <div class="repo-desc">Library of agent skills compatible voi Stitch MCP server, Gemini CLI, Claude Code, Cursor. Install mot lenh, immediate productivity gains cho coding agent workflows.</div>
+      <div class="repo-meta">
+        <span class="repo-stars">+340/week</span>
+        <span class="repo-lang">TypeScript</span>
+        <span class="repo-rel">MCP / Coding</span>
+      </div>
+      <div class="repo-footer">
+        <span class="repo-rel" style="font-size:10px">AI coding agents</span>
+        <a href="https://github.com/google-labs-code/stitch-skills" class="cta" style="font-size:11px" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOC THEM -->
+  <div class="sec-label">Doc them</div>
+
+  <div class="notes-grid">
+    <div class="note-card">
+      <div class="note-label">Research</div>
+      <div class="note-title">Memory for Autonomous LLM Agents: Mechanisms, Evaluation, and Emerging Frontiers (arXiv 2026)</div>
+      <div class="note-text">Survey toan dien ve cac memory architectures: working, episodic, semantic. Highlight benchmarks moi nhu LongMemEval va MemoryBench cho production evaluation.</div>
+      <a href="https://arxiv.org/html/2603.07670v1" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="note-card">
+      <div class="note-label">Deadline</div>
+      <div class="note-title">DeepSeek API migration deadline July 24 — teams phai swap aliases truoc ngay nay</div>
+      <div class="note-text"><code style="font-family:monospace;font-size:11px;background:var(--s3);padding:2px 4px;border-radius:3px">deepseek-chat</code> va <code style="font-family:monospace;font-size:11px;background:var(--s3);padding:2px 4px;border-radius:3px">deepseek-reasoner</code> ngung hoat dong luc 15:59 UTC 24/7. Migrate sang <code style="font-family:monospace;font-size:11px;background:var(--s3);padding:2px 4px;border-radius:3px">deepseek-v4-pro/flash</code> — chi la 1 parameter change.</div>
+      <a href="https://www.techtimes.com/articles/320736/20260716/rebuilt-gemini-35-pro-misses-third-deadline-google-eyes-stopgap-release.htm" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="note-card">
+      <div class="note-label">Transparency</div>
+      <div class="note-title">Anthropic "Inviting Hard Questions" — cam ket tra loi cong khai cac cau hoi kho nhat ve AI</div>
+      <div class="note-text">Initiative moi: Anthropic moi public submit cau hoi kho nhat ve AI safety, roi show work tra loi. Transparency push tu safety lab hang dau the gioi.</div>
+      <a href="https://www.anthropic.com/news/hard-questions" class="note-cta" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>AI Intelligence · Vulcan Labs Daily</strong><br>
+        Issue #90 · 18 July 2026<br>
+        15 stories · 4 GitHub repos<br>
+        Curated for AI product &amp; engineering teams
+      </div>
+      <div class="footer-sources">
+        <p>Signal sources</p>
+        <div class="footer-chips">
+          <span class="footer-chip">🧠 Claude Memory</span>
+          <span class="footer-chip">💬 Slack</span>
+          <span class="footer-chip">📁 Drive</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

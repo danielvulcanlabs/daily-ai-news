@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News Digest — June 18, 2026</title>
+<style>
+  :root {
+    --bg:            #F2F2F0;
+    --surface:       #FFFFFF;
+    --surface-2:     #F8F7F5;
+    --border:        #E8E6E1;
+    --border-soft:   #F0EDE8;
+    --text-primary:  #111110;
+    --text-secondary:#5C5A56;
+    --text-tertiary: #9B9790;
+    --chip-bg:       #EEECEA;
+    --chip-text:     #4A4844;
+    --star-bg:       #FEF3C7;
+    --star-border:   #FDE68A;
+    --star-text:     #78350F;
+    --callout-bg:    #EFF6FF;
+    --callout-border:#BFDBFE;
+    --callout-text:  #1E40AF;
+    --alert-bg:      #FFF7ED;
+    --alert-border:  #FED7AA;
+    --alert-text:    #9A3412;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow:    0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg);
+    padding: 32px 16px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .header {
+    background: var(--text-primary);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px 26px;
+    margin-bottom: 20px;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .masthead { display: flex; align-items: center; gap: 10px; }
+  .masthead-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,.11);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .masthead-text h1 { font-size: 17px; font-weight: 700; letter-spacing: -.2px; color: #fff; line-height: 1.2; }
+  .masthead-text p  { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 1px; }
+  .header-date { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.45); letter-spacing: .3px; text-align: right; }
+  .focus-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 20px; padding: 3px 11px;
+    font-size: 11px; color: rgba(255,255,255,.7);
+    font-weight: 500; letter-spacing: .1px;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .9px;
+    color: var(--text-tertiary); margin-bottom: 12px; margin-top: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    transition: box-shadow .15s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+
+  .card-top-row {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 10px; margin-bottom: 8px;
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+    padding: 2px 9px 2px 7px; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-star   { background: var(--star-bg);  border: 1px solid var(--star-border);  color: var(--star-text); }
+  .badge-alert  { background: var(--alert-bg); border: 1px solid var(--alert-border); color: var(--alert-text); }
+
+  .source-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--chip-bg); border: 1px solid var(--border-soft);
+    border-radius: 20px; padding: 2px 9px;
+    font-size: 11px; color: var(--chip-text); font-weight: 600; white-space: nowrap;
+  }
+
+  .card h2 {
+    font-size: 15px; font-weight: 700; line-height: 1.38;
+    color: var(--text-primary); margin-bottom: 5px; letter-spacing: -.1px;
+  }
+  .card h2 a { color: inherit; text-decoration: none; }
+  .card h2 a:hover { text-decoration: underline; text-decoration-color: var(--border); }
+
+  .card-meta {
+    font-size: 11px; color: var(--text-tertiary); font-weight: 500;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  }
+  .dot-sm { width: 3px; height: 3px; background: var(--border); border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+  .card-body { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+
+  .callout {
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 12.5px; line-height: 1.55;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .callout-blue  { background: var(--callout-bg); border: 1px solid var(--callout-border); color: var(--callout-text); }
+  .callout-amber { background: var(--alert-bg);   border: 1px solid var(--alert-border);   color: var(--alert-text); }
+  .callout-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .callout strong { font-weight: 700; }
+
+  /* ── Other stories ── */
+  .topic-group { margin-bottom: 20px; }
+  .topic-header {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; color: var(--text-secondary);
+    margin-bottom: 8px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft); letter-spacing: .1px;
+  }
+  .topic-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue   { background: #3B82F6; }
+  .dot-purple { background: #8B5CF6; }
+  .dot-green  { background: #10B981; }
+  .dot-amber  { background: #F59E0B; }
+  .dot-rose   { background: #F43F5E; }
+  .dot-slate  { background: #64748B; }
+
+  .story-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px; margin-bottom: 8px;
+    box-shadow: var(--shadow); transition: box-shadow .15s;
+  }
+  .story-item:hover { box-shadow: var(--shadow-md); }
+
+  .story-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); line-height: 1.4; margin-bottom: 3px; }
+  .story-title a { color: inherit; text-decoration: none; }
+  .story-title a:hover { text-decoration: underline; text-decoration-color: var(--border); }
+
+  .story-byline {
+    font-size: 11px; color: var(--text-tertiary); font-weight: 500;
+    margin-bottom: 6px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+  }
+  .story-summary { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  .no-news {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    font-size: 12.5px; color: var(--text-tertiary); font-style: italic; line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 28px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius-md);
+    padding: 16px 20px; font-size: 11.5px;
+    color: var(--text-tertiary); line-height: 1.8; box-shadow: var(--shadow);
+  }
+  .footer-row { display: flex; gap: 6px; }
+  .footer-key { font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="masthead">
+        <div class="masthead-icon">🗞</div>
+        <div class="masthead-text">
+          <h1>AI News Digest</h1>
+          <p>Personalised for Daniel · Vulcan Labs</p>
+        </div>
+      </div>
+      <div class="header-date">Thursday<br>June 18, 2026</div>
+    </div>
+    <div class="focus-label">Today's focus</div>
+    <div class="chips">
+      <span class="chip">Claude &amp; Anthropic API</span>
+      <span class="chip">OpenAI model releases</span>
+      <span class="chip">Mobile AI &amp; on-device</span>
+      <span class="chip">App Store AI policies</span>
+      <span class="chip">AI chat product strategy</span>
+      <span class="chip">Agent frameworks</span>
+    </div>
+  </div>
+
+  <!-- TOP READS -->
+  <div class="section-label">⭐ Top reads</div>
+
+  <!-- Card 1 — Claude Fable 5 suspension -->
+  <div class="card">
+    <div class="card-top-row">
+      <div class="badge badge-alert">🚨 Action needed</div>
+      <div class="source-tag">Anthropic · Jun 9–12</div>
+    </div>
+    <h2><a href="https://techcrunch.com/2026/06/09/anthropics-claude-fable-5-is-a-version-of-mythos-the-public-can-access-today/" target="_blank">Anthropic Launches Claude Fable 5 — Then Suspends It 3 Days Later Under US Export Control Order</a></h2>
+    <div class="card-meta">
+      <span>TechCrunch / National Law Review / Al Jazeera</span>
+      <span class="dot-sm"></span>
+      <span>June 9–12, 2026</span>
+      <span class="dot-sm"></span>
+      <span>Claude &amp; Anthropic API</span>
+    </div>
+    <div class="card-body">
+      On June 9, Anthropic launched Claude Fable 5 — its most capable public model, with always-on adaptive thinking, a 1M-token context window, and 128K output tokens, outperforming Claude Opus 4.8 by more than 10% on key benchmarks. Three days later, on June 12 at 5:21 PM ET, a US government export-control directive forced Anthropic to fully disable both Fable 5 and the restricted Claude Mythos 5, citing a potential jailbreak that could surface software vulnerabilities. Anthropic chose to suspend access for all customers globally rather than attempting nationality-based segmentation. This is the first time a US export-control directive has forced the takedown of a generally available frontier model. <strong>Claude Opus 4.8 remains the current fallback.</strong> Additionally, older Claude models were deprecated on June 15 — check your API version strings now.
+    </div>
+    <div class="callout callout-amber">
+      <span class="callout-icon">⚠️</span>
+      <span><strong>Action needed:</strong> If Chat Smith or any Vulcan Labs app was on Claude Fable 5, it has been silently failing since June 12. Confirm your API model strings are pointing to <code>claude-opus-4-8</code>. Also audit June 15 deprecations — any apps hitting deprecated model endpoints will error. Escalate to Phuong + your backend leads today.</span>
+    </div>
+  </div>
+
+  <!-- Card 2 — Google Antigravity CLI today -->
+  <div class="card">
+    <div class="card-top-row">
+      <div class="badge badge-star">⭐ Today</div>
+      <div class="source-tag">Google · Jun 18</div>
+    </div>
+    <h2><a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank">Google Kills Gemini CLI Today — Forced Migration to Antigravity CLI (agy) Effective June 18</a></h2>
+    <div class="card-meta">
+      <span>Google Developers Blog / The Register / Digital Applied</span>
+      <span class="dot-sm"></span>
+      <span>June 18, 2026</span>
+      <span class="dot-sm"></span>
+      <span>Agent frameworks</span>
+    </div>
+    <div class="card-body">
+      As of today, Gemini CLI stops serving requests for Google AI Pro, Ultra, and free-tier users. Its replacement is Antigravity CLI (<code>agy</code>), a closed-source Go binary that supports Agent Skills, Hooks, Subagents, and an Extensions plugin system. The new tool orchestrates multiple background agents for parallel tasks. However, the quota model changed significantly — from 1,000 requests/day to a weekly compute-based cap that heavy users report exhausting quickly, with multi-day cooldowns. There is no 1-to-1 feature parity at launch. Organisations on Gemini Code Assist Standard/Enterprise retain uninterrupted Gemini CLI access via paid API keys.
+    </div>
+    <div class="callout callout-blue">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Why it matters for you:</strong> If any internal tooling, pipelines, or dev workflows at Vulcan Labs rely on Gemini CLI, they stopped working today. The quota change (weekly cap vs. daily cap) may also affect cost modelling for Gemini-based features in your app portfolio.</span>
+    </div>
+  </div>
+
+  <!-- Card 3 — WWDC 2026 -->
+  <div class="card">
+    <div class="card-top-row">
+      <div class="badge badge-star">⭐ Top read</div>
+      <div class="source-tag">Apple · Jun 8–9</div>
+    </div>
+    <h2><a href="https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/" target="_blank">WWDC 2026: Apple Launches Siri AI (Gemini-Powered), iOS 27, New AI Agent APIs for Developers</a></h2>
+    <div class="card-meta">
+      <span>Apple Newsroom / TechCrunch / CNBC</span>
+      <span class="dot-sm"></span>
+      <span>June 8–9, 2026</span>
+      <span class="dot-sm"></span>
+      <span>App Store AI policies · Mobile AI</span>
+    </div>
+    <div class="card-body">
+      Apple unveiled a full rebuild of Siri — now powered by Google Gemini — with real-time screen awareness, a standalone app, and deep Apple Intelligence integration across iOS 27. New AI developer APIs land in Xcode 27, bringing first-class support for Anthropic, Google, and OpenAI models directly into the developer workflow. Apple also introduced App Store changes giving developers more flexibility for AI agent apps. Agents can now take autonomous actions (booking reservations, editing documents, managing smart home devices) with users delegating full tasks. Apple's Passwords app is the first first-party agentic app. iOS 27 supports all devices running iOS 26 (iPhone 11+).
+    </div>
+    <div class="callout callout-blue">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Why it matters for you:</strong> The new AI agent APIs in Xcode 27 and App Store policy changes directly affect Chat Smith iOS and every AI app in your portfolio. Siri AI being Gemini-powered means new deep-link and intent integration opportunities. Your iOS lead should read Apple's developer newsroom post this week and map which new framework APIs to prioritise for the next release cycle.</span>
+    </div>
+  </div>
+
+  <!-- OTHER STORIES -->
+  <div class="other-stories" style="margin-top:24px;">
+    <div class="section-label">Other stories</div>
+
+    <!-- Topic: OpenAI -->
+    <div class="topic-group">
+      <div class="topic-header">
+        <div class="topic-dot dot-blue"></div>
+        OpenAI model releases &amp; API integration
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://openai.com/news/" target="_blank">OpenAI Launches Deployment Simulation — Replay Past Conversations Through New Model Before Release</a></div>
+        <div class="story-byline">OpenAI <span class="dot-sm"></span> June 16, 2026</div>
+        <div class="story-summary">OpenAI introduced Deployment Simulation, a tool that replays a sample of real past conversations through a candidate model before you flip the switch in production. It lets teams catch regressions, tone shifts, and safety gaps on real-world traffic without exposing live users to a new model. Relevant for any team deploying Chat Smith on OpenAI APIs who wants to de-risk model upgrades.</div>
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://openai.com/news/" target="_blank">OpenAI Launches Partner Network &amp; Frontier Models Now Available on AWS</a></div>
+        <div class="story-byline">OpenAI / AWS <span class="dot-sm"></span> June 2–16, 2026</div>
+        <div class="story-summary">OpenAI's frontier models and Codex are now available on AWS (as of June 2). On June 16, OpenAI also announced the OpenAI Partner Network, a formal ecosystem programme. For teams running infrastructure on AWS — or evaluating multi-cloud deployment for AI features — this simplifies procurement and latency management.</div>
+      </div>
+    </div>
+
+    <!-- Topic: AI Coding Tools -->
+    <div class="topic-group">
+      <div class="topic-header">
+        <div class="topic-dot dot-rose"></div>
+        AI coding tools &amp; developer ecosystem
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://unrot.co/blogs/ai-news-today-june-16-2026" target="_blank">SpaceX Acquires Cursor for $60 Billion — AI Coding Tool Market Consolidates</a></div>
+        <div class="story-byline">Multiple outlets <span class="dot-sm"></span> June 16, 2026</div>
+        <div class="story-summary">SpaceX filed the binding merger agreement to acquire Cursor (the AI-powered code editor) for $60 billion on June 16. SpaceX had secured the acquisition option in April 2026. The deal is the largest AI tooling acquisition to date and signals that AI coding assistants are being absorbed into large infrastructure players. Cursor has ~4 million developers. For Vulcan Labs engineers using Cursor daily, watch for pricing and product direction changes post-acquisition.</div>
+      </div>
+    </div>
+
+    <!-- Topic: Agent Frameworks -->
+    <div class="topic-group">
+      <div class="topic-header">
+        <div class="topic-dot dot-amber"></div>
+        AI agent frameworks for production apps
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-at-build-2026-announce/" target="_blank">Microsoft Agent Framework at BUILD 2026: Agent Harness, Hosted Agents, CodeAct, and GitHub Copilot Backend</a></div>
+        <div class="story-byline">Microsoft Dev Blog <span class="dot-sm"></span> June 2, 2026</div>
+        <div class="story-summary">Microsoft Agent Framework (MAF) shipped major updates at BUILD 2026: an Agent Harness for long-running agentic sessions with shell access and human-in-the-loop flows, Hosted Agents in Azure Foundry with automatic scaling and managed session state, and CodeAct integration. MAF now supports building agents on the GitHub Copilot SDK as a backend — directly relevant to multi-agent systems like OpenClaw.</div>
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/" target="_blank">Microsoft Work IQ APIs Launch: MCP Tools + Semantic Index for Organisational AI Workflows</a></div>
+        <div class="story-byline">Windows Forum / Microsoft <span class="dot-sm"></span> June 16, 2026</div>
+        <div class="story-summary">Microsoft's Work IQ APIs (launched June 16) expose generic MCP tools and a semantic index that maps organisational behaviours across Teams, Outlook, OneDrive, and SharePoint. These APIs let AI agents query institutional knowledge — who works on what, communication patterns, document relationships — without direct data access. Directly relevant to building memory-augmented agents like Chat Smith's LTM layer.</div>
+      </div>
+    </div>
+
+    <!-- Topic: Mobile AI -->
+    <div class="topic-group">
+      <div class="topic-header">
+        <div class="topic-dot dot-green"></div>
+        Mobile AI &amp; on-device AI
+      </div>
+
+      <div class="story-item">
+        <div class="story-title"><a href="https://www.startuphub.ai/ai-news/ai-research/2026/mobilemoe-llms-redefine-on-device-ai" target="_blank">MobileMoE: New Research Matches On-Device Dense LLMs With 2–4× Fewer Inference FLOPs</a></div>
+        <div class="story-byline">StartupHub.ai / Research <span class="dot-sm"></span> June 2026</div>
+        <div class="story-summary">New MobileMoE research demonstrates that Mixture-of-Experts models with a novel on-device scaling law achieve performance matching or exceeding leading dense on-device LLMs, while using 2–4× fewer inference FLOPs and up to 60% fewer parameters. For apps like Chat Smith that balance AI quality vs. battery/cost on mobile, this points to a practical path toward cheaper, faster on-device inference in the near term.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-row"><span class="footer-key">Run timestamp:</span><span>June 18, 2026 · Automated daily digest</span></div>
+    <div class="footer-row"><span class="footer-key">Coverage:</span><span>9 stories · 0 deduped against prior run (last digest was May 18 — all June stories are fresh)</span></div>
+    <div class="footer-row"><span class="footer-key">Freshness:</span><span>3 stories from June 16–18 (within 48h); 4 from June 2–12; 1 undated June research. Claude Fable 5/Mythos 5 suspension (June 12) included despite 6-day age due to direct API impact.</span></div>
+    <div class="footer-row"><span class="footer-key">Focus source:</span><span>Topics carried from May 18 baseline (Drive + Slack signals). Jira still unavailable — check cloud ID config.</span></div>
+  </div>
+
+</div>
+</body>
+</html>

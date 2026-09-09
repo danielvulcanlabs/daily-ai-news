@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intelligence — July 9, 2026 | Issue #85</title>
+<style>
+  :root {
+    --bg: #07070a; --s1: #0f0f14; --s2: #16161d; --s3: #1d1d27; --s4: #30303e;
+    --t1: #f0ece4; --t2: #9a958c; --t3: #6e6b67;
+    --gold: #c8a76a; --blue: #5d8dee; --teal: #3ecf8e;
+    --red: #e55252; --purple: #9d78f0;
+    --r: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(93,141,238,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(157,120,240,0.06) 0%, transparent 50%);
+    color: var(--t1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 64px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px);} to { opacity:1; transform:translateY(0);} }
+  @keyframes borderShift { 0%,100%{border-color:var(--gold)} 50%{border-color:#e8c88a} }
+  @keyframes countGlow { 0%,100%{text-shadow:none} 50%{text-shadow:0 0 12px var(--gold)} }
+  @keyframes ripple { 0%{box-shadow:0 0 0 0 rgba(229,82,82,.6)} 100%{box-shadow:0 0 0 8px rgba(229,82,82,0)} }
+  @keyframes tickerGlow { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .section { animation: fadeUp .5s ease both; }
+
+  /* MASTHEAD */
+  .masthead {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0 20px;
+    border-bottom: 1px solid var(--s4);
+    animation: fadeUp .4s ease;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #e8c275, #c8a76a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .brand-text { font-size: 20px; font-weight: 700; color: var(--t1); letter-spacing: -.3px; }
+  .brand-sub { font-size: 11px; color: var(--t3); letter-spacing: .5px; text-transform: uppercase; }
+  .issue-badge {
+    background: var(--s2); border: 1px solid var(--s4);
+    border-radius: 8px; padding: 6px 14px;
+    font-size: 12px; color: var(--gold); font-weight: 600;
+    text-align: right; line-height: 1.4;
+  }
+  .issue-date { font-size: 11px; color: var(--t3); }
+
+  /* FOCUS CHIPS */
+  .focus-bar { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; animation: fadeUp .45s ease; }
+  .focus-chip {
+    background: var(--s2); border: 1px solid var(--s3);
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 11px; color: var(--t2); cursor: default;
+    transition: all .2s;
+  }
+  .focus-chip:first-child { background: rgba(200,167,106,.12); border-color: var(--gold); color: var(--gold); }
+  .focus-chip:nth-child(2) { border-color: var(--blue); color: var(--blue); background: rgba(93,141,238,.1); }
+  .focus-chip:nth-child(3) { border-color: var(--purple); color: var(--purple); background: rgba(157,120,240,.1); }
+
+  /* TICKER */
+  .ticker {
+    border-radius: var(--r); padding: 10px 16px;
+    background: linear-gradient(90deg, rgba(229,82,82,.2), rgba(157,120,240,.15), rgba(229,82,82,.2));
+    background-size: 200% 100%;
+    animation: tickerGlow 4s ease infinite;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px;
+  }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red); flex-shrink: 0;
+    animation: ripple 1.5s infinite;
+  }
+  .ticker-text { font-size: 12px; font-weight: 600; color: var(--t1); }
+
+  /* SEC LABELS */
+  .sec-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--t3);
+    padding: 32px 0 14px; display: block;
+  }
+
+  /* HERO GRID */
+  .hero-grid { display: grid; grid-template-columns: 1fr 314px; gap: 16px; margin-bottom: 24px; }
+  .hero-card {
+    background: var(--s1); border-radius: var(--r);
+    border: 1.5px solid var(--gold);
+    animation: borderShift 4s ease infinite;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .hero-card::before {
+    content:''; position:absolute; inset:-1px;
+    border-radius: var(--r);
+    background: radial-gradient(ellipse at 30% 0%, rgba(200,167,106,.08), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-sidebar { display: flex; flex-direction: column; gap: 16px; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .5px;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
+    border: 1px solid;
+  }
+  .tag-gold { color: var(--gold); border-color: rgba(200,167,106,.4); background: rgba(200,167,106,.08); }
+  .tag-blue { color: var(--blue); border-color: rgba(93,141,238,.4); background: rgba(93,141,238,.08); }
+  .tag-teal { color: var(--teal); border-color: rgba(62,207,142,.4); background: rgba(62,207,142,.08); }
+  .tag-red { color: var(--red); border-color: rgba(229,82,82,.4); background: rgba(229,82,82,.08); }
+  .tag-purple { color: var(--purple); border-color: rgba(157,120,240,.4); background: rgba(157,120,240,.08); }
+  .hero-title { font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--t1); }
+  .hero-desc { font-size: 13px; color: var(--t2); line-height: 1.6; }
+  .hero-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .hero-bullets li { font-size: 12.5px; color: var(--teal); padding-left: 14px; position: relative; }
+  .hero-bullets li::before { content:"→"; position:absolute; left:0; color: var(--teal); }
+  .hero-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--s3); padding-top: 12px; margin-top: auto;
+  }
+  .src-label { font-size: 11px; color: var(--t3); }
+  .cta {
+    font-size: 11px; font-weight: 600; color: var(--gold);
+    text-decoration: none; padding: 4px 10px;
+    border: 1px solid rgba(200,167,106,.3); border-radius: 6px;
+    transition: all .2s;
+  }
+  .cta:hover { background: rgba(200,167,106,.1); }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .stat { background: var(--s2); border-radius: 8px; padding: 10px 12px; }
+  .stat-val { font-size: 18px; font-weight: 700; color: var(--gold); animation: countGlow 3s ease infinite; }
+  .stat-label { font-size: 10px; color: var(--t3); margin-top: 2px; }
+
+  /* WATCH / MINI CARDS */
+  .watch-card {
+    background: var(--s1); border: 1.5px solid var(--red);
+    border-radius: var(--r); padding: 16px; flex: 1;
+  }
+  .mini-card {
+    background: var(--s1); border: 1px solid var(--s3);
+    border-radius: var(--r); padding: 14px;
+  }
+  .watch-title { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--t1); margin: 8px 0 6px; }
+  .watch-desc { font-size: 12px; color: var(--t2); line-height: 1.5; }
+  .mini-title { font-size: 13px; font-weight: 600; color: var(--t1); margin: 6px 0 4px; line-height: 1.4; }
+  .mini-desc { font-size: 11.5px; color: var(--t2); }
+
+  /* 3-COL CARD GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .news-card {
+    background: var(--s1); border-radius: var(--r);
+    border: 1px solid var(--s3); padding: 18px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform .2s;
+  }
+  .news-card:hover { transform: translateY(-2px); }
+  .card-accent-blue { border-top: 3px solid; border-image: linear-gradient(90deg, var(--blue), var(--teal)) 1; }
+  .card-accent-purple { border-top: 3px solid; border-image: linear-gradient(90deg, var(--purple), var(--blue)) 1; }
+  .card-accent-teal { border-top: 3px solid; border-image: linear-gradient(90deg, var(--teal), var(--blue)) 1; }
+  .co-mark {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .co-anthropic { background: linear-gradient(135deg, #c8602a, #8b4513); color: #fff; }
+  .co-openai { background: linear-gradient(135deg, #10a37f, #1a7a5e); color: #fff; }
+  .co-google { background: #fff; color: #4285f4; }
+  .co-meta { background: linear-gradient(135deg, #0068e0, #003d8f); color: #fff; }
+  .co-mistral { background: linear-gradient(135deg, #ff7000, #cc4400); color: #fff; }
+  .co-xai { background: linear-gradient(135deg, #111, #333); color: #fff; }
+  .co-mem0 { background: linear-gradient(135deg, #5d8dee, #3a5fbf); color: #fff; }
+  .card-date { font-size: 10px; color: var(--t3); }
+  .card-title { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--t1); }
+  .card-text { font-size: 12px; color: var(--t2); line-height: 1.5; }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--s3);
+  }
+
+  /* BRIEFING */
+  .brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 24px; }
+  .brief-item {
+    border-bottom: 1px solid var(--s3); padding: 12px 16px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: all .15s;
+    text-decoration: none; color: inherit;
+    cursor: pointer;
+  }
+  .brief-item:hover { transform: translateX(3px); border-left: 3px solid var(--gold); padding-left: 13px; }
+  .brief-num { font-size: 11px; font-weight: 700; color: var(--t3); width: 20px; flex-shrink: 0; padding-top: 1px; }
+  .brief-body { flex: 1; }
+  .brief-title { font-size: 13px; font-weight: 600; color: var(--t1); line-height: 1.4; margin-bottom: 2px; }
+  .brief-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .brief-src { font-size: 11px; color: var(--t3); }
+  .brief-cta { font-size: 10px; font-weight: 600; color: var(--gold); text-decoration: none; }
+  .tag-pill {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; padding: 1px 6px; border-radius: 3px;
+    margin-bottom: 3px; border: 1px solid;
+  }
+
+  /* TECH CARDS */
+  .tc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .tc-card {
+    background: var(--s1); border-radius: var(--r);
+    border: 1px solid var(--s3); border-left: 3px solid;
+    padding: 18px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .tc-card-blue { border-left-color: var(--blue); }
+  .tc-card-teal { border-left-color: var(--teal); }
+  .tc-card-purple { border-left-color: var(--purple); }
+  .tc-card-gold { border-left-color: var(--gold); }
+  .tc-top { display: flex; align-items: center; justify-content: space-between; }
+  .tc-src { font-size: 10px; color: var(--t3); }
+  .tc-title { font-size: 14px; font-weight: 700; color: var(--t1); line-height: 1.4; }
+  .tc-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .tc-bullets li { font-size: 12px; color: var(--t2); padding-left: 12px; position: relative; line-height: 1.5; }
+  .tc-bullets li::before { content:"•"; position:absolute; left:0; color: var(--blue); }
+  .tc-key { background: var(--s2); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; color: var(--teal); }
+  .tc-footer {
+    border-top: 1px solid var(--s3); padding-top: 10px; margin-top: auto;
+    display: flex; justify-content: flex-end;
+  }
+
+  /* GITHUB REPOS */
+  .repo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .repo-card {
+    background: var(--s1); border: 1px solid var(--s3);
+    border-radius: var(--r); padding: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .repo-name { font-family: monospace; font-size: 12px; font-weight: 700; color: var(--blue); }
+  .repo-desc { font-size: 11.5px; color: var(--t2); line-height: 1.5; flex: 1; }
+  .repo-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .repo-stars { font-size: 10px; font-weight: 700; color: var(--gold); }
+  .repo-lang { font-size: 9px; padding: 1px 6px; border-radius: 3px; background: var(--s2); color: var(--t3); border: 1px solid var(--s4); }
+  .repo-footer {
+    border-top: 1px solid var(--s3); padding-top: 8px; margin-top: auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .repo-rel { font-size: 9px; font-weight: 600; color: var(--teal); border: 1px solid rgba(62,207,142,.3); padding: 1px 6px; border-radius: 3px; }
+
+  /* NOTES */
+  .notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+  .note-card { background: var(--s1); border: 1px solid var(--s3); border-radius: var(--r); padding: 14px; }
+  .note-label { font-size: 11px; color: var(--t3); margin-bottom: 6px; }
+  .note-title { font-size: 13px; font-weight: 600; color: var(--t1); line-height: 1.4; margin-bottom: 6px; }
+  .note-text { font-size: 11.5px; color: var(--t2); line-height: 1.5; }
+  .note-cta { display: block; text-align: right; margin-top: 8px; font-size: 10px; font-weight: 600; color: var(--gold); text-decoration: none; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--s4); padding: 24px 0;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    font-size: 11px; color: var(--t3);
+  }
+  .footer-left { line-height: 1.8; }
+  .footer-brand { font-weight: 700; color: var(--t2); }
+  .signal-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .sig-chip { background: var(--s2); border: 1px solid var(--s3); border-radius: 12px; padding: 3px 10px; font-size: 10px; color: var(--t3); }
+
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    .tc-grid { grid-template-columns: 1fr; }
+    .repo-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .card-grid, .brief-grid, .notes-grid { grid-template-columns: 1fr; }
+    .repo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <div class="brand-text">AI Intelligence</div>
+        <div class="brand-sub">Vulcan Labs Daily</div>
+      </div>
+    </div>
+    <div class="issue-badge">
+      Issue #85<br>
+      <span class="issue-date">July 9, 2026</span>
+    </div>
+  </header>
+
+  <!-- FOCUS CHIPS -->
+  <div class="focus-bar">
+    <span class="focus-chip">⚡ Anthropic / Claude</span>
+    <span class="focus-chip">🤖 AI Coding Agents</span>
+    <span class="focus-chip">🧠 Frontier Models</span>
+    <span class="focus-chip">💾 Agentic Memory</span>
+    <span class="focus-chip">💰 Inference Cost</span>
+    <span class="focus-chip">🔗 Multi-Agent Frameworks</span>
+    <span class="focus-chip">📦 Open Weights</span>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="live-dot"></div>
+    <span class="ticker-text">BREAKING · OpenAI GPT-5.6 (Sol, Terra, Luna) ra mắt công khai hôm nay July 9 — đúng ngày sau Grok 4.5 của SpaceXAI</span>
+  </div>
+
+  <!-- BREAKING THIS WEEK -->
+  <span class="sec-label section">Breaking This Week</span>
+  <div class="hero-grid section">
+    <!-- HERO: Grok 4.5 -->
+    <div class="hero-card">
+      <div class="card-tags">
+        <span class="tag tag-red">⭐ Top Read</span>
+        <span class="tag tag-gold">Frontier Model</span>
+        <span class="tag tag-blue">Coding Agent</span>
+      </div>
+      <h2 class="hero-title">SpaceXAI ra mắt Grok 4.5 — 80 TPS, 4.2× token efficiency hơn Opus 4.8</h2>
+      <p class="hero-desc">SpaceXAI (xAI post-IPO) phát hành Grok 4.5 ngày 8/7, được train cùng Cursor trên V9 foundation 1.5T params. Elon Musk mô tả là "Opus-class model nhưng nhanh hơn và rẻ hơn" — $2/$6 per Mtok so với Opus 4.7 ở $5/$25.</p>
+      <ul class="hero-bullets">
+        <li>Grok 4.5 đạt 83.3% Terminal-Bench 2.1, 62% DeepSWE 1.0 — cạnh tranh trực tiếp Fable max (84.3%, 66.1%)</li>
+        <li>Token efficiency 4.2× so với Opus 4.8 (max): 15,954 vs 67,020 output tokens per SWE task</li>
+        <li>Có mặt ngay trong Cursor (tất cả plans), Grok Build, và SpaceXAI API console — EU ra mắt mid-July</li>
+      </ul>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-val">80 TPS</div><div class="stat-label">serving speed</div></div>
+        <div class="stat"><div class="stat-val">$2/$6</div><div class="stat-label">per Mtok in/out</div></div>
+        <div class="stat"><div class="stat-val">1.5T</div><div class="stat-label">params (V9)</div></div>
+        <div class="stat"><div class="stat-val">4.2×</div><div class="stat-label">token savings</div></div>
+      </div>
+      <div class="hero-footer">
+        <span class="src-label">techcrunch.com · Jul 8, 2026</span>
+        <a class="cta" href="https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="hero-sidebar">
+      <!-- Watch -->
+      <div class="watch-card">
+        <div class="card-tags">
+          <span class="tag tag-red">⭐ Top Read</span>
+          <span class="tag tag-gold">GPT-5.6</span>
+        </div>
+        <div class="watch-title">OpenAI GPT-5.6 Sol công khai hôm nay — Cerebras 750 TPS, frontier mới nhất</div>
+        <div class="watch-desc">Sol, Terra, Luna ra mắt July 9. Sol: $12.5/$75 per Mtok nhưng có Fast mode trên Cerebras đạt 750 tokens/sec. Đây là model mạnh nhất OpenAI từng ship.</div>
+        <div class="hero-footer" style="margin-top:8px;">
+          <span class="src-label">neowin.net · Jul 9, 2026</span>
+          <a class="cta" href="https://www.neowin.net/news/openai-to-release-gpt-56-sol-terra-and-luna-on-july-9/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+      <!-- Mini -->
+      <div class="mini-card">
+        <div class="card-tags"><span class="tag tag-teal">Open Weight</span></div>
+        <div class="mini-title">Mistral AI MoE mới vào early access tháng 7 — "fat but sparse", Apache 2.0</div>
+        <div class="mini-desc">CEO Arthur Mensch xác nhận model flagship mới, lớn hơn Large 3 (675B), vào early access với research/gov partners trước end of July. License Apache 2.0.</div>
+        <div class="hero-footer" style="margin-top:6px;">
+          <span class="src-label">techtimes.com · Jul 6, 2026</span>
+          <a class="cta" href="https://www.techtimes.com/articles/319798/20260706/mistral-ai-targets-frontier-gap-open-weight-model-entering-july-early-access.htm" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIN TUẦN NÀY -->
+  <span class="sec-label section">Tin tuần này</span>
+  <div class="card-grid section">
+    <!-- Card 1: Anthropic Jailbreak Framework -->
+    <div class="news-card card-accent-blue">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="co-mark co-anthropic">A</div>
+        <span class="card-date">Jul 2, 2026</span>
+      </div>
+      <div class="card-tags"><span class="tag tag-blue">Safety</span><span class="tag tag-gold">⭐ Top Read</span></div>
+      <div class="card-title">Anthropic công bố Cyber Jailbreak Severity (CJS) framework — cùng Amazon, Google, Microsoft</div>
+      <p class="card-text">Fable 5's cybersecurity safeguards chi tiết: 4 tầng classifier (Prohibited → High-risk → Low-risk → Benign). CJS scale 0–4 đánh giá severity theo capability gain, breadth, ease of weaponization, discoverability.</p>
+      <div class="card-footer">
+        <span class="src-label">anthropic.com</span>
+        <a class="cta" href="https://www.anthropic.com/news/fable-safeguards-jailbreak-framework" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Alberta Government + Claude Security -->
+    <div class="news-card card-accent-purple">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="co-mark co-anthropic">A</div>
+        <span class="card-date">Jul 6, 2026</span>
+      </div>
+      <div class="card-tags"><span class="tag tag-purple">Enterprise</span></div>
+      <div class="card-title">Alberta Government dùng Claude để tìm và vá lỗ hổng bảo mật toàn bộ hệ thống tỉnh</div>
+      <p class="card-text">Chính phủ Alberta áp dụng Claude Security vào audit hàng nghìn hệ thống công — case study cho thấy AI-assisted cybersecurity đang trở thành standard ở government sector.</p>
+      <div class="card-footer">
+        <span class="src-label">anthropic.com</span>
+        <a class="cta" href="https://www.anthropic.com/news/alberta-government-claude-cybersecurity" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <!-- Card 3: Gemini 3.5 Pro delayed July 17 -->
+    <div class="news-card card-accent-teal">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="co-mark co-google">G</div>
+        <span class="card-date">Jul 7, 2026</span>
+      </div>
+      <div class="card-tags"><span class="tag tag-teal">Frontier</span></div>
+      <div class="card-title">Google delay Gemini 3.5 Pro đến July 17 — kiến trúc rebuild hoàn toàn, 2M context</div>
+      <p class="card-text">Google DeepMind scraps kiến trúc cũ để rebuild Gemini 3.5 Pro với 2M token context, Deep Think reasoning, và SVG rendering cải tiến. Đang limited enterprise preview.</p>
+      <div class="card-footer">
+        <span class="src-label">finance.biggo.com</span>
+        <a class="cta" href="https://finance.biggo.com/news/6f0c6bb2-795f-4c57-9d09-6db691d7638a" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ĐÁNG ĐỌC -->
+  <span class="sec-label section">Đáng đọc — relevance cao</span>
+  <div class="brief-grid section">
+    <div class="brief-item" onclick="window.open('https://www.anthropic.com/features/making-of-claude-code');return false;">
+      <span class="brief-num">01</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-blue">Anthropic</span>
+        <div class="brief-title">The Making of Claude Code — inside story từ researchers và engineers</div>
+        <div class="brief-meta">
+          <span class="brief-src">anthropic.com · Jul 6</span>
+          <a class="brief-cta" href="https://www.anthropic.com/features/making-of-claude-code" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://x.ai/news/grok-4-5');return false;">
+      <span class="brief-num">02</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-gold">SpaceXAI</span>
+        <div class="brief-title">Grok 4.5 official announcement — benchmarks, pricing, Cursor partnership chi tiết</div>
+        <div class="brief-meta">
+          <span class="brief-src">x.ai · Jul 8</span>
+          <a class="brief-cta" href="https://x.ai/news/grok-4-5" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://openai.com/index/previewing-gpt-5-6-sol/');return false;">
+      <span class="brief-num">03</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-teal">OpenAI</span>
+        <div class="brief-title">Previewing GPT-5.6 Sol — agentic capabilities mới cho coding, biology, cybersecurity</div>
+        <div class="brief-meta">
+          <span class="brief-src">openai.com · Jul 8</span>
+          <a class="brief-cta" href="https://openai.com/index/previewing-gpt-5-6-sol/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://www.anthropic.com/news/claude-sonnet-5');return false;">
+      <span class="brief-num">04</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-blue">Anthropic</span>
+        <div class="brief-title">Claude Sonnet 5 — default model mới trong Claude Code, 1M context, $2/$10 per Mtok</div>
+        <div class="brief-meta">
+          <span class="brief-src">anthropic.com · Jun 30</span>
+          <a class="brief-cta" href="https://www.anthropic.com/news/claude-sonnet-5" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://blog.getbind.co/gemini-3-5-pro-slips-to-july-and-four-senior-google-researchers-just-left-for-anthropic/');return false;">
+      <span class="brief-num">05</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-teal">Google</span>
+        <div class="brief-title">Gemini 3.5 Pro delay + 4 senior researchers rời Google sang Anthropic</div>
+        <div class="brief-meta">
+          <span class="brief-src">blog.getbind.co · Jul 7</span>
+          <a class="brief-cta" href="https://blog.getbind.co/gemini-3-5-pro-slips-to-july-and-four-senior-google-researchers-just-left-for-anthropic/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-item" onclick="window.open('https://www.marktechpost.com/2026/07/06/tencent-releases-hy3-open-295b-moe-model/');return false;">
+      <span class="brief-num">06</span>
+      <div class="brief-body">
+        <span class="tag-pill tag-purple">Open Weight</span>
+        <div class="brief-title">Tencent Hy3 — 295B MoE open-weight, 21B active, 78% SWE-Bench Verified, Apache 2.0</div>
+        <div class="brief-meta">
+          <span class="brief-src">marktechpost.com · Jul 6</span>
+          <a class="brief-cta" href="https://www.marktechpost.com/2026/07/06/tencent-releases-hy3-open-295b-moe-model/" onclick="window.open(this.href);return false;">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL DEEP-DIVE -->
+  <span class="sec-label section">Technical Deep-dive</span>
+  <div class="tc-grid section">
+
+    <div class="tc-card tc-card-blue">
+      <div class="tc-top">
+        <span class="tag tag-blue">Coding Agent</span>
+        <span class="tc-src">x.ai</span>
+      </div>
+      <div class="tc-title">Grok 4.5: Token efficiency và RL training ở scale lớn</div>
+      <ul class="tc-bullets">
+        <li>Trained trên <span class="tc-key">tens of thousands GB300 GPUs</span> với asynchronous RL pipeline — agentic rollouts chạy nhiều giờ trong khi learning tiếp tục</li>
+        <li>Cursor developer session data được fold vào training: debugging traces, multi-file diffs, user corrections — không chỉ static code corpora</li>
+        <li>Đạt <span class="tc-key">15,954 avg output tokens</span> per SWE task (4.2× ít hơn Opus 4.8 max ở 67,020) — kết quả trực tiếp của per-token intelligence optimization</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://x.ai/news/grok-4-5" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-card-gold">
+      <div class="tc-top">
+        <span class="tag tag-gold">Safety</span>
+        <span class="tc-src">anthropic.com</span>
+      </div>
+      <div class="tc-title">Fable 5 Cyber Jailbreak Severity Scale: 4-axis scoring system</div>
+      <ul class="tc-bullets">
+        <li><span class="tc-key">CJS 0–4</span>: Tổng điểm 4 axes — Capability Gain (0–4), Breadth (0–2), Ease of Weaponization (0–2), Discoverability (0–2)</li>
+        <li>Scale logarithmic: CJS-4 (Critical, score 9–10) nguy hiểm gấp nhiều lần CJS-3 (High, 7–8.5)</li>
+        <li>Classifier 4 tầng: <span class="tc-key">Prohibited</span> → <span class="tc-key">High-risk dual use</span> → <span class="tc-key">Low-risk dual use</span> → <span class="tc-key">Benign</span> — "safety margin" tăng để giảm false negative</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://www.anthropic.com/news/fable-safeguards-jailbreak-framework" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-card-teal">
+      <div class="tc-top">
+        <span class="tag tag-teal">Open Weight</span>
+        <span class="tc-src">techtimes.com</span>
+      </div>
+      <div class="tc-title">Mistral MoE mới: "Fat but sparse" — memory bandwidth vs active compute</div>
+      <ul class="tc-bullets">
+        <li>MoE architecture: chỉ subset experts activate per token nhưng <span class="tc-key">toàn bộ weight phải ở trong memory</span> — bottleneck là bandwidth, không phải compute</li>
+        <li>Lớn hơn Large 3 (675B total / 41B active) — hardware tier cao hơn cho on-premise sovereign deployment</li>
+        <li>Apache 2.0 = fine-tune và redistribute thương mại không cần xin phép — quan trọng với EU AI Act enforcement Aug 2, 2026</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://www.techtimes.com/articles/319798/20260706/mistral-ai-targets-frontier-gap-open-weight-model-entering-july-early-access.htm" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-card-purple">
+      <div class="tc-top">
+        <span class="tag tag-purple">Inference Cost</span>
+        <span class="tc-src">epoch.ai</span>
+      </div>
+      <div class="tc-title">LLM Pricing Collapse 2026: 10×/năm cost drop, tốc độ đang chậm lại</div>
+      <ul class="tc-bullets">
+        <li>GPT-4 class từng $30/$60 per Mtok (Mar 2023) → nay Gemini 3.1 Flash <span class="tc-key">$0.10/$0.40</span> — 99.7% giảm trong 3 năm</li>
+        <li>Google TurboQuant (Mar 2026): KV cache 3-bit, zero accuracy loss → <span class="tc-key">KV cache memory giảm 6×</span></li>
+        <li>Projection: 3–5×/năm đến 2027, sau đó taper về 1.5–2×/năm — không còn 10×/năm như giai đoạn 2021–2025</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://epoch.ai/data-insights/llm-inference-price-trends" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-card-blue">
+      <div class="tc-top">
+        <span class="tag tag-blue">Coding Research</span>
+        <span class="tc-src">ai.meta.com</span>
+      </div>
+      <div class="tc-title">Meta CWM: Open-weights LLM cho code generation với world models</div>
+      <ul class="tc-bullets">
+        <li>CWM 32B: mid-trained trên <span class="tc-key">observation-action trajectories</span> từ Python interpreter và agentic Docker environments</li>
+        <li>65.8% SWE-bench Verified (test-time scaling), 68.6% LiveCodeBench, 96.6% Math-500</li>
+        <li>Release weights sau mid-training, SFT, và RL — research testbed cho step-by-step Python execution simulation</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://ai.meta.com/research/publications/cwm-an-open-weights-llm-for-research-on-code-generation-with-world-models/" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+    <div class="tc-card tc-card-purple">
+      <div class="tc-top">
+        <span class="tag tag-purple">Agent Memory</span>
+        <span class="tc-src">mem0.ai</span>
+      </div>
+      <div class="tc-title">State of AI Agent Memory 2026: Multi-signal retrieval là standard mới</div>
+      <ul class="tc-bullets">
+        <li>2026 shift: memory không còn là "RAG đơn giản" — ba tầng rõ ràng: <span class="tc-key">working</span>, <span class="tc-key">episodic</span>, <span class="tc-key">semantic</span></li>
+        <li>Multi-signal retrieval: kết hợp semantic similarity + BM25 keyword + entity matching → fused score</li>
+        <li>Letta Cloud và hosted agent services với stateful memory — accessible qua REST API, không cần self-host</li>
+      </ul>
+      <div class="tc-footer">
+        <a class="cta" href="https://mem0.ai/blog/state-of-ai-agent-memory-2026" onclick="window.open(this.href);return false;">Read more →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OPEN SOURCE & TOOLS -->
+  <span class="sec-label section">Open Source &amp; Tools</span>
+  <div class="repo-grid section">
+    <div class="repo-card">
+      <div class="repo-name">Tencent-Hunyuan/Hy3</div>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ New</span>
+        <span class="repo-lang">Python</span>
+        <span class="repo-lang">Apache-2.0</span>
+      </div>
+      <div class="repo-desc">295B MoE open-weight model, 21B active params, 256K context. SWE-Bench 78%, Terminal-Bench competitive. Weights open tải về trực tiếp.</div>
+      <div class="repo-footer">
+        <span class="repo-rel">Open Weight</span>
+        <a class="brief-cta" href="https://github.com/Tencent-Hunyuan/Hy3" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name">langflow-ai/langflow</div>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ 146K</span>
+        <span class="repo-lang">Python</span>
+        <span class="repo-lang">MIT</span>
+      </div>
+      <div class="repo-desc">Visual builder cho AI agent workflows — kéo thả, prototype nhanh, deploy multi-agent pipelines. Top 3 trending agent builder framework.</div>
+      <div class="repo-footer">
+        <span class="repo-rel">Multi-Agent</span>
+        <a class="brief-cta" href="https://github.com/langflow-ai/langflow" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name">mem0ai/mem0</div>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ Trending</span>
+        <span class="repo-lang">Python</span>
+        <span class="repo-lang">Apache-2.0</span>
+      </div>
+      <div class="repo-desc">Memory layer cho AI agents — multi-level memory (working/episodic/semantic), multi-signal retrieval. Tích hợp với Claude, OpenAI, LiteLLM.</div>
+      <div class="repo-footer">
+        <span class="repo-rel">Agent Memory</span>
+        <a class="brief-cta" href="https://github.com/mem0ai/mem0" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-name">Zijian-Ni/awesome-ai-agents-2026</div>
+      <div class="repo-meta">
+        <span class="repo-stars">⭐ Trending</span>
+        <span class="repo-lang">Markdown</span>
+        <span class="repo-lang">MIT</span>
+      </div>
+      <div class="repo-desc">Curated list frameworks, tools, platforms cho AI agents 2026 — cover LangGraph, CrewAI, AutoGen, Claude Agent SDK, Pydantic AI V1 và mới nhất.</div>
+      <div class="repo-footer">
+        <span class="repo-rel">Frameworks</span>
+        <a class="brief-cta" href="https://github.com/Zijian-Ni/awesome-ai-agents-2026" onclick="window.open(this.href);return false;">View repo →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ĐỌC THÊM -->
+  <span class="sec-label section">Đọc thêm</span>
+  <div class="notes-grid section">
+    <div class="note-card">
+      <div class="note-label">🏛️ Regulation</div>
+      <div class="note-title"><a href="https://news.un.org/en/story/2026/07/1167862" style="color:var(--t1);text-decoration:none;" onclick="window.open(this.href);return false;">UN push toàn cầu về AI governance giữa cảnh báo "catastrophic harm"</a></div>
+      <p class="note-text">UN cảnh báo và đẩy mạnh governance framework sau loạt model mạnh ra mắt. EU AI Act enforcement powers activate Aug 2, 2026.</p>
+      <a class="note-cta" href="https://news.un.org/en/story/2026/07/1167862" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="note-card">
+      <div class="note-label">🔬 Research</div>
+      <div class="note-title"><a href="https://www.anthropic.com/news/claude-science-ai-workbench" style="color:var(--t1);text-decoration:none;" onclick="window.open(this.href);return false;">Claude Science — AI workbench cho researchers, auditable artifacts</a></div>
+      <p class="note-text">Anthropic ra mắt Claude Science beta: tích hợp tools/packages nghiên cứu, flexible compute, produce auditable artifacts. Nhắm đến scientific workflows.</p>
+      <a class="note-cta" href="https://www.anthropic.com/news/claude-science-ai-workbench" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+    <div class="note-card">
+      <div class="note-label">💼 Market</div>
+      <div class="note-title"><a href="https://www.techtimes.com/articles/319767/20260706/fable-5-subscription-ends-tomorrow-per-token-costs-who-gets-hit-hardest.htm" style="color:var(--t1);text-decoration:none;" onclick="window.open(this.href);return false;">Fable 5 subscription model kết thúc — ai bị ảnh hưởng nhiều nhất?</a></div>
+      <p class="note-text">Phân tích cost impact khi Fable 5 chuyển sang per-token pricing — enterprise workloads nặng gánh nặng lớn, cần cân nhắc model routing sang Sonnet 5 hoặc Grok 4.5.</p>
+      <a class="note-cta" href="https://www.techtimes.com/articles/319767/20260706/fable-5-subscription-ends-tomorrow-per-token-costs-who-gets-hit-hardest.htm" onclick="window.open(this.href);return false;">Read more →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer section">
+    <div class="footer-left">
+      <div class="footer-brand">AI Intelligence · Vulcan Labs Daily</div>
+      <div>Issue #85 · July 9, 2026 · 15 stories · 4 repos</div>
+      <div style="margin-top:4px;color:var(--t3);">Curated for AI product &amp; engineering teams</div>
+      <div class="signal-chips">
+        <span class="sig-chip">🧠 Claude Memory</span>
+        <span class="sig-chip">💬 Slack</span>
+        <span class="sig-chip">📁 Drive</span>
+        <span class="sig-chip">✉️ Gmail</span>
+      </div>
+    </div>
+    <div style="text-align:right;color:var(--t3);font-size:10px;line-height:2;">
+      Blocked: thenextweb.com · wired.com<br>
+      Sources verified via WebFetch<br>
+      Hard cutoff: 24h (Thu rule)
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
